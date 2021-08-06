@@ -1,20 +1,24 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import classes from './ContractItem.module.css';
+import "bulma/css/bulma.min.css";
+import classes from "./ContractItem.module.css";
 
 const ContractItem = (props) => {
   return (
-    <li className={classes.item}>
-      <figure>
-        <blockquote>
-          <p>{props.text}</p>
-        </blockquote>
-        <figcaption>{props.author}</figcaption>
-      </figure>
-      <Link className='btn' to={`/contracts/${props.id}`}>
-        View Fullscreen
-      </Link>
-    </li>
+    <tr>
+      <td>{props.id}</td>
+      <td>{props.client}</td>
+      <td>{props.contractName}</td>
+      <td>{props.startDate}</td>
+      <td>{props.endDate}</td>
+      <td>{props.amount}</td>
+      <td>{props.status}</td>
+      <td>
+        <Link className="btn" to={`/contracts/${props.id}`}>
+          {props.action}
+        </Link>
+      </td>
+    </tr>
   );
 };
 
