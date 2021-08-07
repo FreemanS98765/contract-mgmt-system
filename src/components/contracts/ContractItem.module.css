@@ -36,3 +36,8 @@
     font-style: italic;
     color: #566d6d;
   }
+
+  .action {
+    color: #56c1b0;
+    font-weight: bold;
+  }

@@ -10,7 +10,7 @@ html {
 
 body {
   margin: 0;
-  background-color: #e0e9f5;
+  color: #4a4a4a;
 }
 
 .centered {
@@ -102,4 +102,13 @@ p {
 
 .flex.space-between {
   justify-content: space-between;
+}
+
+.table-head {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.table-body {
+  font-size: 14px;
 }

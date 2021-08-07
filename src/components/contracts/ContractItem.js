@@ -6,10 +6,19 @@ import classes from "./ContractItem.module.css";
 import { CONTRACT_TABLE_HEADERS } from "../../data/data";
 
 const ContractItem = (props) => {
+
   // Converts date object to string
   const convertDateFormat = (val) => {
     if (Object.prototype.toString.call(val) === "[object Date]") {
       return `${val.getDate()}/${val.getMonth() + 1}/${val.getFullYear()}`;
+    }
+
+    if (val === props.action) {
+      return (
+        <Link className={classes.action} to={`/contracts/${props.id}`}>
+          {val}
+        </Link>
+      )
     }
     return val;
   };
@@ -19,7 +28,7 @@ const ContractItem = (props) => {
       {CONTRACT_TABLE_HEADERS.map((header) => {
         const value = props.contract[header.id];
 
-        return <td>{convertDateFormat(value)}</td>;
+        return <td className='table-body'>{convertDateFormat(value)}</td>;
       })}
 
       {/* <td>{props.id}</td>
