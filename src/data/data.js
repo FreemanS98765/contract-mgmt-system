@@ -16,7 +16,7 @@ export const CONTRACT_DATA = [
     contractName: "Contract 2",
     client: "Client 2",
     amount: "$1200.00",
-    status: "Active",
+    status: "Draft",
     action: "view",
   },
   {
@@ -26,7 +26,7 @@ export const CONTRACT_DATA = [
     contractName: "Contract 3",
     client: "Client 3",
     amount: "$290.00",
-    status: "Active",
+    status: "Expired",
     action: "view",
   },
   {
@@ -46,7 +46,7 @@ export const CONTRACT_DATA = [
     contractName: "Contract 5",
     client: "Client 5",
     amount: "$3000.00",
-    status: "Active",
+    status: "Draft",
     action: "view",
   },
   {
@@ -56,7 +56,7 @@ export const CONTRACT_DATA = [
     contractName: "Contract 6",
     client: "Client 6",
     amount: "$2499.00",
-    status: "Active",
+    status: "Expired",
     action: "view",
   },
   {
