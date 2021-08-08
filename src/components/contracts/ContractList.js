@@ -52,8 +52,6 @@ const ContractList = (props) => {
     setFilteredDate(selectedDate);
   };
 
-  console.log(filteredStatus);
-
   const filteredContracts = props.contracts.filter((contract) => {
     if (
       filteredStatus === "draft" ||
