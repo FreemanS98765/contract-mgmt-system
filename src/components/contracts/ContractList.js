@@ -7,8 +7,6 @@ import FiltersToolbar from "../tables/FiltersToolbar";
 import "bulma/css/bulma.min.css";
 import classes from "./ContractList.module.css";
 
-
-
 const tableSort = (array, ascending, prop) => {
   return array.sort((a, b, prop) => {
     if (ascending) {
@@ -20,12 +18,18 @@ const tableSort = (array, ascending, prop) => {
 };
 
 const ContractList = (props) => {
+  const [filteredStatus, setFilteredStatus] = useState();
+  const [filteredDate, setFilteredDate] = useState();
+
   const history = useHistory();
   const location = useLocation();
 
   const queryParams = new URLSearchParams(location.search);
 
   const isSortingAscending = queryParams.get("sort") === "asc";
+
+  const currentMonth = new Date().getMonth() + 1;
+  const currentYear = new Date().getFullYear();
 
   const sortedContracts = tableSort(
     props.contracts,
@@ -40,9 +44,60 @@ const ContractList = (props) => {
     });
   };
 
+  const statusFilterChangeHandler = (selectedStatus) => {
+    setFilteredStatus(selectedStatus);
+  };
+
+  const dateFilterChangeHandler = (selectedDate) => {
+    setFilteredDate(selectedDate);
+  };
+
+  console.log(filteredStatus);
+
+  const filteredContracts = props.contracts.filter((contract) => {
+    if (
+      filteredStatus === "draft" ||
+      filteredStatus === "expired" ||
+      filteredStatus === "active"
+    ) {
+      return contract.status.toLowerCase() === filteredStatus;
+    }
+
+    if (
+      filteredDate === "2022" ||
+      filteredDate === "2021" ||
+      filteredDate === "2020" ||
+      filteredDate === "2019" ||
+      filteredDate === "2018"
+    ) {
+      return contract.startDate.getFullYear().toString() === filteredDate;
+    }
+
+    return contract;
+  });
+
+  if (filteredContracts.length === 0) {
+    return (
+      <Fragment>
+        <FiltersToolbar
+          selectedStatus={filteredStatus}
+          selectedDate={filteredDate}
+          onChangeStatusFilter={statusFilterChangeHandler}
+          onChangeDateFilter={dateFilterChangeHandler}
+        />
+        <h2>No contracts found.</h2>
+      </Fragment>
+    );
+  }
+
   return (
     <Fragment>
-      <FiltersToolbar />
+      <FiltersToolbar
+        selectedStatus={filteredStatus}
+        selectedDate={filteredDate}
+        onChangeStatusFilter={statusFilterChangeHandler}
+        onChangeDateFilter={dateFilterChangeHandler}
+      />
       <table className="table is-striped is-fullwidth">
         <thead>
           <tr>
@@ -52,7 +107,7 @@ const ContractList = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.contracts.map((contract) => (
+          {filteredContracts.map((contract) => (
             <ContractItem
               contract={contract}
               key={contract.id}
