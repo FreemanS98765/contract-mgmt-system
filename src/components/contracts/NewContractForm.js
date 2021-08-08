@@ -9,8 +9,13 @@ const NewContractForm = () => {
 
   const formik = useFormik({
     initialValues: {
+      company: "",
       client: "",
-      contractName: "",
+      address: "",
+      city: "",
+      state: "",
+      zipcode: "",
+      contract: "",
       startDate: "",
       endDate: "",
       amount: "",
@@ -29,11 +34,11 @@ const NewContractForm = () => {
           <div className="field is-grouped">
             <div className="control is-expanded">
               <input
-                id="clientCompany"
-                name="clientCompany"
+                id="company"
+                name="company"
                 type="text"
                 onChange={formik.handleChange}
-                value={formik.values.clientCompany}
+                value={formik.values.company}
                 className="input"
                 placeholder="Company name"
               />
@@ -119,7 +124,7 @@ const NewContractForm = () => {
           {/* end of Client Info */}
         </div>
       </div>
-        {/* End of Client Info */}
+      {/* End of Client Info */}
 
       <div className="columns">
         <div className="column form-section">
@@ -128,11 +133,11 @@ const NewContractForm = () => {
           <div className="field is-grouped">
             <div className="control is-expanded">
               <input
-                id="contractName"
-                name="contractName"
+                id="contract"
+                name="contract"
                 type="text"
                 onChange={formik.handleChange}
-                value={formik.values.contractName}
+                value={formik.values.contract}
                 className="input"
                 placeholder="Contract Name"
               />
@@ -168,21 +173,20 @@ const NewContractForm = () => {
               />
             </div>
           </div>
-            <div className="field">
-                <div className="control">
-                    <textarea class="textarea" placeholder="Notes"></textarea>
-                </div>
+          <div className="field">
+            <div className="control">
+              <textarea class="textarea" placeholder="Notes"></textarea>
             </div>
-            <div className="field">
-                <div className="control">
-                    <label className="label">File upload</label>
-                    <input className="button link" type="file" name="upload" />
-                </div>
+          </div>
+          <div className="field">
+            <div className="control">
+              <label className="label">File upload</label>
+              <input className="button link" type="file" name="upload" />
             </div>
+          </div>
         </div>
       </div>
-        {/* End of Contract Info */}
-
+      {/* End of Contract Info */}
 
       <div className="control-panel">
         <div className="columns">
