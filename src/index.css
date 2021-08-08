@@ -112,3 +112,7 @@ p {
 .table-body {
   font-size: 14px;
 }
+
+.table-head__cell {
+  cursor: pointer;
+}

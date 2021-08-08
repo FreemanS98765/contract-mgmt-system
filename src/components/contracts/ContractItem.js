@@ -10,7 +10,7 @@ const ContractItem = (props) => {
   // Converts date object to string
   const convertDateFormat = (val) => {
     if (Object.prototype.toString.call(val) === "[object Date]") {
-      return `${val.getDate()}/${val.getMonth() + 1}/${val.getFullYear()}`;
+      return `${val.getMonth() + 1}/${val.getDate()}/${val.getFullYear()}`;
     }
 
     if (val === props.action) {

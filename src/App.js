@@ -6,7 +6,6 @@ import Contracts from "./pages/Contracts";
 import ContractSingle from "./pages/ContractSingle";
 import NewContract from "./pages/NewContract";
 
-import MainNavigation from "./components/MainNavigation";
 import Layout from "./components/Layout";
 
 import "./App.css";

@@ -1,39 +1,36 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Fragment } from "react";
 
 const Filter = (props) => {
-  const filterIcon = <FontAwesomeIcon icon={faAngleDown} />;
-  const searchIcon = <FontAwesomeIcon icon={faSearch} />;
+
+  const dropdownChangeHandler = (event) => {
+    if (event.target.id === "status-menu") {
+      props.onChangeStatusFilter(event.target.value);
+    }
+
+    if (event.target.id === "date-menu") {
+      props.onChangeDateFilter(event.target.value);
+    }
+
+    return;
+  };
 
   const filterItems = (
-    <div className="dropdown-content">
-      {props.filters.map((filterItem) => (
-        <a className="dropdown-item" href={filterItem.href}>
-          {filterItem.value}
-        </a>
-      ))}
-    </div>
+    <Fragment>
+      <select
+        id={props.menuId}
+        value={props.selected}
+        onChange={dropdownChangeHandler}
+      >
+        {props.filters.map((filterItem) => (
+          <option value={filterItem.value}>
+            {`${props.filterName}: ${filterItem.name}`}
+          </option>
+        ))}
+      </select>
+    </Fragment>
   );
 
-  return (
-    <div className={`dropdown mr-4${props.toggled ? " is-active" : ""}`}>
-      <div className="dropdown-trigger">
-        <button
-          className="button is-outlined is-medium"
-          aria-haspopup="true"
-          aria-controls={props.menuId}
-          onClick={props.onClick}
-        >
-          <span>{props.filterName}: {props.selected}</span>
-          <span className="icon is-small">{filterIcon}</span>
-        </button>
-      </div>
-
-      <div className="dropdown-menu" id={props.menuId} role="menu">
-        {filterItems}
-      </div>
-    </div>
-  );
+  return <div className="select is-medium mr-3">{filterItems}</div>;
 };
 
 export default Filter;
