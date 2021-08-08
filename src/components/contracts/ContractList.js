@@ -21,6 +21,9 @@ const ContractList = (props) => {
   const [filteredStatus, setFilteredStatus] = useState();
   const [filteredDate, setFilteredDate] = useState();
 
+  const [query, setQuery] = useState("");
+  const [searchParam] = useState(["client", "contractName"]);
+
   const history = useHistory();
   const location = useLocation();
 
@@ -52,6 +55,10 @@ const ContractList = (props) => {
     setFilteredDate(selectedDate);
   };
 
+  const searchFilterChangeHandler = (query) => {
+    setQuery(query);
+  };
+
   const filteredContracts = props.contracts.filter((contract) => {
     if (
       filteredStatus === "draft" ||
@@ -71,7 +78,14 @@ const ContractList = (props) => {
       return contract.startDate.getFullYear().toString() === filteredDate;
     }
 
-    return contract;
+    return searchParam.some((filteredContract) => {
+      return (
+        contract[filteredContract]
+          .toString()
+          .toLowerCase()
+          .indexOf(query.toLowerCase()) > -1
+      );
+    });
   });
 
   if (filteredContracts.length === 0) {
@@ -82,6 +96,7 @@ const ContractList = (props) => {
           selectedDate={filteredDate}
           onChangeStatusFilter={statusFilterChangeHandler}
           onChangeDateFilter={dateFilterChangeHandler}
+          searchValue={query}
         />
         <h2>No contracts found.</h2>
       </Fragment>
@@ -95,6 +110,7 @@ const ContractList = (props) => {
         selectedDate={filteredDate}
         onChangeStatusFilter={statusFilterChangeHandler}
         onChangeDateFilter={dateFilterChangeHandler}
+        onChangeSearchFilter={searchFilterChangeHandler}
       />
       <table className="table is-striped is-fullwidth">
         <thead>
