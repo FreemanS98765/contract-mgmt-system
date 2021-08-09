@@ -19,18 +19,18 @@ const TextInput = ({ label, ...props }) => {
 };
 
 const TextareaInput = ({ label, ...props }) => {
-    const [field, meta] = useField(props);
-  
-    return (
-      <Fragment>
-        <label htmlFor={props.id || props.name}>{label}</label>
-        <textarea className="textarea" {...field} {...props}></textarea>
-        {meta.touched && meta.error ? (
-          <span className="error-message">{meta.error}</span>
-        ) : null}
-      </Fragment>
-    );
-  };
+  const [field, meta] = useField(props);
+
+  return (
+    <Fragment>
+      <label htmlFor={props.id || props.name}>{label}</label>
+      <textarea className="textarea" {...field} {...props}></textarea>
+      {meta.touched && meta.error ? (
+        <span className="error-message">{meta.error}</span>
+      ) : null}
+    </Fragment>
+  );
+};
 
 const SelectField = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -85,7 +85,7 @@ const NewContractForm = () => {
       }}
     >
       {(formik) => (
-        <form id="new-contract" onSubmit={formik.handleSubmit}>
+        <Form>
           <div className="columns">
             <div className="column form-section">
               <h5 className="form-section_title">Client Info</h5>
@@ -116,14 +116,6 @@ const NewContractForm = () => {
 
               <div className="field">
                 <div className="control">
-                  <input
-                    id="address"
-                    name="address"
-                    type="text"
-                    {...formik.getFieldProps("address")}
-                    className="input"
-                    placeholder="Address"
-                  />
                   <TextInput name="address" type="text" placeholder="Address" />
                 </div>
               </div>
@@ -247,7 +239,7 @@ const NewContractForm = () => {
               </div>
             </div>
           </div>
-        </form>
+        </Form>
       )}
     </Formik>
   );
