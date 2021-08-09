@@ -7,14 +7,16 @@ import classes from "./Contracts.module.css";
 const Contracts = () => {
   return (
     <div>
-      <div className="page-header">
+      <div className="page-header flex space-between">
         <h1 className="is-size-4">Contracts</h1>
         <button className="button is-primary">Create Contract</button>
       </div>
-      <ContractList
-        contracts={CONTRACT_DATA}
-        contractHeaders={CONTRACT_TABLE_HEADERS}
-      />
+      <div className="container content">
+        <ContractList
+          contracts={CONTRACT_DATA}
+          contractHeaders={CONTRACT_TABLE_HEADERS}
+        />
+      </div>
     </div>
   );
 };
