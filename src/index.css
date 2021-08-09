@@ -90,13 +90,16 @@ p {
 
 .page-header {
   border-bottom: 1px solid #ccc;
-  margin-bottom: 3rem;
 }
 
 .page-title {
   font-size: 1.5rem;
   font-weight: bold;
   padding: 0 18px;
+}
+
+.content {
+  padding-top: 7vh;
 }
 
 .flex {
@@ -144,4 +147,10 @@ p {
 .form-section_title {
   font-size: 1.25rem;
   margin-bottom: 1rem;
+}
+
+.error-message {
+  font-size: 1rem;
+  color: red;
+  margin-left: 3px
 }

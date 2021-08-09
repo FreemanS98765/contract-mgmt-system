@@ -10,7 +10,7 @@ const NewContract = () => {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container content">
         <NewContractForm />
       </div>
     </Fragment>

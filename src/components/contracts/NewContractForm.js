@@ -3,6 +3,28 @@ import { useFormik, Formik } from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.company) {
+    errors.company = "Required";
+  }
+
+  if (!values.client) {
+    errors.client = "Required";
+  }
+
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Invalid email address format";
+  }
+
+  if (values.zipcode.length !== 5) {
+    errors.zipcode = "Must be 5 characters";
+  }
+
+  return errors;
+};
+
 const NewContractForm = () => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -19,8 +41,10 @@ const NewContractForm = () => {
       startDate: "",
       endDate: "",
       amount: "",
+      upload: "",
       status: "",
     },
+    validate,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
@@ -37,22 +61,26 @@ const NewContractForm = () => {
                 id="company"
                 name="company"
                 type="text"
-                onChange={formik.handleChange}
-                value={formik.values.company}
+                {...formik.getFieldProps('company')}
                 className="input"
                 placeholder="Company name"
               />
+              {formik.touched.company && formik.errors.company ? (
+                <span className="error-message">{formik.errors.company}</span>
+              ) : null}
             </div>
             <div className="control is-expanded">
               <input
                 id="client"
                 name="client"
                 type="text"
-                onChange={formik.handleChange}
-                value={formik.values.client}
+                {...formik.getFieldProps('client')}
                 className="input"
                 placeholder="Client name"
               />
+              {formik.touched.client && formik.errors.client ? (
+                <span className="error-message">{formik.errors.client}</span>
+              ) : null}
             </div>
 
             <div className="control is-expanded">
@@ -60,11 +88,13 @@ const NewContractForm = () => {
                 id="email"
                 name="email"
                 type="email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
+                {...formik.getFieldProps('email')}
                 className="input"
                 placeholder="Client email"
               />
+              {formik.touched.email && formik.errors.email ? (
+                <span className="error-message">{formik.errors.email}</span>
+              ) : null}
             </div>
           </div>
 
@@ -74,8 +104,7 @@ const NewContractForm = () => {
                 id="address"
                 name="address"
                 type="text"
-                onChange={formik.handleChange}
-                value={formik.values.address}
+                {...formik.getFieldProps('address')}
                 className="input"
                 placeholder="Address"
               />
@@ -87,8 +116,7 @@ const NewContractForm = () => {
                 id="city"
                 name="city"
                 type="text"
-                onChange={formik.handleChange}
-                value={formik.values.city}
+                {...formik.getFieldProps('city')}
                 className="input"
                 placeholder="City"
               />
@@ -100,8 +128,7 @@ const NewContractForm = () => {
                   id="state"
                   name="state"
                   form="new-contract"
-                  onChange={formik.handleChange}
-                  value={formik.values.state}
+                  {...formik.getFieldProps('state')}
                 >
                   <option>Alaska</option>
                   <option>New Hampshire</option>
@@ -114,11 +141,13 @@ const NewContractForm = () => {
                 id="zipcode"
                 name="zipcode"
                 type="number"
-                onChange={formik.handleChange}
-                value={formik.values.zipcode}
+                {...formik.getFieldProps('zipcode')}
                 className="input"
                 placeholder="Zipcode"
               />
+              {formik.touched.zipcode && formik.errors.zipcode ? (
+                <span className="error-message">{formik.errors.zipcode}</span>
+              ) : null}
             </div>
           </div>
           {/* end of Client Info */}
@@ -136,8 +165,7 @@ const NewContractForm = () => {
                 id="contract"
                 name="contract"
                 type="text"
-                onChange={formik.handleChange}
-                value={formik.values.contract}
+                {...formik.getFieldProps('contract')}
                 className="input"
                 placeholder="Contract Name"
               />
@@ -148,6 +176,7 @@ const NewContractForm = () => {
                 name="startDate"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
+                onBlur={formik.handleBlur}
                 className="input is-normal"
                 placeholderText="Start Date"
               />
@@ -157,6 +186,7 @@ const NewContractForm = () => {
                 name="endDate"
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
+                onBlur={formik.handleBlur}
                 className="input is-normal"
                 placeholderText="End Date"
               />
@@ -166,8 +196,7 @@ const NewContractForm = () => {
                 id="amount"
                 name="amount"
                 type="text"
-                onChange={formik.handleChange}
-                value={formik.values.amount}
+                {...formik.getFieldProps('amount')}
                 className="input"
                 placeholder="Amount"
               />
@@ -175,13 +204,26 @@ const NewContractForm = () => {
           </div>
           <div className="field">
             <div className="control">
-              <textarea class="textarea" placeholder="Notes"></textarea>
+              <textarea
+                id="notes"
+                name="notes"
+                type="textarea"
+                {...formik.getFieldProps('notes')}
+                class="textarea"
+                placeholder="Notes"
+              ></textarea>
             </div>
           </div>
           <div className="field">
             <div className="control">
               <label className="label">File upload</label>
-              <input className="button link" type="file" name="upload" />
+              <input
+                id="upload"
+                name="upload"
+                type="file"
+                {...formik.getFieldProps('upload')}
+                className="button link"
+              />
             </div>
           </div>
         </div>
