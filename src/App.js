@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Dashboard from "./pages/Dashboard";
 import Contracts from "./pages/Contracts";
@@ -9,8 +10,11 @@ import NewContract from "./pages/NewContract";
 import Layout from "./components/Layout";
 
 import "./App.css";
+import NewContractForm from "./components/contracts/NewContractForm";
 
 function App() {
+  
+
   return (
     <Layout>
       <Switch>
@@ -29,7 +33,6 @@ function App() {
         <Route path="/new-contract">
           <NewContract />
         </Route>
-
       </Switch>
     </Layout>
   );

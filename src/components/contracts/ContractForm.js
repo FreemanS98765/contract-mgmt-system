@@ -33,45 +33,47 @@ const ContractForm = (props) => {
   }
 
   return (
-    <Card>
-      <form className={classes.form} onSubmit={submitFormHandler}>
-
-        {props.isLoading && (
+    <div className="modal">
+      <div className="modal-background"></div>
+      <div className="modal-card">
+        <form className={classes.form} onSubmit={submitFormHandler}>
+          {props.isLoading && (
             <div className={classes.loading}>
-                <LoadingSpinner />
+              <LoadingSpinner />
             </div>
-        )}
+          )}
 
-        <div className={classes.control}>
-          <label htmlFor="client">Client</label>
-          <input type="text" id="client" ref={clientInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="contractName">Contract Name</label>
-          <input type="text" id="contractName" ref={contractNameInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="amount">Amount</label>
-          <input type="text" id="amount" ref={amountInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="status">Status</label>
-          <input type="text" id="status" ref={statusInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="startDate">Start Date</label>
-          <input type="text" id="startDate" ref={startDateInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="endDate">End Date</label>
-          <input type="text" id="endDate" ref={endDateInputRef} />
-        </div>
+          <div className={classes.control}>
+            <label htmlFor="client">Client</label>
+            <input type="text" id="client" ref={clientInputRef} />
+          </div>
+          <div className={classes.control}>
+            <label htmlFor="contractName">Contract Name</label>
+            <input type="text" id="contractName" ref={contractNameInputRef} />
+          </div>
+          <div className={classes.control}>
+            <label htmlFor="amount">Amount</label>
+            <input type="text" id="amount" ref={amountInputRef} />
+          </div>
+          <div className={classes.control}>
+            <label htmlFor="status">Status</label>
+            <input type="text" id="status" ref={statusInputRef} />
+          </div>
+          <div className={classes.control}>
+            <label htmlFor="startDate">Start Date</label>
+            <input type="text" id="startDate" ref={startDateInputRef} />
+          </div>
+          <div className={classes.control}>
+            <label htmlFor="endDate">End Date</label>
+            <input type="text" id="endDate" ref={endDateInputRef} />
+          </div>
 
-        <div className={classes.actions}>
-            <button className='btn'>Add Contract</button>
-        </div>
-      </form>
-    </Card>
+          <div className={classes.actions}>
+            <button className="btn">Add Contract</button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 

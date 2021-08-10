@@ -4,6 +4,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as yup from "yup";
 
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
+
 const TextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
@@ -50,6 +53,12 @@ const SelectField = ({ label, ...props }) => {
 const NewContractForm = () => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
+
+  const dispatch = useDispatch();
+
+  const toggleButtonHandler = () => {
+    dispatch(uiActions.toggleNewContract());
+  };
 
   return (
     <Formik
@@ -152,8 +161,13 @@ const NewContractForm = () => {
                     placeholder="Contract Name"
                   />
                 </div>
-
                 <div className="control">
+                  <TextInput name="amount" type="text" placeholder="Amount" />
+                </div>
+              </div>
+
+              <div className="field is-grouped">
+                <div className="control is-expanded">
                   <DatePicker
                     name="startDate"
                     selected={startDate}
@@ -163,7 +177,7 @@ const NewContractForm = () => {
                     placeholderText="Start Date"
                   />
                 </div>
-                <div className="control">
+                <div className="control is-expanded">
                   <DatePicker
                     name="endDate"
                     selected={endDate}
@@ -173,10 +187,8 @@ const NewContractForm = () => {
                     placeholderText="End Date"
                   />
                 </div>
-                <div className="control">
-                  <TextInput name="amount" type="text" placeholder="Amount" />
-                </div>
               </div>
+
               <div className="field">
                 <div className="control">
                   <TextareaInput
@@ -211,6 +223,7 @@ const NewContractForm = () => {
                     <button
                       className="button is-outlined is-white"
                       type="button"
+                      onClick={toggleButtonHandler}
                     >
                       Cancel
                     </button>
