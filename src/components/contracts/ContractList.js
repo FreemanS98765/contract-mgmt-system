@@ -4,6 +4,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import ContractItem from "./ContractItem";
 import FiltersToolbar from "../tables/FiltersToolbar";
 
+import { ContractsTable } from "../tables/Table";
+
 import "bulma/css/bulma.min.css";
 import classes from "./ContractList.module.css";
 
@@ -154,17 +156,23 @@ const ContractList = (props) => {
         orderBy={orderBy}
         onRequestSort={handleRequestSort}
       />
+
+    <ContractsTable />
+
       <table className="table is-striped is-fullwidth">
         <thead>
           <tr>
-            {props.contractHeaders.map((header) => {
+            {props.contractHeaders.map((header, i) => {
               return (
                 <th
                   onClick={() => handleRequestSort("click", header.id)}
                   className="table-head is-hoverable table-head__cell"
+                  key={i}
                 >
                   {header.label}
-                  <span className="icon">{ (order === 'asc') ? faAngleDownIcon : faAngleUpIcon}</span>
+                  <span className="icon">
+                    {order === "asc" ? faAngleDownIcon : faAngleUpIcon}
+                  </span>
                 </th>
               );
             })}
@@ -191,6 +199,8 @@ const ContractList = (props) => {
           )}
         </tbody>
       </table>
+
+      
     </Fragment>
   );
 };

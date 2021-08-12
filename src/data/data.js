@@ -5,9 +5,8 @@ export const CONTRACT_DATA = [
     endDate: new Date(2020, 7, 14),
     contract: "Contract 1",
     client: "Client 1",
-    amount: "$65.00",
+    amount: 65,
     status: "Active",
-    action: "view",
   },
   {
     id: 2,
@@ -15,9 +14,8 @@ export const CONTRACT_DATA = [
     endDate: new Date(2022, 4, 14),
     contract: "Contract 2",
     client: "Client 2",
-    amount: "$1200.00",
+    amount: 1199.95,
     status: "Draft",
-    action: "view",
   },
   {
     id: 3,
@@ -25,9 +23,8 @@ export const CONTRACT_DATA = [
     endDate: new Date(2022, 2, 1),
     contract: "Contract 3",
     client: "Client 3",
-    amount: "$290.00",
+    amount: 290,
     status: "Expired",
-    action: "view",
   },
   {
     id: 4,
@@ -35,9 +32,8 @@ export const CONTRACT_DATA = [
     endDate: new Date(2020, 6, 27),
     contract: "Contract 4",
     client: "Client 4",
-    amount: "$585.00",
+    amount: 585.00,
     status: "Active",
-    action: "view",
   },
   {
     id: 5,
@@ -45,9 +41,8 @@ export const CONTRACT_DATA = [
     endDate: new Date(2021, 1, 4),
     contract: "Contract 5",
     client: "Client 5",
-    amount: "$3000.00",
+    amount: 2999.955,
     status: "Draft",
-    action: "view",
   },
   {
     id: 6,
@@ -55,9 +50,8 @@ export const CONTRACT_DATA = [
     endDate: new Date(2020, 8, 8),
     contract: "Contract 6",
     client: "Client 6",
-    amount: "$2499.00",
+    amount: 2499,
     status: "Expired",
-    action: "view",
   },
   {
     id: 7,
@@ -65,9 +59,8 @@ export const CONTRACT_DATA = [
     endDate: new Date(2020, 7, 9),
     contract: "Contract 7",
     client: "Client 7",
-    amount: "$249.00",
+    amount: 249,
     status: "Active",
-    action: "view",
   },
 ];
 

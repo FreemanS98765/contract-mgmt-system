@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { useSelector } from "react-redux";
 
 import { CONTRACT_DATA, CONTRACT_TABLE_HEADERS } from "../data/data.js";
@@ -10,9 +12,17 @@ import "bulma/css/bulma.min.css";
 import classes from "./Contracts.module.css";
 
 const Contracts = () => {
+  const [contracts, setContracts] = useState(CONTRACT_DATA);
+
   const showContractModal = useSelector(
     (state) => state.ui.contractModalIsVisible
   );
+
+  const addContractHandler = (contract) => {
+    setContracts((prevContracts) => {
+      return [contract, ...prevContracts];
+    });
+  };
 
   return (
     <div>
@@ -22,11 +32,15 @@ const Contracts = () => {
       </div>
       <div className="container content">
         <ContractList
-          contracts={CONTRACT_DATA}
+          contracts={contracts}
           contractHeaders={CONTRACT_TABLE_HEADERS}
         />
       </div>
-      {showContractModal && <ContractModal toggleModal={showContractModal ? 'is-active' : 'false'} />}
+      {showContractModal && (
+        <ContractModal onAddContract={addContractHandler}
+          toggleModal={showContractModal ? "is-active" : "false"}
+        />
+      )}
     </div>
   );
 };

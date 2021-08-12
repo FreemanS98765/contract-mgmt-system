@@ -1,8 +1,136 @@
+import { useState } from "react";
+import { CONTRACT_DATA } from "../../data/data";
 
-const Table = () => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEllipsisH,
+  faEye,
+  faEdit,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+
+const renderValues = (val) => {
+  // Converts date object to string
+  if (Object.prototype.toString.call(val) === "[object Date]") {
+    return `${val.getMonth() + 1}/${val.getDate()}/${val.getFullYear()}`;
+  }
+
+  return val;
+};
+
+const getFormattedAmount = (amount) => `$${amount.toFixed(2)}`;
+
+export const ContractsTable = () => {
+  const [isSelected, setIsSelected] = useState(
+    new Array(CONTRACT_DATA.length).fill(false)
+  );
+
+  const totalContracts = CONTRACT_DATA.length;
+
+  const formattedContracts = CONTRACT_DATA.map((c) => {
+    return renderValues(c);
+  });
+
+  const toggleDropdown = (position) => {
+    const updatedToggledState = isSelected.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setIsSelected(updatedToggledState);
+  };
+
+  const TableRow = (props) => {
+    const { id, startDate, endDate, contract, client, amount, status } = props;
+    const statusVariant =
+      status === "Active"
+        ? "has-text-success-dark"
+        : status === "Draft"
+        ? "has-text-warning-dark"
+        : status === "Expired"
+        ? "has-text-danger-dark"
+        : "primary";
+
     return (
-        <h1>Table</h1>
-    )
-}
+      <tr>
+        <td>{client}</td>
+        <td>{contract}</td>
+        <td>{renderValues(startDate)}</td>
+        <td>{renderValues(endDate)}</td>
+        <td>{getFormattedAmount(amount)}</td>
+        <td>
+          <span className={statusVariant}>{status}</span>
+        </td>
+        <td>
+          <div className={`dropdown ${props.selected ? "is-active" : ""} `}>
+            <div className="dropdown-trigger">
+              <button
+                className="button"
+                aria-haspopup="true"
+                aria-controls="dropdown-menu"
+                onClick={props.onClick}
+              >
+                <span className="icon is-small">
+                  <FontAwesomeIcon icon={faEllipsisH} className="icon-dark" />
+                </span>
+              </button>
+            </div>
+            <div
+              className="dropdown-menu"
+              id={`actions-menu-${props.id}`}
+              role="menu"
+            >
+              <div className="dropdown-content">
+                <Link className="dropdown-item" to={`/contracts/${props.id}`}>
+                  <span className="icon-text">
+                    <span className="icon">
+                      <FontAwesomeIcon icon={faEye} />
+                    </span>
+                    <span>View Details</span>
+                  </span>
+                </Link>
+                <Link className="dropdown-item" to={`/contracts/${props.id}`}>
+                  <span className="icon-text">
+                    <span className="icon">
+                      <FontAwesomeIcon icon={faEdit} />
+                    </span>
+                    <span>Edit</span>
+                  </span>
+                </Link>
+                <Link className="dropdown-item" to={`/contracts/${props.id}`}>
+                  <span className="icon-text has-text-danger">
+                    <span className="icon">
+                      <FontAwesomeIcon icon={faTrashAlt} />
+                    </span>
+                    <span>Remove</span>
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    );
+  };
 
-export default Table;
+  return (
+    <table className="table">
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Contract</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {CONTRACT_DATA.map((c, i) => (
+          <TableRow key={c.id} {...c} selected={isSelected[i]} onClick={() => toggleDropdown(i)} />
+        ))}
+      </tbody>
+    </table>
+  );
+};

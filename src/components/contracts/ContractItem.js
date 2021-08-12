@@ -6,9 +6,8 @@ import classes from "./ContractItem.module.css";
 import { CONTRACT_TABLE_HEADERS } from "../../data/data";
 
 const ContractItem = (props) => {
-
-  // Converts date object to string
-  const convertDateFormat = (val) => {
+  const renderValues = (val) => {
+    // Converts date object to string
     if (Object.prototype.toString.call(val) === "[object Date]") {
       return `${val.getMonth() + 1}/${val.getDate()}/${val.getFullYear()}`;
     }
@@ -18,31 +17,18 @@ const ContractItem = (props) => {
         <Link className={classes.action} to={`/contracts/${props.id}`}>
           {val}
         </Link>
-      )
+      );
     }
     return val;
   };
 
   return (
     <tr>
-      {CONTRACT_TABLE_HEADERS.map((header) => {
+      {CONTRACT_TABLE_HEADERS.map((header, i) => {
+        //console.log(header);
         const value = props.contract[header.id];
-
-        return <td className='table-body'>{convertDateFormat(value)}</td>;
+        return <td key={i}>{renderValues(value)}</td>;
       })}
-
-      {/* <td>{props.id}</td>
-      <td>{props.client}</td>
-      <td>{props.contractName}</td>
-      <td>{convertDateFormat(props.startDate)}</td>
-      <td>{convertDateFormat(props.endDate)}</td>
-      <td>{props.amount}</td>
-      <td>{props.status}</td>
-      <td>
-        <Link className="btn" to={`/contracts/${props.id}`}>
-          {props.action}
-        </Link>
-      </td> */}
     </tr>
   );
 };

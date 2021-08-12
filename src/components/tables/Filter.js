@@ -21,8 +21,8 @@ const Filter = (props) => {
         value={props.selected}
         onChange={dropdownChangeHandler}
       >
-        {props.filters.map((filterItem) => (
-          <option value={filterItem.value}>
+        {props.filters.map((filterItem, i) => (
+          <option key={i} value={filterItem.value}>
             {`${props.filterName}: ${filterItem.name}`}
           </option>
         ))}
