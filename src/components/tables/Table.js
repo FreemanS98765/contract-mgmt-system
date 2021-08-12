@@ -21,10 +21,39 @@ const renderValues = (val) => {
 
 const getFormattedAmount = (amount) => `$${amount.toFixed(2)}`;
 
-export const ContractsTable = () => {
+const descendingComparator = (a, b, orderBy) => {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+
+  return 0;
+};
+
+const getComparator = (order, orderBy) => {
+  return order === "desc"
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+};
+
+const tableSort = (array, comparator) => {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+};
+
+export const ContractsTable = (props) => {
   const [isSelected, setIsSelected] = useState(
     new Array(CONTRACT_DATA.length).fill(false)
   );
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState([]);
 
   const totalContracts = CONTRACT_DATA.length;
 
@@ -127,8 +156,13 @@ export const ContractsTable = () => {
         </tr>
       </thead>
       <tbody>
-        {CONTRACT_DATA.map((c, i) => (
-          <TableRow key={c.id} {...c} selected={isSelected[i]} onClick={() => toggleDropdown(i)} />
+        {tableSort(props.contracts, getComparator(order, orderBy)).map((c, i) => (
+          <TableRow
+            key={c.id}
+            {...c}
+            selected={isSelected[i]}
+            onClick={() => toggleDropdown(i)}
+          />
         ))}
       </tbody>
     </table>

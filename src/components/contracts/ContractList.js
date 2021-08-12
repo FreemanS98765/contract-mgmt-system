@@ -12,16 +12,6 @@ import classes from "./ContractList.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
-// const tableSort = (array, ascending, prop) => {
-//   return array.sort((a, b, prop) => {
-//     if (ascending) {
-//       return a.prop > b.prop ? 1 : -1;
-//     } else {
-//       return a.prop < b.prop ? 1 : -1;
-//     }
-//   });
-// };
-
 const ContractList = (props) => {
   const [filteredStatus, setFilteredStatus] = useState();
   const [filteredDate, setFilteredDate] = useState();
@@ -34,46 +24,6 @@ const ContractList = (props) => {
 
   const faAngleDownIcon = <FontAwesomeIcon icon={faAngleDown} />;
   const faAngleUpIcon = <FontAwesomeIcon icon={faAngleUp} />;
-
-  // const history = useHistory();
-  // const location = useLocation();
-
-  // const queryParams = new URLSearchParams(location.search);
-
-  // const isSortingAscending = queryParams.get("sort") === "asc";
-
-  // const sortedContracts = tableSort(
-  //   props.contracts,
-  //   isSortingAscending,
-  //   props.client
-  // );
-
-  const descendingComparator = (a, b, orderBy) => {
-    if (b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-      return 1;
-    }
-
-    return 0;
-  };
-
-  const getComparator = (order, orderBy) => {
-    return order === "desc"
-      ? (a, b) => descendingComparator(a, b, orderBy)
-      : (a, b) => -descendingComparator(a, b, orderBy);
-  };
-
-  const tableSort = (array, comparator) => {
-    const stabilizedThis = array.map((el, index) => [el, index]);
-    stabilizedThis.sort((a, b) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) return order;
-      return a[1] - b[1];
-    });
-    return stabilizedThis.map((el) => el[0]);
-  };
 
   const statusFilterChangeHandler = (selectedStatus) => {
     setFilteredStatus(selectedStatus);
@@ -92,13 +42,6 @@ const ContractList = (props) => {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-
-  // const changeSortingHandler = () => {
-  //   history.push({
-  //     pathname: location.pathname,
-  //     search: `?sort=${isSortingAscending ? "desc" : "asc"}`,
-  //   });
-  // };
 
   const filteredContracts = props.contracts.filter((contract) => {
     if (
@@ -157,50 +100,7 @@ const ContractList = (props) => {
         onRequestSort={handleRequestSort}
       />
 
-    <ContractsTable />
-
-      <table className="table is-striped is-fullwidth">
-        <thead>
-          <tr>
-            {props.contractHeaders.map((header, i) => {
-              return (
-                <th
-                  onClick={() => handleRequestSort("click", header.id)}
-                  className="table-head is-hoverable table-head__cell"
-                  key={i}
-                >
-                  {header.label}
-                  <span className="icon">
-                    {order === "asc" ? faAngleDownIcon : faAngleUpIcon}
-                  </span>
-                </th>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {tableSort(filteredContracts, getComparator(order, orderBy)).map(
-            (contract) => {
-              return (
-                <ContractItem
-                  contract={contract}
-                  key={contract.id}
-                  id={contract.id}
-                  startDate={contract.startDate}
-                  endDate={contract.endDate}
-                  contractName={contract.contractName}
-                  client={contract.client}
-                  amount={contract.amount}
-                  status={contract.status}
-                  action={contract.action}
-                />
-              );
-            }
-          )}
-        </tbody>
-      </table>
-
-      
+      <ContractsTable contracts={filteredContracts} />
     </Fragment>
   );
 };
