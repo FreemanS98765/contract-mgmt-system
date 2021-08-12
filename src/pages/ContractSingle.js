@@ -6,14 +6,25 @@ import ContractEditButton from "../components/contracts/ContractEditButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhone, faBook } from "@fortawesome/free-solid-svg-icons";
 
-import { CONTRACT_DATA } from "../data/data";
-
 const ContractSingle = (props) => {
   const params = useParams();
 
-  const contracts = CONTRACT_DATA.find(
+  const { id, startDate, endDate, contract, client, amount, status } = props;
+
+  const contracts = props.contracts.find(
     (contract) => contract.id.toString() === params.contractId
   );
+
+  const statusVariant =
+      contracts.status === "Active"
+        ? "is-success"
+        : status === "Draft"
+        ? "is-warning"
+        : status === "Expired"
+        ? "is-danger"
+        : "primary";
+
+        console.log(contracts);
 
   if (!contracts) {
     return <p>Contract not found!</p>;
@@ -27,7 +38,7 @@ const ContractSingle = (props) => {
             <h1 className="title is-3 has-text-weight-bold">{`Contract #${params.contractId}`}</h1>
           </div>
           <div className="level-item">
-            <span className="tag is-success is-medium">Active</span>
+            <span className={`tag is-medium ${statusVariant}`}>{contracts.status}</span>
           </div>
         </div>
         <ContractEditButton />
@@ -67,19 +78,15 @@ const ContractSingle = (props) => {
               </div>
               <div className="block">
                 <h5 className="subtitle is-5">Start Date</h5>
-                <p>{`#${params.contractId}`}</p>
+                <p>{`${contracts.startDate}`}</p>
               </div>
               <div className="block">
                 <h5 className="subtitle is-5">End Date</h5>
-                <p>{`#${params.contractId}`}</p>
+                <p>{`${contracts.endDate}`}</p>
               </div>
               <div className="block">
                 <h5 className="subtitle is-5">Contract Amount</h5>
-                <p>{`#${params.contractId}`}</p>
-              </div>
-              <div className="block">
-                <h5 className="subtitle is-5">Contract Status</h5>
-                <p>{`#${params.contractId}`}</p>
+                <p>{`$${contracts.amount}`}</p>
               </div>
             </div>
             <div className="column">
@@ -91,11 +98,11 @@ const ContractSingle = (props) => {
 
               <div className="block">
                 <h5 className="subtitle is-5">Client</h5>
-                <p>{`#${params.contractId}`}</p>
+                <p>{`${contracts.client}`}</p>
               </div>
               <div className="block">
                 <h5 className="subtitle is-5">Company</h5>
-                <p>{`#${params.contractId}`}</p>
+                <p>{`${contracts.company}`}</p>
               </div>
               <div className="block">
                 <h5 className="subtitle is-5">Contact Information</h5>
@@ -103,7 +110,7 @@ const ContractSingle = (props) => {
                   <span className="icon">
                     <FontAwesomeIcon icon={faPhone} />
                   </span>
-                  <span>(603) 264-3904</span>
+                  <span>{contracts.phone}</span>
                 </span>
               </div>
               <div className="block">
@@ -112,15 +119,18 @@ const ContractSingle = (props) => {
                     <FontAwesomeIcon icon={faEnvelope} />
                   </span>
                   <span>
-                    <a href="mailto:freeman@danfreedesign.com">
-                      Freeman@danfreedesign.com
+                    <a href={`{mailto:${contracts.email}}`}>
+                      {contracts.email}
                     </a>
                   </span>
                 </span>
               </div>
               <div className="block">
                 <h5 className="subtitle is-5">Address</h5>
-                <p>{`#${params.contractId}`}</p>
+                <p>{`${contracts.address}`}</p>
+                <p>{`${contracts.city}`}</p>
+                <p>{`${contracts.state}`}</p>
+                <p>{`${contracts.zipcode}`}</p>
               </div>
             </div>
           </div>

@@ -8,6 +8,8 @@ import NewContract from "./pages/NewContract";
 
 import Layout from "./components/Layout";
 
+import { CONTRACT_DATA } from "./data/data";
+
 function App() {
   
 
@@ -24,7 +26,7 @@ function App() {
           <Contracts />
         </Route>
         <Route path="/contracts/:contractId">
-          <ContractSingle />
+          <ContractSingle contracts={CONTRACT_DATA} />
         </Route>
         <Route path="/new-contract">
           <NewContract />
