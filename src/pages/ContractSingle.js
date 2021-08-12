@@ -3,6 +3,8 @@ import { useParams, Route } from "react-router-dom";
 
 import ContractEditButton from "../components/contracts/ContractEditButton";
 
+import { Breadcrumbs, BreadcrumbItem } from "../components/UI/Breadcrumbs";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhone, faBook } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,9 +20,9 @@ const ContractSingle = (props) => {
   const statusVariant =
       contracts.status === "Active"
         ? "is-success"
-        : status === "Draft"
+        : contracts.status === "Draft"
         ? "is-warning"
-        : status === "Expired"
+        : contracts.status === "Expired"
         ? "is-danger"
         : "primary";
 
@@ -44,24 +46,11 @@ const ContractSingle = (props) => {
         <ContractEditButton />
       </div>
       <div className="mt-3">
-        <nav
-          className="breadcrumb has-arrow-separator"
-          aria-label="breadcrumbs"
-        >
-          <ul>
-            <li>
-              <a href="#">Dashboard</a>
-            </li>
-            <li>
-              <a href="#">Contracts</a>
-            </li>
-            <li className="is-active">
-              <a href="#" aria-current="page">
-                Contract Details
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <Breadcrumbs className="has-arrow-separator">
+          <BreadcrumbItem to={`/dashboard`}>Dashboard</BreadcrumbItem>
+          <BreadcrumbItem to={`/contracts`}>Contracts</BreadcrumbItem>
+          <BreadcrumbItem to={`/contracts/${contracts.id}`} className="is-active">{`Contract #${contracts.id}`}</BreadcrumbItem>
+        </Breadcrumbs>
       </div>
       <section className="section">
         <div className="container">
