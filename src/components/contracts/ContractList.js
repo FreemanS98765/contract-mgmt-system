@@ -9,9 +9,6 @@ import { ContractsTable } from "../tables/Table";
 import "bulma/css/bulma.min.css";
 import classes from "./ContractList.module.css";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
-
 const ContractList = (props) => {
   const [filteredStatus, setFilteredStatus] = useState();
   const [filteredDate, setFilteredDate] = useState();
@@ -21,9 +18,6 @@ const ContractList = (props) => {
 
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState([]);
-
-  const faAngleDownIcon = <FontAwesomeIcon icon={faAngleDown} />;
-  const faAngleUpIcon = <FontAwesomeIcon icon={faAngleUp} />;
 
   const statusFilterChangeHandler = (selectedStatus) => {
     setFilteredStatus(selectedStatus);
@@ -100,7 +94,7 @@ const ContractList = (props) => {
         onRequestSort={handleRequestSort}
       />
 
-      <ContractsTable contracts={filteredContracts} />
+      <ContractsTable contracts={filteredContracts} order={order} orderBy={orderBy} />
     </Fragment>
   );
 };

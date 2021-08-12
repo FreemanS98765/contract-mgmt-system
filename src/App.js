@@ -1,6 +1,5 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import Dashboard from "./pages/Dashboard";
 import Contracts from "./pages/Contracts";
@@ -8,9 +7,6 @@ import ContractSingle from "./pages/ContractSingle";
 import NewContract from "./pages/NewContract";
 
 import Layout from "./components/Layout";
-
-import "./App.css";
-import NewContractForm from "./components/contracts/NewContractForm";
 
 function App() {
   

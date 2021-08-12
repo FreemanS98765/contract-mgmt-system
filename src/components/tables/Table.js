@@ -52,8 +52,6 @@ export const ContractsTable = (props) => {
   const [isSelected, setIsSelected] = useState(
     new Array(CONTRACT_DATA.length).fill(false)
   );
-  const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState([]);
 
   const totalContracts = CONTRACT_DATA.length;
 
@@ -156,7 +154,7 @@ export const ContractsTable = (props) => {
         </tr>
       </thead>
       <tbody>
-        {tableSort(props.contracts, getComparator(order, orderBy)).map((c, i) => (
+        {tableSort(props.contracts, getComparator(props.order, props.orderBy)).map((c, i) => (
           <TableRow
             key={c.id}
             {...c}
