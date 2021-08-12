@@ -94,7 +94,12 @@ const ContractList = (props) => {
         onRequestSort={handleRequestSort}
       />
 
-      <ContractsTable contracts={filteredContracts} order={order} orderBy={orderBy} />
+      <ContractsTable
+        contracts={filteredContracts}
+        order={order}
+        orderBy={orderBy}
+        onRemoveHandler={props.onRemoveHandler}
+      />
     </Fragment>
   );
 };

@@ -50,14 +50,8 @@ const tableSort = (array, comparator) => {
 
 export const ContractsTable = (props) => {
   const [isSelected, setIsSelected] = useState(
-    new Array(CONTRACT_DATA.length).fill(false)
+    new Array(props.contracts.length).fill(false)
   );
-
-  const totalContracts = CONTRACT_DATA.length;
-
-  const formattedContracts = CONTRACT_DATA.map((c) => {
-    return renderValues(c);
-  });
 
   const toggleDropdown = (position) => {
     const updatedToggledState = isSelected.map((item, index) =>
@@ -124,14 +118,14 @@ export const ContractsTable = (props) => {
                     <span>Edit</span>
                   </span>
                 </Link>
-                <Link className="dropdown-item" to={`/contracts/${props.id}`}>
+                <button className="dropdown-item" onClick={props.onRemoveHandler}>
                   <span className="icon-text has-text-danger">
                     <span className="icon">
                       <FontAwesomeIcon icon={faTrashAlt} />
                     </span>
                     <span>Remove</span>
                   </span>
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -160,6 +154,7 @@ export const ContractsTable = (props) => {
             {...c}
             selected={isSelected[i]}
             onClick={() => toggleDropdown(i)}
+            onRemoveHandler={() => props.onRemoveHandler(i)}
           />
         ))}
       </tbody>

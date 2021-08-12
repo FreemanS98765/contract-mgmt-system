@@ -24,6 +24,12 @@ const Contracts = () => {
     });
   };
 
+  const removeContractHandler = (contract) => {
+    setContracts((prevContracts) => {
+      return prevContracts.filter((item, index) => index !== contract);
+    });
+  };
+
   return (
     <div>
       <div className="page-header flex space-between">
@@ -34,10 +40,12 @@ const Contracts = () => {
         <ContractList
           contracts={contracts}
           contractHeaders={CONTRACT_TABLE_HEADERS}
+          onRemoveHandler={removeContractHandler}
         />
       </div>
       {showContractModal && (
-        <ContractModal onAddContract={addContractHandler}
+        <ContractModal
+          onAddContract={addContractHandler}
           toggleModal={showContractModal ? "is-active" : "false"}
         />
       )}
