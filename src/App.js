@@ -11,7 +11,6 @@ import Layout from "./components/Layout";
 import { CONTRACT_DATA } from "./data/data";
 
 function App() {
-  
 
   return (
     <Layout>

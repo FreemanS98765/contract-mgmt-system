@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const db = require("./src/models");
 
 const app = express();
 
@@ -28,7 +29,7 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
-const db = require("./src/models");
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
+
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});

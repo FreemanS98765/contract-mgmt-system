@@ -10,6 +10,7 @@ import "bulma/css/bulma.min.css";
 import classes from "./ContractList.module.css";
 
 const ContractList = (props) => {
+
   const [filteredStatus, setFilteredStatus] = useState();
   const [filteredDate, setFilteredDate] = useState();
 

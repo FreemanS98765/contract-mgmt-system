@@ -6,8 +6,14 @@ module.exports = (sequelize, Sequelize) => {
     client: {
       type: Sequelize.STRING,
     },
+    startDate: {
+      type: Sequelize.DATEONLY,
+    },
+    endDate: {
+      type: Sequelize.DATEONLY,
+    },
     price: {
-      type: Sequelize.NUMBER,
+      type: Sequelize.FLOAT,
     },
     status: {
       type: Sequelize.STRING,
@@ -16,7 +22,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     phone: {
-      type: Sequelize.NUMBER,
+      type: Sequelize.INTEGER,
     },
     email: {
       type: Sequelize.STRING,

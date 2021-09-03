@@ -16,7 +16,9 @@ exports.create = (req, res) => {
   const contract = {
     title: req.body.title,
     client: req.body.client,
-    amount: req.body.amount,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    price: req.body.amount,
     status: req.body.status,
     company: req.body.company,
     phone: req.body.phone,
