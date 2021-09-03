@@ -155,3 +155,25 @@ p {
   color: red;
   margin-left: 3px
 }
+
+.contract__detail {
+  display: flex;
+  align-items: center;
+  margin-bottom: .5em;
+}
+
+.contract__detail.is-align-content-flex-start {
+  align-items: flex-start;
+}
+
+.contract__detail h5 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #dd3333;
+  margin-right: 1em
+}
+
+.contract__contact-info {
+  display: flex;
+  flex-direction: column;
+}

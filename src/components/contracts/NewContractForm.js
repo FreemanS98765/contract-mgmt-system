@@ -1,4 +1,6 @@
 import React, { useState, useRef, Fragment, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 import { Formik, Form, useField, useFormik } from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,12 +11,18 @@ import { TextInput, TextareaInput, SelectField } from "../UI/FormElements";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 
+import useHttp from "../../hooks/use-http";
+//import { addContract } from "../../lib/api";
+
 const NewContractForm = (props) => {
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
-  const [saveStatus, setSaveStatus] = useState('')
+  const { sendRequest, status } = useHttp();
+  const history = useHistory();
 
   const dispatch = useDispatch();
+
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [saveStatus, setSaveStatus] = useState("");
 
   const toggleButtonHandler = () => {
     dispatch(uiActions.toggleNewContract());
@@ -144,6 +152,20 @@ const NewContractForm = (props) => {
               </div>
 
               <div className="field is-grouped">
+                <div className="control">
+                  <SelectField name="category">
+                    <option>Maintenance</option>
+                    <option>Project</option>
+                  </SelectField>
+                </div>
+
+                <div className="control">
+                  <SelectField name="level">
+                    <option>Easy</option>
+                    <option>Medium</option>
+                  </SelectField>
+                </div>
+
                 <div className="control is-expanded">
                   <DatePicker
                     name="startDate"
@@ -176,16 +198,19 @@ const NewContractForm = (props) => {
                   ></TextareaInput>
                 </div>
               </div>
-              <div className="field">
-                <div className="control">
-                  <label className="label">File upload</label>
-                  <input
-                    id="upload"
-                    name="upload"
-                    type="file"
-                    {...formik.getFieldProps("upload")}
-                    className="button link"
-                  />
+
+              <div className="form-section">
+                <div className="field">
+                  <div className="control">
+                    <label className="label">File upload</label>
+                    <input
+                      id="upload"
+                      name="upload"
+                      type="file"
+                      {...formik.getFieldProps("upload")}
+                      className="button link"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

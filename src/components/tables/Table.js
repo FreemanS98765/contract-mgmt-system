@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { CONTRACT_DATA } from "../../data/data";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,16 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-const renderValues = (val) => {
-  // Converts date object to string
-  if (Object.prototype.toString.call(val) === "[object Date]") {
-    return `${val.getMonth() + 1}/${val.getDate()}/${val.getFullYear()}`;
-  }
-
-  return val;
-};
-
-const getFormattedAmount = (amount) => `$${amount.toFixed(2)}`;
+import { getFormattedAmount, getFormattedDate } from "../../helpers/FormatOutput";
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -76,8 +66,8 @@ export const ContractsTable = (props) => {
       <tr>
         <td>{client}</td>
         <td>{contract}</td>
-        <td>{renderValues(startDate)}</td>
-        <td>{renderValues(endDate)}</td>
+        <td>{getFormattedDate(startDate)}</td>
+        <td>{getFormattedDate(endDate)}</td>
         <td>{getFormattedAmount(amount)}</td>
         <td>
           <span className={statusVariant}>{status}</span>

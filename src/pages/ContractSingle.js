@@ -4,6 +4,7 @@ import { useParams, Route } from "react-router-dom";
 import ContractEditButton from "../components/contracts/ContractEditButton";
 
 import { Breadcrumbs, BreadcrumbItem } from "../components/UI/Breadcrumbs";
+import { getFormattedDate, getFormattedAmount } from "../helpers/FormatOutput";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhone, faBook } from "@fortawesome/free-solid-svg-icons";
@@ -18,15 +19,15 @@ const ContractSingle = (props) => {
   );
 
   const statusVariant =
-      contracts.status === "Active"
-        ? "is-success"
-        : contracts.status === "Draft"
-        ? "is-warning"
-        : contracts.status === "Expired"
-        ? "is-danger"
-        : "primary";
+    contracts.status === "Active"
+      ? "is-success"
+      : contracts.status === "Draft"
+      ? "is-warning"
+      : contracts.status === "Expired"
+      ? "is-danger"
+      : "primary";
 
-        console.log(contracts);
+  console.log(contracts);
 
   if (!contracts) {
     return <p>Contract not found!</p>;
@@ -40,7 +41,9 @@ const ContractSingle = (props) => {
             <h1 className="title is-3 has-text-weight-bold">{`Contract #${params.contractId}`}</h1>
           </div>
           <div className="level-item">
-            <span className={`tag is-medium ${statusVariant}`}>{contracts.status}</span>
+            <span className={`tag is-medium ${statusVariant}`}>
+              {contracts.status}
+            </span>
           </div>
         </div>
         <ContractEditButton />
@@ -49,60 +52,58 @@ const ContractSingle = (props) => {
         <Breadcrumbs className="has-arrow-separator">
           <BreadcrumbItem to={`/dashboard`}>Dashboard</BreadcrumbItem>
           <BreadcrumbItem to={`/contracts`}>Contracts</BreadcrumbItem>
-          <BreadcrumbItem to={`/contracts/${contracts.id}`} className="is-active">{`Contract #${contracts.id}`}</BreadcrumbItem>
+          <BreadcrumbItem
+            to={`/contracts/${contracts.id}`}
+            className="is-active"
+          >{`Contract #${contracts.id}`}</BreadcrumbItem>
         </Breadcrumbs>
       </div>
       <section className="section">
         <div className="container">
-          <div className="columns">
-            <div className="column">
-              <div className="block">
-                <h3 className="is-size-3 has-text-weight-bold">
-                  Contract Details
-                </h3>
-              </div>
-              <div className="block">
-                <h5 className="subtitle is-5">Contract ID</h5>
-                <p>{`#${params.contractId}`}</p>
-              </div>
-              <div className="block">
-                <h5 className="subtitle is-5">Start Date</h5>
-                <p>{`${contracts.startDate}`}</p>
-              </div>
-              <div className="block">
-                <h5 className="subtitle is-5">End Date</h5>
-                <p>{`${contracts.endDate}`}</p>
-              </div>
-              <div className="block">
-                <h5 className="subtitle is-5">Contract Amount</h5>
-                <p>{`$${contracts.amount}`}</p>
-              </div>
+          <div className="column">
+            <div className="contract__detail">
+              <h3 className="is-size-3 has-text-weight-bold">
+                Contract Details
+              </h3>
             </div>
-            <div className="column">
-              <div className="block">
-                <h3 className="is-size-3 has-text-weight-bold">
-                  Client Details
-                </h3>
-              </div>
+            <div className="contract__detail">
+              <h5>Contract ID:</h5>
+              <p>{`#${params.contractId}`}</p>
+            </div>
+            <div className="contract__detail">
+              <h5>Start Date:</h5>
+              <p>{getFormattedDate(contracts.startDate)}</p>
+            </div>
+            <div className="contract__detail">
+              <h5>End Date:</h5>
+              <p>{getFormattedDate(contracts.endDate)}</p>
+            </div>
+            <div className="contract__detail">
+              <h5>Contract Amount:</h5>
+              <p>{getFormattedAmount(contracts.amount)}</p>
+            </div>
 
-              <div className="block">
-                <h5 className="subtitle is-5">Client</h5>
-                <p>{`${contracts.client}`}</p>
-              </div>
-              <div className="block">
-                <h5 className="subtitle is-5">Company</h5>
-                <p>{`${contracts.company}`}</p>
-              </div>
-              <div className="block">
-                <h5 className="subtitle is-5">Contact Information</h5>
+            <div className="block">
+              <h3 className="is-size-3 has-text-weight-bold">Client Details</h3>
+            </div>
+
+            <div className="contract__detail">
+              <h5>Client</h5>
+              <p>{`${contracts.client}`}</p>
+            </div>
+            <div className="contract__detail">
+              <h5>Company</h5>
+              <p>{`${contracts.company}`}</p>
+            </div>
+            <div className="contract__detail is-align-content-flex-start">
+              <h5>Contact Information</h5>
+              <div className="contract__contact-info">
                 <span className="icon-text">
                   <span className="icon">
                     <FontAwesomeIcon icon={faPhone} />
                   </span>
                   <span>{contracts.phone}</span>
                 </span>
-              </div>
-              <div className="block">
                 <span className="icon-text">
                   <span className="icon">
                     <FontAwesomeIcon icon={faEnvelope} />
@@ -114,13 +115,13 @@ const ContractSingle = (props) => {
                   </span>
                 </span>
               </div>
-              <div className="block">
-                <h5 className="subtitle is-5">Address</h5>
-                <p>{`${contracts.address}`}</p>
-                <p>{`${contracts.city}`}</p>
-                <p>{`${contracts.state}`}</p>
-                <p>{`${contracts.zipcode}`}</p>
-              </div>
+            </div>
+            <div className="contract__detail">
+              <h5>Address</h5>
+              <p>{`${contracts.address}`}</p>
+              <p>{`${contracts.city}`}</p>
+              <p>{`${contracts.state}`}</p>
+              <p>{`${contracts.zipcode}`}</p>
             </div>
           </div>
         </div>
