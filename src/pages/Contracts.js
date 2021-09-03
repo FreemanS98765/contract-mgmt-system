@@ -2,11 +2,16 @@ import { useState } from "react";
 
 import { useSelector } from "react-redux";
 
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import NoContractsFound from "../components/contracts/NoContractsFound";
+
 import { CONTRACT_DATA, CONTRACT_TABLE_HEADERS } from "../data/data.js";
 
 import ContractList from "../components/contracts/ContractList";
 import ContractButton from "../components/contracts/ContractButton";
 import ContractModal from "../components/contracts/ContractModal.js";
+
+
 
 import "bulma/css/bulma.min.css";
 import classes from "./Contracts.module.css";

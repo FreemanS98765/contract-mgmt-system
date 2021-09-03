@@ -52,7 +52,7 @@ export const ContractsTable = (props) => {
   };
 
   const TableRow = (props) => {
-    const { id, startDate, endDate, contract, client, amount, status } = props;
+    const { id, startDate, endDate, contract, client, price, status } = props;
     const statusVariant =
       status === "Active"
         ? "has-text-success-dark"
@@ -68,7 +68,7 @@ export const ContractsTable = (props) => {
         <td>{contract}</td>
         <td>{getFormattedDate(startDate)}</td>
         <td>{getFormattedDate(endDate)}</td>
-        <td>{getFormattedAmount(amount)}</td>
+        <td>{getFormattedAmount(price)}</td>
         <td>
           <span className={statusVariant}>{status}</span>
         </td>
