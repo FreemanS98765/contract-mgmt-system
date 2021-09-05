@@ -1,21 +1,42 @@
+import React from 'react';
+
 import NewContractForm from "./NewContractForm";
-import { useDispatch } from "react-redux";
-import { uiActions } from "../../store/ui-slice";
+import { connect } from "react-redux";
+import uiSlice from "../../reducers/ui-slice";
+import { addContract } from "../../actions/contracts";
+import { useHistory } from 'react-router-dom';
 
 const ContractModal = (props) => {
-  const dispatch = useDispatch();
+  let history = useHistory();
 
-  const toggleButtonHandler = () => {
-    dispatch(uiActions.toggleNewContract());
+  const toggleModalHandler = () => {
+    //props.dispatch(uiSlice);
+    props.dispatch('TOGGLE_MODAL', props.isToggled)
+    console.log(props.isToggled);
   };
 
   const saveContractDataHandler = (enteredContractData) => {
-    const contractData = {
+    // const contractData = {
+    //   ...enteredContractData,
+    // };
+    //props.onAddContract(contractData);
+    props.dispatch(addContract(enteredContractData));
+    //props.history.push('/');
+
+    toggleModalHandler();
+  };
+
+  const draftContractDataHandler = async (enteredContractData) => {
+    await new Promise((r) => setTimeout(r, 500));
+
+    const newValues = {
       ...enteredContractData,
-      id: Math.random().toString(),
+      status: "Draft",
     };
-    props.onAddContract(contractData);
-    toggleButtonHandler();
+    console.log(newValues);
+    props.dispatch(addContract(newValues));
+
+    toggleModalHandler();
   };
 
   return (
@@ -26,11 +47,14 @@ const ContractModal = (props) => {
           <p className="modal-card-title">New Contract</p>
         </header>
         <section className="modal-card-body">
-          <NewContractForm onSaveContractData={saveContractDataHandler} />
+          <NewContractForm
+            onSaveContractData={saveContractDataHandler}
+            onDraftContractData={draftContractDataHandler}
+          />
         </section>
       </div>
       <button
-        onClick={toggleButtonHandler}
+        onClick={toggleModalHandler}
         className="modal-close is-large"
         aria-label="close"
       />
@@ -38,4 +62,4 @@ const ContractModal = (props) => {
   );
 };
 
-export default ContractModal;
+export default connect()(ContractModal);

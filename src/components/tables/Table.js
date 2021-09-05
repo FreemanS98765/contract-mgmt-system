@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { removeContract } from "../../actions/contracts";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEllipsisH,
@@ -9,7 +11,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-import { getFormattedAmount, getFormattedDate } from "../../helpers/FormatOutput";
+import {
+  getFormattedAmount,
+  getFormattedDate,
+} from "../../helpers/FormatOutput";
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -108,7 +113,12 @@ export const ContractsTable = (props) => {
                     <span>Edit</span>
                   </span>
                 </Link>
-                <button className="dropdown-item" onClick={props.onRemoveHandler}>
+                <button
+                  className="dropdown-item"
+                  onClick={() => {
+                    dispatchEvent(removeContract({ id }));
+                  }}
+                >
                   <span className="icon-text has-text-danger">
                     <span className="icon">
                       <FontAwesomeIcon icon={faTrashAlt} />
@@ -138,7 +148,10 @@ export const ContractsTable = (props) => {
         </tr>
       </thead>
       <tbody>
-        {tableSort(props.contracts, getComparator(props.order, props.orderBy)).map((c, i) => (
+        {tableSort(
+          props.contracts,
+          getComparator(props.order, props.orderBy)
+        ).map((c, i) => (
           <TableRow
             key={c.id}
             {...c}

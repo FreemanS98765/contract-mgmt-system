@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { connect } from 'react-redux';
 
 import ContractItem from "./ContractItem";
 import FiltersToolbar from "../tables/FiltersToolbar";
@@ -8,8 +8,11 @@ import { ContractsTable } from "../tables/Table";
 
 import "bulma/css/bulma.min.css";
 import classes from "./ContractList.module.css";
+import { removeContract } from "../../actions/contracts";
 
 const ContractList = (props) => {
+
+  const DUMMY = [];
 
   const [filteredStatus, setFilteredStatus] = useState();
   const [filteredDate, setFilteredDate] = useState();
@@ -38,7 +41,7 @@ const ContractList = (props) => {
     setOrderBy(property);
   };
 
-  const filteredContracts = props.contracts.filter((contract) => {
+  const filteredContracts = DUMMY.filter((contract) => {
     if (
       filteredStatus === "draft" ||
       filteredStatus === "expired" ||
@@ -99,10 +102,15 @@ const ContractList = (props) => {
         contracts={filteredContracts}
         order={order}
         orderBy={orderBy}
-        onRemoveHandler={props.onRemoveHandler}
       />
     </Fragment>
   );
 };
 
-export default ContractList;
+const mapStateToProps = (state) => {
+  return {
+    contracts: state
+  };
+}
+
+export default connect(mapStateToProps)(ContractList);

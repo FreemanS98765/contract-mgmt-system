@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 
 import "bulma/css/bulma.min.css";
 import classes from "./ContractItem.module.css";
@@ -33,4 +34,4 @@ const ContractItem = (props) => {
   );
 };
 
-export default ContractItem;
+export default connect()(ContractItem);

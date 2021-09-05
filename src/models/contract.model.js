@@ -1,30 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
   const Contract = sequelize.define("contract", {
-    title: {
-      type: Sequelize.STRING,
-    },
     client: {
-      type: Sequelize.STRING,
-    },
-    startDate: {
-      type: Sequelize.DATEONLY,
-    },
-    endDate: {
-      type: Sequelize.DATEONLY,
-    },
-    price: {
-      type: Sequelize.FLOAT,
-    },
-    status: {
       type: Sequelize.STRING,
     },
     company: {
       type: Sequelize.STRING,
     },
-    phone: {
-      type: Sequelize.INTEGER,
-    },
     email: {
+      type: Sequelize.STRING,
+    },
+    phone: {
       type: Sequelize.STRING,
     },
     address: {
@@ -39,9 +24,29 @@ module.exports = (sequelize, Sequelize) => {
     zipcode: {
       type: Sequelize.STRING,
     },
+    title: {
+      type: Sequelize.STRING,
+    },
+    startDate: {
+      type: Sequelize.DATEONLY,
+    },
+    endDate: {
+      type: Sequelize.DATEONLY,
+    },
+    price: {
+      type: Sequelize.FLOAT,
+    },
     notes: {
       type: Sequelize.STRING,
     },
+    upload: {
+      type: Sequelize.STRING,
+    },
+    status: {
+      type: Sequelize.STRING,
+    },
+  }, {
+    // options
   });
 
   return Contract;

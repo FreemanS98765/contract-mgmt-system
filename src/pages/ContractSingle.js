@@ -1,5 +1,12 @@
+import React from "react";
+import { connect } from "react-redux";
+
+import { getContracts } from "../actions/contracts";
+
 import { Fragment } from "react";
 import { useParams, Route } from "react-router-dom";
+
+import { Contract } from "../models/contract.model";
 
 import ContractEditButton from "../components/contracts/ContractEditButton";
 
@@ -15,7 +22,7 @@ const ContractSingle = (props) => {
   const { id, startDate, endDate, contract, client, amount, status } = props;
 
   const contracts = props.contracts.find(
-    (contract) => contract.id.toString() === params.contractId
+    (contract) => contract.id.toString() === params.id
   );
 
   const statusVariant =
@@ -159,4 +166,10 @@ const ContractSingle = (props) => {
   );
 };
 
-export default ContractSingle;
+const mapStateToProps = (state) => {
+  return {
+    contracts: state
+  }
+}
+
+export default connect(mapStateToProps)(ContractSingle);

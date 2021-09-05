@@ -1,5 +1,5 @@
 import React, { useState, useRef, Fragment, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { Formik, Form, useField, useFormik } from "formik";
 import DatePicker from "react-datepicker";
@@ -9,34 +9,27 @@ import * as yup from "yup";
 import { TextInput, TextareaInput, SelectField } from "../UI/FormElements";
 
 import { useDispatch } from "react-redux";
-import { uiActions } from "../../store/ui-slice";
+import { uiActions } from "../../reducers/ui-slice";
 
-import useHttp from "../../hooks/use-http";
-//import { addContract } from "../../lib/api";
+//import useHttp from "../../hooks/use-http";
+import { addContract } from "../../actions/contracts";
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const NewContractForm = (props) => {
-  const { sendRequest, status } = useHttp();
-  const history = useHistory();
+  // const { sendRequest, status } = useHttp();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [saveStatus, setSaveStatus] = useState("");
 
+  const phoneRegex =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
   const toggleButtonHandler = () => {
-    dispatch(uiActions.toggleNewContract());
-  };
-
-  const draftButtonHandler = async (values) => {
-    await new Promise((r) => setTimeout(r, 500));
-
-    const newValues = {
-      ...values,
-      status: "Draft",
-    };
-    console.log(values);
-    props.onSaveContractData(newValues);
+    props.dispatch(uiActions.toggleNewContract());
   };
 
   return (
@@ -45,11 +38,12 @@ const NewContractForm = (props) => {
         company: "",
         client: "",
         email: "",
+        phone: "",
         address: "",
         city: "",
         state: "",
         zipcode: "",
-        contract: "",
+        title: "",
         startDate: "",
         endDate: "",
         amount: 0,
@@ -59,6 +53,7 @@ const NewContractForm = (props) => {
       validationSchema={yup.object({
         company: yup.string().required("Required"),
         client: yup.string().required("Required"),
+        phone: yup.string().matches(phoneRegex, "Phone number is invalid."),
         email: yup.string().email("Invalid email address"),
         zipcode: yup
           .string()
@@ -66,16 +61,18 @@ const NewContractForm = (props) => {
           .min(5, "Must be exactly 5 digits")
           .max(5, "Must be exactly 5 digits"),
       })}
-      onSubmit={async (values) => {
-        await new Promise((r) => setTimeout(r, 500));
+      onSubmit={async (contracts) => {
+        // setTimeout(() => {
+        //   console.log(`This is the contract data: ${contract}`);
+        //   actions.setSubmitting(false);
+        //   props.onSaveContractData(contract);
+        // }, 1000);
 
-        const newValues = {
-          ...values,
-          status: "Active",
-        };
+        await sleep(500);
+        console.log(contracts);
 
-        console.log(newValues);
-        props.onSaveContractData(newValues);
+        props.dispatch(addContract(contracts));
+        props.history.push("/");
       }}
     >
       {(formik) => (
@@ -104,6 +101,13 @@ const NewContractForm = (props) => {
                     name="email"
                     type="email"
                     placeholder="Client email"
+                  />
+                </div>
+                <div className="control is-expanded">
+                  <TextInput
+                    name="phone"
+                    type="text"
+                    placeholder="Client phone"
                   />
                 </div>
               </div>
@@ -239,7 +243,7 @@ const NewContractForm = (props) => {
                       <button
                         className="button is-outlined is-white mr-3"
                         type="button"
-                        onClick={() => draftButtonHandler(formik.values)}
+                        onClick={() => props.onDraftContractData(formik.values)}
                       >
                         Draft
                       </button>
@@ -261,4 +265,4 @@ const NewContractForm = (props) => {
   );
 };
 
-export default NewContractForm;
+export default connect()(NewContractForm);

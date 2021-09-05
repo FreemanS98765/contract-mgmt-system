@@ -1,28 +1,24 @@
-module.exports = (app) => {
+module.exports = function(app) {  
   const contracts = require("../controllers/contract.controller.js");
 
-  let router = require("express").Router();
-
   // Create a new Contract
-  router.post("/", contracts.create);
+  app.post("/api/contracts/add", contracts.create);
 
   // Retrieve all Contracts
-  router.get("/", contracts.findAll);
+  app.get("/api/contracts", contracts.findAll);
 
   // Retrieve all published Contracts
-  router.get("/published", contracts.findAllPublished);
+  app.get("/api/contracts/published", contracts.findAllPublished);
 
   // Retrieve a single Contract with id
-  router.get("/:id", contracts.findOne);
+  app.get("/api/contracts/:contractId", contracts.findById);
 
   // Update a Contract with id
-  router.put("/:id", contracts.update);
+  app.put("/api/contracts/:contractId", contracts.update);
 
   // Delete a Contract with id
-  router.delete("/:id", contracts.delete);
+  app.delete("/api/contracts/:contractId", contracts.delete);
 
   // Delete all Contracts
-  router.delete("/", contracts.deleteAll);
-
-  app.use("/api/contracts", router);
+  app.delete("/api/contracts/", contracts.deleteAll);
 };

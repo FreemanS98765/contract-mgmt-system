@@ -1,8 +1,16 @@
-const db = require("../config/db.config.js");
-const Contracts = db.contracts;
+const db = require("../models");
+const Contract = db.contracts;
+const Op = db.Sequelize.Op;
 
 // Create and Save a new Contract
 exports.create = (req, res) => {
+  // Validate request
+  if (!req.body.title) {
+    res.status(400).send({
+      message: "Content cannot be empty!",
+    });
+    return;
+  }
 
   // Create a Contract
   const contract = {
@@ -10,7 +18,7 @@ exports.create = (req, res) => {
     client: req.body.client,
     startDate: req.body.startDate,
     endDate: req.body.endDate,
-    price: req.body.price,
+    price: req.body.amount,
     status: req.body.status,
     company: req.body.company,
     phone: req.body.phone,
@@ -19,23 +27,28 @@ exports.create = (req, res) => {
     city: req.body.city,
     state: req.body.state,
     zipcode: req.body.zipcode,
-    upload: req.body.upload,
     notes: req.body.notes,
   };
 
   // Save Contract in the database
-  Contracts.create(contract)
+  Contract.create(contract)
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send("Error -> " + err);
+      res.status(500).send({
+        message:
+          err.message || "Some error occured while creating the Contract",
+      });
     });
 };
 
 // Retrieve all Contracts from the database.
 exports.findAll = (req, res) => {
-  Contracts.findAll()
+  const title = req.query.title;
+  let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+
+  Contract.findAll({ where: condition })
     .then((data) => {
       res.send(data);
     })
@@ -48,10 +61,10 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single Contract with an id
-exports.findById = (req, res) => {
+exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Contracts.findByPk(id)
+  Contract.findByPk(id)
     .then((data) => {
       res.send(data);
     })
@@ -66,7 +79,7 @@ exports.findById = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  Contracts.update(req.body, {
+  Contract.update(req.body, {
     where: { id: id },
   }).then((num) => {
     if (num === 1) {
@@ -85,7 +98,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Contracts.destroy({
+  Contract.destroy({
     where: { id: id },
   }).then((num) => {
     if (num === 1) {
@@ -102,7 +115,7 @@ exports.delete = (req, res) => {
 
 // Delete all Contracts from the database.
 exports.deleteAll = (req, res) => {
-  Contracts.destroy({
+  Contract.destroy({
     where: {},
     truncate: false,
   })
@@ -119,7 +132,7 @@ exports.deleteAll = (req, res) => {
 
 // Find all published Contracts
 exports.findAllPublished = (req, res) => {
-  Contracts.findAll({ where: { published: true } })
+  Contract.findAll({ where: { published: true } })
     .then((data) => {
       res.send(data);
     })
@@ -130,7 +143,3 @@ exports.findAllPublished = (req, res) => {
       });
     });
 };
-
-function validateContract(contract) {
-  console.log(contract);
-}

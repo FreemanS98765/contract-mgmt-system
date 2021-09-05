@@ -1,24 +1,34 @@
-const HOST = "giowm1045.siteground.biz";
-const USERNAME = "uqfk1kp5urx5x";
-const PASSWORD = "y211~9&6$23&";
-const DATABASE = "dbt4yxagyszfid";
-const PORT = 3306;
+const env = require("./env.js");
 
-// const USERNAME = "root";
-// const PASSWORD = "root";
-// const DATABASE = "contract_mgmt";
-// const PORT = 8889;
+const Sequelize = require("sequelize");
+const sequelize = new Sequelize(env.db, env.user, env.password, {
+  host: env.host,
+  dialect: env.dialect,
+  operatorsAliases: false,
 
-module.exports = {
-  HOST:  HOST,
-  USER: USERNAME,
-  PASSWORD: PASSWORD,
-  DB: DATABASE,
-  dialect: "mysql",
   pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  }
-};
+    max: env.max,
+    min: env.pool.min,
+    acquire: env.pool.acquire,
+    idle: env.pool.idle,
+  },
+});
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Connection has been established successfully.");
+  })
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
+  });
+
+const db = {};
+
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
+//Models/tables
+db.contracts = require("../models/contract.model.js")(sequelize, Sequelize);
+
+module.exports = db;
