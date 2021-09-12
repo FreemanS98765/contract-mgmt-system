@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { connect } from "react-redux";
+
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 import { removeContract } from "../../actions/contracts";
 
@@ -15,6 +18,8 @@ import {
   getFormattedAmount,
   getFormattedDate,
 } from "../../helpers/FormatOutput";
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -43,10 +48,16 @@ const tableSort = (array, comparator) => {
   return stabilizedThis.map((el) => el[0]);
 };
 
-export const ContractsTable = (props) => {
+const ContractsTable = (props) => {
   const [isSelected, setIsSelected] = useState(
     new Array(props.contracts.length).fill(false)
   );
+
+  props.contracts.map((el) => {
+    console.log(el.id);
+  });
+
+  console.log("Table props are: ", props);
 
   const toggleDropdown = (position) => {
     const updatedToggledState = isSelected.map((item, index) =>
@@ -56,26 +67,36 @@ export const ContractsTable = (props) => {
     setIsSelected(updatedToggledState);
   };
 
+  const removeContractHandler = async (id) => {
+    await new Promise((r) => setTimeout(r, 2000));
+
+    // post contract data
+    props.dispatchData(removeContract({ id }));
+  };
+
   const TableRow = (props) => {
-    const { id, startDate, endDate, contract, client, price, status } = props;
+    //const { id, startDate, endDate, contract, client, price, status } = props;
+
     const statusVariant =
-      status === "Active"
+      props.status === "Active"
         ? "has-text-success-dark"
-        : status === "Draft"
+        : props.status === "Draft"
         ? "has-text-warning-dark"
-        : status === "Expired"
+        : props.status === "Expired"
         ? "has-text-danger-dark"
         : "primary";
 
+    console.log("Table Row: ", props.key);
+
     return (
-      <tr>
-        <td>{client}</td>
-        <td>{contract}</td>
-        <td>{getFormattedDate(startDate)}</td>
-        <td>{getFormattedDate(endDate)}</td>
-        <td>{getFormattedAmount(price)}</td>
+      <tr id={props.key}>
+        <td>{props.client}</td>
+        <td>{props.title}</td>
+        <td>{!props.startDate ? "" : getFormattedDate(props.startDate)}</td>
+        <td>{!props.endDate ? "" : getFormattedDate(props.endDate)}</td>
+        <td>{!props.price ? "" : getFormattedAmount(props.price)}</td>
         <td>
-          <span className={statusVariant}>{status}</span>
+          <span className={statusVariant}>{props.status}</span>
         </td>
         <td>
           <div className={`dropdown ${props.selected ? "is-active" : ""} `}>
@@ -115,8 +136,14 @@ export const ContractsTable = (props) => {
                 </Link>
                 <button
                   className="dropdown-item"
-                  onClick={() => {
-                    dispatchEvent(removeContract({ id }));
+                  onClick={(e) => {
+                    const id = props.id;
+
+                    //await sleep(1000);
+                    //props.dispatchData(removeContract({ id }));
+                    removeContractHandler(id);
+
+                    console.log("Remove item: ", id);
                   }}
                 >
                   <span className="icon-text has-text-danger">
@@ -135,32 +162,46 @@ export const ContractsTable = (props) => {
   };
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Client</th>
-          <th>Contract</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Amount</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {tableSort(
-          props.contracts,
-          getComparator(props.order, props.orderBy)
-        ).map((c, i) => (
-          <TableRow
-            key={c.id}
-            {...c}
-            selected={isSelected[i]}
-            onClick={() => toggleDropdown(i)}
-            onRemoveHandler={() => props.onRemoveHandler(i)}
-          />
-        ))}
-      </tbody>
-    </table>
+    <>
+      {props.isLoading ? (
+        <div className="center">
+          <LoadingSpinner />
+        </div>
+      ) : (
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Company</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableSort(
+              props.contracts,
+              getComparator(props.order, props.orderBy)
+            ).map((c, i) => {
+              console.log("Table Row Id: ", c.id);
+              return (
+                <TableRow
+                  key={c.id}
+                  {...c}
+                  selected={isSelected[i]}
+                  onClick={() => toggleDropdown(i)}
+                  dispatchData={props.dispatchData}
+                  onRemove={removeContractHandler.bind(null, c.id)}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+      )}
+    </>
   );
 };
+
+export default connect()(ContractsTable);

@@ -1,15 +1,10 @@
 import { useDispatch } from "react-redux";
-import { uiActions } from "../../reducers/ui-slice";
+import { uiActions } from "../../reducers/uiSlice";
 
 const ContractButton = (props) => {
-  const dispatch = useDispatch();
-
-  const toggleButtonHandler = () => {
-    dispatch(uiActions.toggleNewContract());
-  };
 
   return (
-    <button onClick={toggleButtonHandler} className="button is-primary">
+    <button onClick={props.onShowModal} className="button is-primary">
       Create Contract
     </button>
   );

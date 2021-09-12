@@ -9,6 +9,8 @@ import { Provider } from "react-redux";
 
 import * as serviceWorker from "./serviceWorker";
 
+console.log("Initial state: ", getAppStore().getState());
+
 const store = getAppStore();
 
 const template = (

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { uiActions } from "../../reducers/ui-slice";
+import { uiActions } from "../../reducers/uiSlice";
 
 const ContractEditButton = (props) => {
 

@@ -1,10 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { getContracts } from "../actions/contracts";
-
 import { Fragment } from "react";
-import { useParams, Route } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { Contract } from "../models/contract.model";
 
@@ -19,11 +17,14 @@ import { faEnvelope, faPhone, faBook } from "@fortawesome/free-solid-svg-icons";
 const ContractSingle = (props) => {
   const params = useParams();
 
-  const { id, startDate, endDate, contract, client, amount, status } = props;
+  console.log("Single contract page: ", props.contracts.contractObj);
 
-  const contracts = props.contracts.find(
+  //const { id, startDate, endDate, contract, client, amount, status } = props;
+
+  const contracts = props.contracts.contractObj.contracts.find(
     (contract) => contract.id.toString() === params.id
   );
+  
 
   const statusVariant =
     contracts.status === "Active"
@@ -168,8 +169,8 @@ const ContractSingle = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    contracts: state
-  }
-}
+    contracts: state,
+  };
+};
 
 export default connect(mapStateToProps)(ContractSingle);

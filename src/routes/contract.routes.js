@@ -1,4 +1,4 @@
-module.exports = function(app) {  
+module.exports = function (app) {
   const contracts = require("../controllers/contract.controller.js");
 
   // Create a new Contract
@@ -11,14 +11,14 @@ module.exports = function(app) {
   app.get("/api/contracts/published", contracts.findAllPublished);
 
   // Retrieve a single Contract with id
-  app.get("/api/contracts/:contractId", contracts.findById);
+  app.get("/api/contracts/:id", contracts.findById);
 
   // Update a Contract with id
-  app.put("/api/contracts/:contractId", contracts.update);
+  app.put("/api/contracts/:id", contracts.update);
 
   // Delete a Contract with id
-  app.delete("/api/contracts/:contractId", contracts.delete);
+  app.delete("/api/contracts/:id", contracts.delete);
 
   // Delete all Contracts
-  app.delete("/api/contracts/", contracts.deleteAll);
+  app.delete("/api/contracts", contracts.deleteAll);
 };

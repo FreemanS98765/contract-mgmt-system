@@ -1,13 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useSelector } from "react-redux";
 
-import LoadingSpinner from "../components/UI/LoadingSpinner";
+import useHttp from "../hooks/use-http";
 import NoContractsFound from "../components/contracts/NoContractsFound";
 
-import { CONTRACT_TABLE_HEADERS } from "../data/data.js";
-
-import { getContracts } from "../actions/contracts";
+//import { CONTRACT_TABLE_HEADERS } from "../data/data.js";
 
 import ContractList from "../components/contracts/ContractList";
 import ContractButton from "../components/contracts/ContractButton";
@@ -17,45 +14,83 @@ import "bulma/css/bulma.min.css";
 import classes from "./Contracts.module.css";
 
 const Contracts = (props) => {
-  const CONTRACT_DATA = useSelector((state) => state.contacts);
+  //const CONTRACT_DATA = useSelector((state) => state.contacts);
+  const [showModal, setShowModal] = useState(false);
+  //const contracts = props.contracts;
 
-  //console.log(JSON.stringify(CONTRACT_DATA));
+  console.log("Contracts props are: ", props);
 
-  const showContractModal = useSelector(
-    (state) => state.ui.contractModalIsVisible
-  );
+  // Stores contracts array
+  // const CONTRACT_DATA = props.contracts.contractObj.contracts;
+  const CONTRACT_DATA = props.contracts.contractObj;
+  const DISPATCH_DATA = props.dispatch;
+  const CONTRACT_TABLE_HEADERS = props.contractHeaders;
 
-  // const addContractHandler = (contract) => {
-  //   setContracts((prevContracts) => {
-  //     return [contract, ...prevContracts];
-  //   });
-  // };
+  console.log('contract data', CONTRACT_DATA);
+  //console.log('dispatch data', DISPATCH_DATA);
 
-  // const removeContractHandler = (contract) => {
-  //   setContracts((prevContracts) => {
-  //     return prevContracts.filter((item, index) => index !== contract);
-  //   });
-  // };
+
+  const showContractModal = () => {
+    setShowModal(true);
+  };
+
+  const hideContractModal = () => {
+    setShowModal(false);
+  };
+
+  // useEffect(() => {
+  //   sendRequest();
+  // }, [sendRequest]);
+
+  // if (error) {
+  //   return (
+  //     <div className="message is-danger">
+  //       <p className="centered focused">{error}</p>
+  //       <button className="delete" aria-label="delete"></button>
+  //     </div>
+  //   );
+  // }
+
+  if (
+    CONTRACT_DATA === undefined ||
+    (CONTRACT_DATA && (!CONTRACT_DATA || CONTRACT_DATA.length === 0))
+  ) {
+    return <NoContractsFound />;
+  }
 
   return (
     <div>
+      {console.log("contracts are: ", CONTRACT_DATA)}
       <div className="page-header flex space-between">
         <h1 className="is-size-4">Contracts</h1>
-        <ContractButton />
+        <ContractButton onShowModal={showContractModal} />
       </div>
+
       <div className="container content">
         <ContractList
           contracts={CONTRACT_DATA}
-          contractHeaders={CONTRACT_TABLE_HEADERS}
+          isLoading={props.isLoading}
+          dispatchData={DISPATCH_DATA}
         />
       </div>
-      {showContractModal && (
+
+      {showModal && (
+        //<ContractModal onClose={showContractModal ? "is-active" : "false"} />
         <ContractModal
-          toggleModal={showContractModal ? "is-active" : "false"}
+          onHideModal={hideContractModal}
+          onShowModal={showModal}
+          dispatchData={DISPATCH_DATA}
         />
       )}
     </div>
   );
 };
 
-export default connect()(Contracts);
+const mapStateToProps = (state) => {
+  return {
+    contracts: state,
+    isLoading: state,
+  };
+};
+
+export default connect(mapStateToProps)(Contracts);

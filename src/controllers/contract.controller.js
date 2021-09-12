@@ -1,9 +1,9 @@
 const db = require("../config/db.config.js");
 const Contracts = db.contracts;
+//const Op = db.Sequelize.Op;
 
-// Create and Save a new Contract
+// Create and Save a new Contract with Express API
 exports.create = (req, res) => {
-
   // Create a Contract
   const contract = {
     title: req.body.title,
@@ -49,15 +49,14 @@ exports.findAll = (req, res) => {
 
 // Find a single Contract with an id
 exports.findById = (req, res) => {
-  const id = req.params.id;
-
-  Contracts.findByPk(id)
+  Contracts.findByPk(req.params.id)
     .then((data) => {
+      console.log(req.params.id);
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving Contract with id=" + id,
+        message: "Error -> " + err,
       });
     });
 };
@@ -68,36 +67,37 @@ exports.update = (req, res) => {
 
   Contracts.update(req.body, {
     where: { id: id },
-  }).then((num) => {
-    if (num === 1) {
-      res.send({
-        message: "Contract was updated successfully.",
+  })
+    .then((num) => {
+      if (num === 1) {
+        res.send({
+          message: "Contract was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update Contract with id=${id}. Maybe Contract was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Error updating Contract with id=" + id,
       });
-    } else {
-      res.send({
-        message: `Cannot update Contract with id=${id}. Maybe Contract was not found or req.body is empty!`,
-      });
-    }
-  });
+    });
 };
 
 // Delete a Contract with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Contracts.destroy({
-    where: { id: id },
-  }).then((num) => {
-    if (num === 1) {
-      res.send({
-        message: "Contract was deleted successfully!",
-      });
-    } else {
-      res.send({
-        message: `Cannot delete Contract with id=${id}. Maybe Contract was not found.`,
-      });
-    }
-  });
+  console.log('Within delete controller function: ', req.params.id)
+  Contracts.destroy()
+    .then(() => {
+      res.status(200).send("Contract has been deleted!");
+    })
+    .catch((err) => {
+      res.status(500).send("Fail to delete!");
+    });
 };
 
 // Delete all Contracts from the database.

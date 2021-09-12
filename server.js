@@ -1,7 +1,5 @@
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
 
 const cors = require("cors");
 
@@ -16,10 +14,10 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
-//app.use(express.json());
+app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-//app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 // force: true will drop the table if it already exists
 db.sequelize.sync({ force: true }).then(() => {
@@ -30,7 +28,7 @@ require("./src/routes/contract.routes.js")(app);
 
 //simple route
 // app.get("/", (req, res) => {
-//   res.json({ message: "Welcome to the Contract Management System." });
+//   res.send({ message: "Welcome to the Contract Management System." });
 // });
 
 // set port, listen for requests

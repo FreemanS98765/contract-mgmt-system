@@ -1,29 +1,37 @@
-import React from 'react';
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import NewContractForm from "./NewContractForm";
-import { connect } from "react-redux";
-import uiSlice from "../../reducers/ui-slice";
+import useHttp from "../../hooks/use-http";
+
 import { addContract } from "../../actions/contracts";
-import { useHistory } from 'react-router-dom';
 
 const ContractModal = (props) => {
-  let history = useHistory();
+  const { sendRequest, loadingStatus } = useHttp(addContract);
+  const history = useHistory();
 
-  const toggleModalHandler = () => {
-    //props.dispatch(uiSlice);
-    props.dispatch('TOGGLE_MODAL', props.isToggled)
-    console.log(props.isToggled);
-  };
+  console.log(`loadingStatus is: ${loadingStatus}`);
 
-  const saveContractDataHandler = (enteredContractData) => {
-    // const contractData = {
-    //   ...enteredContractData,
-    // };
-    //props.onAddContract(contractData);
-    props.dispatch(addContract(enteredContractData));
-    //props.history.push('/');
+  // useEffect(() => {
+  //   if (loadingStatus === "completed") {
+  //     history.push("/contracts");
+  //     props.onHideModal();
+  //   }
+  // }, [loadingStatus, history]);
 
-    toggleModalHandler();
+  const saveContractDataHandler = async (enteredContractData) => {
+    await new Promise((r) => setTimeout(r, 3000));
+
+    const newContractData = {
+      ...enteredContractData,
+      status: "Active",
+    };
+    console.log('New contract data is: ', newContractData);
+
+    // post contract data
+    props.dispatchData(addContract(newContractData));
+    props.onHideModal();
+
   };
 
   const draftContractDataHandler = async (enteredContractData) => {
@@ -34,13 +42,16 @@ const ContractModal = (props) => {
       status: "Draft",
     };
     console.log(newValues);
-    props.dispatch(addContract(newValues));
+    props.dispatchData(addContract(newValues));
+    props.onHideModal();
+  };
 
-    toggleModalHandler();
+  const processContractHandler = (contractData) => {
+    sendRequest(contractData);
   };
 
   return (
-    <div className={`modal ${props.toggleModal}`}>
+    <div className={`modal ${props.onShowModal === true ? "is-active" : ""}`}>
       <div className="modal-background"></div>
       <div className="modal-card">
         <header className="modal-card-head">
@@ -50,11 +61,14 @@ const ContractModal = (props) => {
           <NewContractForm
             onSaveContractData={saveContractDataHandler}
             onDraftContractData={draftContractDataHandler}
+            onCancel={props.onHideModal}
+            isLoading={loadingStatus === "pending"}
+            onProcessContractHandler={processContractHandler}
           />
         </section>
       </div>
       <button
-        onClick={toggleModalHandler}
+        onClick={props.onHideModal}
         className="modal-close is-large"
         aria-label="close"
       />
@@ -62,4 +76,4 @@ const ContractModal = (props) => {
   );
 };
 
-export default connect()(ContractModal);
+export default ContractModal;

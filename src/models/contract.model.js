@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Contract = sequelize.define("contract", {
+  const Contract = sequelize.define("Contract", {
     client: {
       type: Sequelize.STRING,
     },
