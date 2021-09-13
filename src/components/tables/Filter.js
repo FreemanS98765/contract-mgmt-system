@@ -1,36 +1,52 @@
-import { Fragment } from "react";
+import React, { Component, Fragment } from "react";
+import PropTypes from "prop-types";
 
-const Filter = (props) => {
+import Selectbox from "./Selectbox";
 
-  const dropdownChangeHandler = (event) => {
+class Filter extends Component {
+  static propTypes = {
+    updateFilters: PropTypes.func.isRequired,
+    filters: PropTypes.array,
+  };
+
+  dropdownChangeHandler = (event) => {
     if (event.target.id === "status-menu") {
-      props.onChangeStatusFilter(event.target.value);
+      this.props.onChangeStatusFilter(event.target.value);
     }
 
     if (event.target.id === "date-menu") {
-      props.onChangeDateFilter(event.target.value);
+      this.props.onChangeDateFilter(event.target.value);
     }
 
     return;
   };
 
-  const filterItems = (
+  filterItems = (
     <Fragment>
       <select
-        id={props.menuId}
-        value={props.selected}
-        onChange={dropdownChangeHandler}
+        id={this.props.menuId}
+        value={this.props.selected}
+        onChange={this.dropdownChangeHandler}
       >
-        {props.filters.map((filterItem, i) => (
+        {this.props.filters.map((filterItem, i) => (
           <option key={i} value={filterItem.value}>
-            {`${props.filterName}: ${filterItem.name}`}
+            {`${this.props.filterName}: ${filterItem.name}`}
           </option>
         ))}
       </select>
+      <Selectbox
+        id={this.props.menuId}
+        filterName={this.props.filterName}
+        value={this.props.selected}
+        onChange={this.dropdownChangeHandler}
+        options={this.props.filters}
+      />
     </Fragment>
   );
 
-  return <div className="select is-medium mr-3">{filterItems}</div>;
-};
+  render() {
+    return <div className="select is-medium mr-3">{this.filterItems}</div>;
+  }
+}
 
 export default Filter;

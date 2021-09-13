@@ -9,7 +9,7 @@ import { Contract } from "../models/contract.model";
 import ContractEditButton from "../components/contracts/ContractEditButton";
 
 import { Breadcrumbs, BreadcrumbItem } from "../components/UI/Breadcrumbs";
-import { getFormattedDate, getFormattedAmount } from "../helpers/FormatOutput";
+import { getFormattedDate, formatPrice } from "../utils/utils";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhone, faBook } from "@fortawesome/free-solid-svg-icons";
@@ -88,7 +88,7 @@ const ContractSingle = (props) => {
             </div>
             <div className="contract__detail">
               <h5>Contract Amount:</h5>
-              <p>{getFormattedAmount(contracts.amount)}</p>
+              <p>{formatPrice(contracts.amount)}</p>
             </div>
 
             <div className="block">

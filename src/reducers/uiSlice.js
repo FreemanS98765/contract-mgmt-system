@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const uiSlice = createSlice({
+const uiReducer = createSlice({
   name: "ui",
   initialState: { contractModalIsVisible: false },
   reducers: {
@@ -10,6 +10,6 @@ const uiSlice = createSlice({
   },
 });
 
-export const uiActions = uiSlice.actions;
+export const uiActions = uiReducer.actions;
 
-export default uiSlice.reducer;
+export default uiReducer.reducer;

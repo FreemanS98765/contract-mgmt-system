@@ -9,18 +9,20 @@ import { Provider } from "react-redux";
 
 import * as serviceWorker from "./serviceWorker";
 
-console.log("Initial state: ", getAppStore().getState());
 
 const store = getAppStore();
 
-const template = (
+const Root = (
   <Provider store={store}>
     <App />
   </Provider>
 );
 
+console.log("Initial state: ", store.getState());
+console.log("Store is: ", store);
+
 store.dispatch(getContracts()).then(() => {
-  ReactDOM.render(template, document.getElementById("root"));
+  ReactDOM.render(Root, document.getElementById("root"));
 });
 
 // If you want your app to work offline and load faster, you can change

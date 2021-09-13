@@ -1,0 +1,4 @@
+1. Dropdown menu on Contracts list will not toggle after adding a new contract. A page refresh is required.
+2. Added contracts are not displaying correct data within table.
+3. Remove contract works within db, but doesn't update state.
+4. Add Contract button on NoContractsPage is not working

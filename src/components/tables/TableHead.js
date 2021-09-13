@@ -1,5 +1,8 @@
-const TableHead = () => {
-  return <h1>TableHead</h1>;
-};
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default TableHead;
+import Sort from '../Sort';
+
+const TableHead = props => {
+  return;
+}

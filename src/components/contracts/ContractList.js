@@ -4,6 +4,8 @@ import FiltersToolbar from "../tables/FiltersToolbar";
 
 import ContractsTable from "../tables/Table";
 
+import Spinner from "../UI/LoadingSpinner";
+
 import "bulma/css/bulma.min.css";
 
 const ContractList = (props) => {
@@ -92,6 +94,8 @@ const ContractList = (props) => {
           orderBy={orderBy}
           onRequestSort={handleRequestSort}
         />
+
+        {props.isLoading && <Spinner />}
 
         <ContractsTable
           contracts={filteredContracts}

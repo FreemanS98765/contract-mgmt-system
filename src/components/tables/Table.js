@@ -3,21 +3,7 @@ import { connect } from "react-redux";
 
 import LoadingSpinner from "../UI/LoadingSpinner";
 
-import { removeContract } from "../../actions/contracts";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEllipsisH,
-  faEye,
-  faEdit,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-
-import {
-  getFormattedAmount,
-  getFormattedDate,
-} from "../../helpers/FormatOutput";
+import TableRow from "./TableRow";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -67,100 +53,6 @@ const ContractsTable = (props) => {
     setIsSelected(updatedToggledState);
   };
 
-  const removeContractHandler = async (id) => {
-    await new Promise((r) => setTimeout(r, 2000));
-
-    // post contract data
-    props.dispatchData(removeContract({ id }));
-  };
-
-  const TableRow = (props) => {
-    //const { id, startDate, endDate, contract, client, price, status } = props;
-
-    const statusVariant =
-      props.status === "Active"
-        ? "has-text-success-dark"
-        : props.status === "Draft"
-        ? "has-text-warning-dark"
-        : props.status === "Expired"
-        ? "has-text-danger-dark"
-        : "primary";
-
-    console.log("Table Row: ", props.key);
-
-    return (
-      <tr id={props.key}>
-        <td>{props.client}</td>
-        <td>{props.title}</td>
-        <td>{!props.startDate ? "" : getFormattedDate(props.startDate)}</td>
-        <td>{!props.endDate ? "" : getFormattedDate(props.endDate)}</td>
-        <td>{!props.price ? "" : getFormattedAmount(props.price)}</td>
-        <td>
-          <span className={statusVariant}>{props.status}</span>
-        </td>
-        <td>
-          <div className={`dropdown ${props.selected ? "is-active" : ""} `}>
-            <div className="dropdown-trigger">
-              <button
-                className="button"
-                aria-haspopup="true"
-                aria-controls="dropdown-menu"
-                onClick={props.onClick}
-              >
-                <span className="icon is-small">
-                  <FontAwesomeIcon icon={faEllipsisH} className="icon-dark" />
-                </span>
-              </button>
-            </div>
-            <div
-              className="dropdown-menu"
-              id={`actions-menu-${props.id}`}
-              role="menu"
-            >
-              <div className="dropdown-content">
-                <Link className="dropdown-item" to={`/contracts/${props.id}`}>
-                  <span className="icon-text">
-                    <span className="icon">
-                      <FontAwesomeIcon icon={faEye} />
-                    </span>
-                    <span>View Details</span>
-                  </span>
-                </Link>
-                <Link className="dropdown-item" to={`/contracts/${props.id}`}>
-                  <span className="icon-text">
-                    <span className="icon">
-                      <FontAwesomeIcon icon={faEdit} />
-                    </span>
-                    <span>Edit</span>
-                  </span>
-                </Link>
-                <button
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    const id = props.id;
-
-                    //await sleep(1000);
-                    //props.dispatchData(removeContract({ id }));
-                    removeContractHandler(id);
-
-                    console.log("Remove item: ", id);
-                  }}
-                >
-                  <span className="icon-text has-text-danger">
-                    <span className="icon">
-                      <FontAwesomeIcon icon={faTrashAlt} />
-                    </span>
-                    <span>Remove</span>
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
-    );
-  };
-
   return (
     <>
       {props.isLoading ? (
@@ -193,7 +85,7 @@ const ContractsTable = (props) => {
                   selected={isSelected[i]}
                   onClick={() => toggleDropdown(i)}
                   dispatchData={props.dispatchData}
-                  onRemove={removeContractHandler.bind(null, c.id)}
+                  //onRemove={props.removeContractHandler.bind(null, c.id)}
                 />
               );
             })}

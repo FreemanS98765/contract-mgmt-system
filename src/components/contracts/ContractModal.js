@@ -51,7 +51,7 @@ const ContractModal = (props) => {
   };
 
   return (
-    <div className={`modal ${props.onShowModal === true ? "is-active" : ""}`}>
+    <div className={`modal ${props.isOpen === true ? "is-active" : ""}`}>
       <div className="modal-background"></div>
       <div className="modal-card">
         <header className="modal-card-head">

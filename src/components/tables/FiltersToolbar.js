@@ -25,6 +25,7 @@ const FiltersToolbar = (props) => {
     <div className="filters-toolbar mb-4">
       <div className="flex space-between">
         <div className="field is-grouped">
+          {console.log(STATUS_FILTERS)}
           <Filter
             filterName={"Status"}
             filters={STATUS_FILTERS}

@@ -1,6 +1,10 @@
 import { setNestedObjectValues } from "formik";
 import axios from "../axios/axios";
-import { ADD_CONTRACT, GET_CONTRACTS } from "../constants/ActionTypes";
+import {
+  ADD_CONTRACT,
+  GET_CONTRACTS,
+  LOAD_TABLE,
+} from "../constants/ActionTypes";
 
 const _addContract = (contract) => ({
   type: ADD_CONTRACT,
@@ -86,11 +90,12 @@ const _removeContract = (id) => ({
 
 export const removeContract = (itemId) => {
   return (dispatch) => {
-    return axios.delete("contracts/", {params: {id: itemId}}).then((res) => {
-      console.log("Remove contract by id: ", itemId);
-      dispatch(_removeContract(itemId));
-      
-    });
+    return axios
+      .delete("contracts/", { params: { id: itemId } })
+      .then((res) => {
+        console.log("Remove contract by id: ", itemId);
+        dispatch(_removeContract(itemId));
+      });
   };
 };
 
@@ -127,60 +132,37 @@ const _getContracts = (contracts, loading) => ({
 //   isLoading: false,
 // });
 
-export const getContracts = () => (dispatch, getState) => {
-  return axios
-    .get("contracts")
-    .then((response) => {
-      const contracts = [];
+export const getContracts = (callback) => (dispatch, getState) => {
+  return (
+    axios
+      .get("contracts")
+      .then((response) => {
+        const contracts = [];
 
-      console.log(contracts);
+        console.log('Get Contracts: ', contracts);
 
-      response.data.forEach((item) => {
-        contracts.push(item);
-      });
+        response.data.forEach((item) => {
+          contracts.push(item);
+        });
 
-      dispatch(_getContracts(contracts));
-    })
-    .catch((error) => {
-      if (error.response) {
-        console.log(error.response.data);
-      } else if (error.request) {
-        console.log(error.request);
-      } else {
-        console.log("Error", error.message);
-      }
-    });
+        dispatch(_getContracts(contracts));
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+      })
+  );
 };
 
-// Initiate a network request with redux-thunk.
-// Create an action creator, getContracts
-// export const fetchContracts = (contracts) => (dispatch) => {
-//   dispatch(_requestContracts(contracts));
-//   return axios
-//     .get("contracts")
-//     .then((response) => {
-//       //const contracts = [];
-
-//       // if (response.status !== 200) {
-//       //   throw new Error(response.message || "Could not fetch contracts.");
-//       // }
-
-//       // response.data.forEach((item) => {
-//       //   contracts.push(item);
-//       // });
-
-//       dispatch(_receiveContracts(contracts));
-//     })
-//     .catch((error) => {
-//       if (error.response) {
-//         console.log(error.response.data);
-//       } else if (error.request) {
-//         console.log(error.request);
-//       } else {
-//         console.log("Error", error.message);
-//       }
-//     });
-// };
+export const loadTable = (contracts) => ({
+  type: LOAD_TABLE,
+  payload: contracts,
+});
 
 const shouldFetchContracts = (state, contracts) => {
   const allContracts = state.contractsBySubreddit[contracts];
