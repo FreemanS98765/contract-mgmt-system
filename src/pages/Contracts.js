@@ -130,10 +130,10 @@ class Contracts extends Component {
   // };
 
   render() {
-    console.log("State is now: ", this.state);
+    console.log("Props are now: ", this.props);
 
     const contracts = this.props.contractState;
-    const dispatchData = this.props.dispatchData;
+    const dispatchData = this.props.dispatch;
     const { isLoading } = this.state;
     const { isOpen } = this.state;
 
