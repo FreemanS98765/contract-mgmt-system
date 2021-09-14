@@ -1,23 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { Fragment } from "react";
 import { useParams } from "react-router-dom";
 
-import ContractEditButton from "../components/contracts/ContractEditButton";
+import ContractButton from "../components/contracts/ContractButton";
 
 import { Breadcrumbs, BreadcrumbItem } from "../components/UI/Breadcrumbs";
 import { getFormattedDate, formatPrice } from "../utils/utils";
+
+import ContractModal from "../components/contracts/ContractModal.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhone, faBook } from "@fortawesome/free-solid-svg-icons";
 
 const ContractSingle = (props) => {
   const params = useParams();
+  const dispatchData = props.dispatch;
 
-  console.log("Single contract page: ", props);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   //const { id, startDate, endDate, contract, client, amount, status } = props;
+
+  const openFormModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeFormModal = () => {
+    setIsOpen(false);
+  };
 
   const contracts = props.contractState.find(
     (contract) => contract.id.toString() === params.id
@@ -31,8 +44,6 @@ const ContractSingle = (props) => {
       : contracts.status === "Expired"
       ? "is-danger"
       : "primary";
-
-  console.log(contracts);
 
   if (!contracts) {
     return <p>Contract not found!</p>;
@@ -67,7 +78,7 @@ const ContractSingle = (props) => {
             </span>
           </div>
         </div>
-        <ContractEditButton />
+        <ContractButton text="Edit Contract" onShowModal={openFormModal} />
       </div>
       <div className="mt-3">
         <Breadcrumbs className="has-arrow-separator">
@@ -149,7 +160,7 @@ const ContractSingle = (props) => {
       <section className="section">
         <div className="block">
           <h5 className="title is-3">Notes</h5>
-          <p>{`${contracts.notes}`}</p>
+          <p>{checkIfEmpty(contracts.notes)}</p>
         </div>
       </section>
       <section className="section">
@@ -160,6 +171,16 @@ const ContractSingle = (props) => {
           </span>
         </div>
       </section>
+
+      {isOpen && (
+        //<ContractModal onClose={showContractModal ? "is-active" : "false"} />
+        <ContractModal
+          onHideModal={closeFormModal}
+          onShowModal={openFormModal}
+          dispatchData={dispatchData}
+          isOpen={isOpen}
+        />
+      )}
     </Fragment>
   );
 };
