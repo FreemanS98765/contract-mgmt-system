@@ -11,7 +11,7 @@ export const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
 
 export const formatPrice = (x, currency) => {
   switch (currency) {
-    case "BRL":
+    case "USD":
       return x.toFixed(2).replace(".", ",");
     default:
       return x.toFixed(2);

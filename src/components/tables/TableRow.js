@@ -14,7 +14,7 @@ import {
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { formatPrice, getFormattedDate } from "../../utils/utils";
+import { getFormattedPrice, getFormattedDate } from "../../utils/utils";
 
 class TableRow extends Component {
   //const { id, startDate, endDate, contract, client, price, status } = props;
@@ -73,7 +73,7 @@ class TableRow extends Component {
         <td>
           {!this.props.endDate ? "" : getFormattedDate(this.props.endDate)}
         </td>
-        <td>{!this.props.price ? "" : formatPrice(this.props.price)}</td>
+        <td>{!this.props.price ? "" : getFormattedPrice(this.props.price)}</td>
         <td>
           <span className={this.statusVariant}>{this.props.status}</span>
         </td>
