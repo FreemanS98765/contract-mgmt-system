@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import { Fragment } from "react";
 import { useParams } from "react-router-dom";
 
-import { Contract } from "../models/contract.model";
-
 import ContractEditButton from "../components/contracts/ContractEditButton";
 
 import { Breadcrumbs, BreadcrumbItem } from "../components/UI/Breadcrumbs";
@@ -17,14 +15,13 @@ import { faEnvelope, faPhone, faBook } from "@fortawesome/free-solid-svg-icons";
 const ContractSingle = (props) => {
   const params = useParams();
 
-  console.log("Single contract page: ", props.contracts.contractObj);
+  console.log("Single contract page: ", props);
 
   //const { id, startDate, endDate, contract, client, amount, status } = props;
 
-  const contracts = props.contracts.contractObj.contracts.find(
+  const contracts = props.contractState.find(
     (contract) => contract.id.toString() === params.id
   );
-  
 
   const statusVariant =
     contracts.status === "Active"
@@ -41,12 +38,28 @@ const ContractSingle = (props) => {
     return <p>Contract not found!</p>;
   }
 
+  const checkIfEmpty = (data) => {
+    if (data === contracts.email) {
+      return contracts.email ? (
+        <a href={`mailto:${contracts.email}`}>{contracts.email}</a>
+      ) : (
+        `Nothing found`
+      );
+    }
+
+    return data ? data : "Nothing found";
+  };
+
   return (
     <Fragment>
       <div className="page-header flex space-between">
         <div className="level">
           <div className="level-item mr-3">
-            <h1 className="title is-3 has-text-weight-bold">{`Contract #${params.contractId}`}</h1>
+            <h1 className="title is-3 has-text-weight-bold">
+              {contracts.title
+                ? `Contract #${contracts.id}: ${contracts.title}`
+                : `Contract #${contracts.id}`}
+            </h1>
           </div>
           <div className="level-item">
             <span className={`tag is-medium ${statusVariant}`}>
@@ -76,19 +89,19 @@ const ContractSingle = (props) => {
             </div>
             <div className="contract__detail">
               <h5>Contract ID:</h5>
-              <p>{`#${params.contractId}`}</p>
+              <p>{`#${contracts.id}`}</p>
             </div>
             <div className="contract__detail">
               <h5>Start Date:</h5>
-              <p>{getFormattedDate(contracts.startDate)}</p>
+              <p>{checkIfEmpty(getFormattedDate(contracts.startDate))}</p>
             </div>
             <div className="contract__detail">
               <h5>End Date:</h5>
-              <p>{getFormattedDate(contracts.endDate)}</p>
+              <p>{checkIfEmpty(getFormattedDate(contracts.endDate))}</p>
             </div>
             <div className="contract__detail">
               <h5>Contract Amount:</h5>
-              <p>{formatPrice(contracts.amount)}</p>
+              <p>{checkIfEmpty(formatPrice(contracts.price))}</p>
             </div>
 
             <div className="block">
@@ -110,26 +123,25 @@ const ContractSingle = (props) => {
                   <span className="icon">
                     <FontAwesomeIcon icon={faPhone} />
                   </span>
-                  <span>{contracts.phone}</span>
+                  <span>{checkIfEmpty(contracts.phone)}</span>
                 </span>
                 <span className="icon-text">
                   <span className="icon">
                     <FontAwesomeIcon icon={faEnvelope} />
                   </span>
-                  <span>
-                    <a href={`{mailto:${contracts.email}}`}>
-                      {contracts.email}
-                    </a>
-                  </span>
+                  <span>{checkIfEmpty(contracts.email)}</span>
                 </span>
               </div>
             </div>
             <div className="contract__detail">
               <h5>Address</h5>
-              <p>{`${contracts.address}`}</p>
-              <p>{`${contracts.city}`}</p>
-              <p>{`${contracts.state}`}</p>
-              <p>{`${contracts.zipcode}`}</p>
+
+              <div>
+                <p>{checkIfEmpty(contracts.address)}</p>
+                <p>{checkIfEmpty(contracts.city)}</p>
+                <p>{checkIfEmpty(contracts.state)}</p>
+                <p>{checkIfEmpty(contracts.zipcode)}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -137,22 +149,7 @@ const ContractSingle = (props) => {
       <section className="section">
         <div className="block">
           <h5 className="title is-3">Notes</h5>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus
-            ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium
-            lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue
-            tempus, at accumsan quam tristique. Cras aliquam nibh eros, id
-            facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu
-            feugiat at, eleifend sit amet felis. Mauris et turpis id felis
-            consectetur faucibus. Nulla euismod porttitor arcu, eget convallis
-            velit tempus id. Pellentesque pretium egestas tellus vel mollis.
-            Etiam viverra hendrerit mi, tempus fermentum libero posuere
-            facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur
-            sit amet. Fusce ac enim elit. Etiam scelerisque semper magna,
-            suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar
-            ultrices. Curabitur euismod felis quis euismod bibendum.
-          </p>
+          <p>{`${contracts.notes}`}</p>
         </div>
       </section>
       <section className="section">
@@ -169,7 +166,8 @@ const ContractSingle = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    contracts: state,
+    contractState: state.contracts,
+    dispatchData: state.dispatch,
   };
 };
 
