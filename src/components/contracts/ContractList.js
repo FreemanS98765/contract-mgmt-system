@@ -102,6 +102,7 @@ const ContractList = (props) => {
           order={order}
           orderBy={orderBy}
           dispatchData={props.dispatchData}
+          filters={props.filters}
         />
       </Fragment>
     );

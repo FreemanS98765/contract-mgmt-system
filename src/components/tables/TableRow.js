@@ -30,19 +30,19 @@ class TableRow extends Component {
       this.selectedCheckboxes.add(label);
     }
 
-    this.props.updateFilters(Array.from(this.selectedCheckboxes));
+    //this.props.updateFilters(Array.from(this.selectedCheckboxes));
   };
 
   createCheckbox = (label) => (
     <Checkbox
-      classes="checkbox"
+      classes="checkbox checkbox--medium"
       label={label}
       handleCheckboxChange={this.toggleCheckbox}
       key={label}
     />
   );
 
-  createCheckboxes = () => this.props.filters.map(this.createCheckbox);
+  createCheckboxes = () => this.createCheckbox();
 
   statusVariant =
     this.props.status === "Active"
@@ -53,8 +53,8 @@ class TableRow extends Component {
       ? "has-text-danger-dark"
       : "primary";
 
-  removeContractHandler = async (id) => {
-    await new Promise((r) => setTimeout(r, 2000));
+  removeContractHandler = (id) => {
+    //await new Promise((r) => setTimeout(r, 2000));
 
     // post contract data
     this.props.dispatchData(removeContract({ id }));
@@ -62,8 +62,9 @@ class TableRow extends Component {
 
   render() {
     return (
-      <tr id={this.props.key}>
-        <td>{this.createCheckboxes()}</td>
+      <tr id={`table-row-${this.props.id}`}>
+      {console.log('Filters are: ', this.props)}
+        <td className='is-flex is-justify-content-center is-align-content-center'>{this.createCheckboxes('checkbox')}</td>
         <td>{this.props.client}</td>
         <td>{this.props.title}</td>
         <td>
@@ -152,4 +153,4 @@ const mapStateToProps = (state) => ({
   filters: state.filters.items,
 });
 
-export default connect(mapStateToProps, { updateFilters })(TableRow);
+export default TableRow;

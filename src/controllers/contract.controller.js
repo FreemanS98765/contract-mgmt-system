@@ -90,8 +90,8 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  console.log('Within delete controller function: ', req.params.id)
-  Contracts.destroy()
+  console.log("Within delete controller function: ", req.params);
+  Contracts.destroy({ where: { id: id } })
     .then(() => {
       res.status(200).send("Contract has been deleted!");
     })

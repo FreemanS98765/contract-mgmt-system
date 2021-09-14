@@ -20,29 +20,29 @@ const ContractModal = (props) => {
   // }, [loadingStatus, history]);
 
   const saveContractDataHandler = async (enteredContractData) => {
-    await new Promise((r) => setTimeout(r, 3000));
+    await new Promise((r) => setTimeout(r, 1000));
 
-    const newContractData = {
+    const savedData = {
       ...enteredContractData,
       status: "Active",
     };
-    console.log('New contract data is: ', newContractData);
+    console.log('New contract data is: ', savedData);
 
     // post contract data
-    props.dispatchData(addContract(newContractData));
+    props.dispatchData(addContract(savedData));
     props.onHideModal();
 
   };
 
   const draftContractDataHandler = async (enteredContractData) => {
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 1000));
 
-    const newValues = {
+    const draftedData = {
       ...enteredContractData,
       status: "Draft",
     };
-    console.log(newValues);
-    props.dispatchData(addContract(newValues));
+    console.log(draftedData);
+    props.dispatchData(addContract(draftedData));
     props.onHideModal();
   };
 

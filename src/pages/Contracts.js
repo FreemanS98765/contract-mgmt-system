@@ -134,10 +134,11 @@ class Contracts extends Component {
 
     const contracts = this.props.contractState;
     const dispatchData = this.props.dispatch;
+    const filters = this.props.filters;
     const { isLoading } = this.state;
     const { isOpen } = this.state;
 
-    console.log("Contracts are: ", contracts);
+    console.log("Contracts are: ", isLoading);
 
     return (
       <div>
@@ -151,10 +152,11 @@ class Contracts extends Component {
             contracts={contracts}
             isLoading={isLoading}
             dispatchData={dispatchData}
+            filters={filters}
           />
         </div>
 
-        {console.log('isOpen: ', isOpen)}
+        {console.log("isOpen: ", isOpen)}
 
         {isOpen && (
           //<ContractModal onClose={showContractModal ? "is-active" : "false"} />
@@ -163,7 +165,6 @@ class Contracts extends Component {
             onShowModal={this.openFormModal}
             dispatchData={dispatchData}
             isOpen={isOpen}
-            
           />
         )}
       </div>

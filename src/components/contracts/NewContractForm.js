@@ -1,5 +1,4 @@
 import React, { useState, Fragment, useEffect } from "react";
-import { connect } from "react-redux";
 
 import { Formik, Form, useField, useFormik } from "formik";
 import DatePicker from "react-datepicker";
@@ -8,7 +7,6 @@ import * as yup from "yup";
 import { TextInput, TextareaInput, SelectField } from "../UI/FormElements";
 
 import useHttp from "../../hooks/use-http";
-import { addContract } from "../../actions/contracts";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { Prompt } from "react-router-dom";
 
@@ -73,19 +71,10 @@ const NewContractForm = (props) => {
         onSubmit={(contracts, action) => {
           //await sleep(1000);
 
-
-
-          //props.dispatch(addContract(contracts));
+          console.log('Saving contracts: ', contracts);
           
           props.onSaveContractData(contracts);
           props.history.push("/");
-
-          // setTimeout(() => {
-          //   props.dispatch(addContract(contracts));
-          //   action.setStatus("sent");
-          //   props.history.push("/");
-          //   console.log("Sent!");
-          // }, 1000);
         }}
       >
         {(formik) => (
@@ -307,4 +296,4 @@ const NewContractForm = (props) => {
   );
 };
 
-export default connect()(NewContractForm);
+export default NewContractForm;

@@ -39,10 +39,6 @@ const ContractsTable = (props) => {
     new Array(props.contracts.length).fill(false)
   );
 
-  props.contracts.map((el) => {
-    console.log(el.id);
-  });
-
   console.log("Table props are: ", props);
 
   const toggleDropdown = (position) => {
@@ -63,6 +59,7 @@ const ContractsTable = (props) => {
         <table className="table">
           <thead>
             <tr>
+              <th></th>
               <th>Client</th>
               <th>Company</th>
               <th>Start Date</th>
@@ -73,6 +70,7 @@ const ContractsTable = (props) => {
             </tr>
           </thead>
           <tbody>
+            {console.log('Contracts before tableRow: ', props.contracts)}
             {tableSort(
               props.contracts,
               getComparator(props.order, props.orderBy)
@@ -81,10 +79,12 @@ const ContractsTable = (props) => {
               return (
                 <TableRow
                   key={c.id}
+                  id={c.id}
                   {...c}
                   selected={isSelected[i]}
                   onClick={() => toggleDropdown(i)}
                   dispatchData={props.dispatchData}
+                  filters={props.filters}
                   //onRemove={props.removeContractHandler.bind(null, c.id)}
                 />
               );

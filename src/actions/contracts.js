@@ -83,18 +83,18 @@ export const addContract =
 //   };
 // };
 
-const _removeContract = (id) => ({
+const _removeContract = ({id = {}}) => ({
   type: "REMOVE_CONTRACT",
   id,
 });
 
-export const removeContract = (itemId) => {
+export const removeContract = ({id} = {}) => {
   return (dispatch) => {
     return axios
-      .delete("contracts/", { params: { id: itemId } })
+      .delete(`contracts/${id}`)
       .then((res) => {
-        console.log("Remove contract by id: ", itemId);
-        dispatch(_removeContract(itemId));
+        console.log("Remove contract by id: ", {id});
+        dispatch(_removeContract({id}));
       });
   };
 };
