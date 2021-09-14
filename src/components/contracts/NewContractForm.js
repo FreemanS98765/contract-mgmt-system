@@ -55,6 +55,7 @@ const NewContractForm = (props) => {
           endDate: "",
           price: 0,
           upload: "",
+          notes: "",
           status: "",
         }}
         validationSchema={yup.object({
@@ -71,8 +72,8 @@ const NewContractForm = (props) => {
         onSubmit={(contracts, action) => {
           //await sleep(1000);
 
-          console.log('Saving contracts: ', contracts);
-          
+          console.log("Saving contracts: ", contracts);
+
           props.onSaveContractData(contracts);
           props.history.push("/");
         }}
@@ -165,7 +166,7 @@ const NewContractForm = (props) => {
                 <div className="field is-grouped">
                   <div className="control is-expanded">
                     <TextInput
-                      name="contract"
+                      name="title"
                       type="text"
                       placeholder="Contract Name"
                     />
