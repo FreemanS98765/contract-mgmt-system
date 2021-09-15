@@ -4,12 +4,14 @@ import PropTypes from "prop-types";
 import Selectbox from "./Selectbox";
 
 class Filter extends Component {
-  static propTypes = {
-    updateFilters: PropTypes.func.isRequired,
-    filters: PropTypes.array,
-  };
+  // static propTypes = {
+  //   updateFilters: PropTypes.func.isRequired,
+  //   filters: PropTypes.array,
+  // };
 
   dropdownChangeHandler = (event) => {
+
+    console.log(`Event target is ${event.target}`);
     if (event.target.id === "status-menu") {
       this.props.onChangeStatusFilter(event.target.value);
     }
@@ -18,12 +20,12 @@ class Filter extends Component {
       this.props.onChangeDateFilter(event.target.value);
     }
 
-    return;
+    return 'cannot find option';
   };
 
   filterItems = (
     <Fragment>
-      <select
+      {/* <select
         id={this.props.menuId}
         value={this.props.selected}
         onChange={this.dropdownChangeHandler}
@@ -33,7 +35,7 @@ class Filter extends Component {
             {`${this.props.filterName}: ${filterItem.name}`}
           </option>
         ))}
-      </select>
+      </select> */}
       <Selectbox
         id={this.props.menuId}
         filterName={this.props.filterName}

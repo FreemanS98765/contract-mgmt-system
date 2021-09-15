@@ -40,7 +40,7 @@ class Contracts extends Component {
     const { isLoading } = this.state;
     const { isOpen } = this.state;
 
-    console.log("Contracts are: ", isLoading);
+    console.log("Contracts are: ", contracts);
 
     return (
       <div>

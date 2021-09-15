@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Selectbox = ({id, filterName, options, classes, handleOnChange }) => {
+const Selectbox = ({ id, value, filterName, options, classes, onChange }) => {
   const createOptions = (options) =>
     options.map((o) => (
       <option value={o.value} key={o.value}>
@@ -10,19 +10,16 @@ const Selectbox = ({id, filterName, options, classes, handleOnChange }) => {
     ));
 
   return (
-    <select
-      onChange={(e) => handleOnChange(e.target.value)}
-      id={id}
-    >
+    <select id={id} value={value} onChange={onChange}>
       {createOptions(options)}
     </select>
   );
 };
 
-Selectbox.propTypes = {
-  options: PropTypes.array.isRequired,
-  classes: PropTypes.string,
-  handleOnChange: PropTypes.func.isRequired,
-};
+// Selectbox.propTypes = {
+//   options: PropTypes.array.isRequired,
+//   classes: PropTypes.string,
+//   handleOnChange: PropTypes.func.isRequired,
+// };
 
 export default Selectbox;

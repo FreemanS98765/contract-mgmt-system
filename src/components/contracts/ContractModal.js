@@ -10,8 +10,6 @@ const ContractModal = (props) => {
   const { sendRequest, loadingStatus } = useHttp(addContract);
   const history = useHistory();
 
-  console.log(`loadingStatus is: ${loadingStatus}`);
-
   // useEffect(() => {
   //   if (loadingStatus === "completed") {
   //     history.push("/contracts");
@@ -26,7 +24,6 @@ const ContractModal = (props) => {
       ...enteredContractData,
       status: "Active",
     };
-    console.log("New contract data is: ", savedData);
 
     // post contract data
     props.dispatchData(addContract(savedData));
@@ -39,21 +36,25 @@ const ContractModal = (props) => {
     const savedData = {
       ...enteredContractData,
     };
-    console.log("Updated contract data is: ", id);
 
-    // post contract data
+    // Update contract data
     props.dispatchData(editContract(id, savedData));
     props.onHideModal();
   };
 
-  const draftContractDataHandler = async (enteredContractData) => {
+  const draftContractDataHandler = async (enteredContractData, id) => {
     await new Promise((r) => setTimeout(r, 1000));
 
     const draftedData = {
       ...enteredContractData,
       status: "Draft",
     };
-    console.log(draftedData);
+    console.log("On draft: ", draftedData.status);
+
+    if (draftedData.status !== '') {
+      props.dispatchData(editContract(id, draftedData));
+    }
+
     props.dispatchData(addContract(draftedData));
     props.onHideModal();
   };
@@ -67,7 +68,9 @@ const ContractModal = (props) => {
       <div className="modal-background"></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">{props.type === 'edit' ? 'Update Contract' : 'New Contract' }</p>
+          <p className="modal-card-title">
+            {props.type === "edit" ? "Update Contract" : "New Contract"}
+          </p>
         </header>
         <section className="modal-card-body">
           <NewContractForm

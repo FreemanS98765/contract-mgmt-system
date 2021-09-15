@@ -25,7 +25,6 @@ const FiltersToolbar = (props) => {
     <div className="filters-toolbar mb-4">
       <div className="flex space-between">
         <div className="field is-grouped">
-          {console.log(STATUS_FILTERS)}
           <Filter
             filterName={"Status"}
             filters={STATUS_FILTERS}
@@ -39,6 +38,7 @@ const FiltersToolbar = (props) => {
             menuId={"date-menu"}
             onChangeDateFilter={props.onChangeDateFilter}
             selected={props.selectedDate}
+            hand
           />
           <Search searchValue={props.searchValue} onChangeSearchFilter={props.onChangeSearchFilter} />
         </div>

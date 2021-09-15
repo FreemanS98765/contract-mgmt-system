@@ -80,7 +80,7 @@ const NewContractForm = (props) => {
 
           if (`${props.type}` === "edit") {
             console.log("Updating by type: ", contracts);
-            return props.onUpdateContractData(contracts, props.contract.id);
+            props.onUpdateContractData(contracts, props.contract.id);
           } else {
             props.onSaveContractData(contracts);
           }
@@ -279,7 +279,7 @@ const NewContractForm = (props) => {
                         <button
                           className="button is-outlined is-white mr-3"
                           type="submit"
-                          onClick={props.onDraftContractData}
+                          onClick={props.onDraftContractData(props.contract, props.contract.id)}
                           disabled={formik.isSubmitting}
                         >
                           Draft

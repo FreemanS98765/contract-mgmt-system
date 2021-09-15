@@ -63,7 +63,7 @@ class TableRow extends Component {
   render() {
     return (
       <tr id={`table-row-${this.props.id}`}>
-      {console.log('Filters are: ', this.props)}
+      {/* {console.log('Filters are: ', this.props)} */}
         <td className='is-flex is-justify-content-center is-align-content-center'>{this.createCheckboxes('checkbox')}</td>
         <td>{this.props.client}</td>
         <td>{this.props.title}</td>

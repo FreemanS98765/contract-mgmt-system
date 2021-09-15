@@ -13,7 +13,7 @@ const ContractList = (props) => {
   const [filteredDate, setFilteredDate] = useState();
 
   const [query, setQuery] = useState("");
-  const [searchParam] = useState(["client", "contractName"]);
+  const [searchParam] = useState(["client", "title"]);
 
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState([]);
@@ -40,30 +40,57 @@ const ContractList = (props) => {
 
   const filteredContracts = props.contracts.filter((contract) => {
     console.log("Filtered contracts are: ", contract);
+    console.log("Filtered contracts are: ", typeof contract.status);
+
     if (
-      filteredStatus === "draft" ||
-      filteredStatus === "expired" ||
-      filteredStatus === "active"
+      (filteredStatus === "All" ||
+        filteredStatus === "draft" ||
+        filteredStatus === "expired" ||
+        filteredStatus === "active") &&
+      filteredStatus !== null
     ) {
       return contract.status.toLowerCase() === filteredStatus;
     }
 
+    // If some searchParam's value matches the value of the contract
+    // Return true
+
     if (
-      filteredDate === "2022" ||
-      filteredDate === "2021" ||
-      filteredDate === "2020" ||
-      filteredDate === "2019" ||
-      filteredDate === "2018"
+      (filteredDate === "2022" ||
+        filteredDate === "2021" ||
+        filteredDate === "2020" ||
+        filteredDate === "2019" ||
+        filteredDate === "2018") &&
+      filteredDate !== null
     ) {
       return contract.startDate.getFullYear().toString() === filteredDate;
     }
 
-    return searchParam.some((filteredContract) => {
+    // for (const prop in contract) {
+    //   const isFilteredDate = filteredDate;
+    //   const isFilteredStatus = filteredStatus;
+
+    //   console.log(`Filtered status is ${filteredStatus}`);
+    //   console.log(`Prop is ${prop}`);
+
+    //   // if (filteredDate === prop) {
+    //   //   return searchParam.some(prop);
+    //   // }
+
+    //   // return searchParam.some(prop);
+    // }
+
+    return searchParam.some((param) => {
+      const searchItem = contract[param];
+
+      if (searchItem === null) {
+        console.log("Search value is null");
+        return;
+      }
+
       return (
-        contract[filteredContract]
-          .toString()
-          .toLowerCase()
-          .indexOf(query.toLowerCase()) > -1
+        searchItem.toString().toLowerCase().indexOf(query.toLowerCase()) >
+        -1
       );
     });
   });
