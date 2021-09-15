@@ -7,3 +7,4 @@ export const CONTRACT_FAILURE = "CONTRACT_FAILURE";
 export const ADD_CONTRACT = "ADD_CONTRACT";
 export const LOAD_TABLE = "LOAD_TABLE";
 export const TOGGLE_MODAL = "TOGGLE_MODAL";
+export const EDIT_CONTRACT = "EDIT_CONTRACT";

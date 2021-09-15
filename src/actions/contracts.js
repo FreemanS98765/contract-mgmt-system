@@ -4,6 +4,7 @@ import {
   ADD_CONTRACT,
   GET_CONTRACTS,
   LOAD_TABLE,
+  EDIT_CONTRACT,
 } from "../constants/ActionTypes";
 
 const _addContract = (contract) => ({
@@ -100,7 +101,7 @@ export const removeContract = ({id} = {}) => {
 };
 
 const _editContract = (id, updates) => ({
-  type: "EDIT_CONTRACT",
+  type: EDIT_CONTRACT,
   id,
   updates,
 });

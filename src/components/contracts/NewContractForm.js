@@ -1,5 +1,7 @@
 import React, { useState, Fragment, useEffect } from "react";
 
+import { connect } from "react-redux";
+
 import { Formik, Form, useField, useFormik } from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -40,23 +42,25 @@ const NewContractForm = (props) => {
         }
       />
 
+      {console.log("Contract form props: ", props.contract)}
+
       <Formik
         initialValues={{
-          company: "",
-          client: "",
-          email: "",
-          phone: "",
-          address: "",
-          city: "",
-          state: "",
-          zipcode: "",
-          title: "",
-          startDate: "",
-          endDate: "",
-          price: 0,
-          upload: "",
-          notes: "",
-          status: "",
+          company: props.contract.company || "",
+          client: props.contract.client || "",
+          email: props.contract.email || "",
+          phone: props.contract.phone || "",
+          address: props.contract.address || "",
+          city: props.contract.city || "",
+          state: props.contract.state || "",
+          zipcode: props.contract.zipcode || "",
+          title: props.contract.title || "",
+          startDate: props.contract.startDate || "",
+          endDate: props.contract.endDate || "",
+          price: props.contract.price || 0,
+          upload: props.contract.upload || "",
+          notes: props.contract.notes || "",
+          status: props.contract.status || "",
         }}
         validationSchema={yup.object({
           company: yup.string().required("Required"),
@@ -74,7 +78,13 @@ const NewContractForm = (props) => {
 
           console.log("Saving contracts: ", contracts);
 
-          props.onSaveContractData(contracts);
+          if (`${props.type}` === "edit") {
+            console.log("Updating by type: ", contracts);
+            return props.onUpdateContractData(contracts, props.contract.id);
+          } else {
+            props.onSaveContractData(contracts);
+          }
+
           props.history.push("/");
         }}
       >

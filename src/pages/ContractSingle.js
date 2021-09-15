@@ -202,11 +202,13 @@ const ContractSingle = (props) => {
       {isOpen && (
         //<ContractModal onClose={showContractModal ? "is-active" : "false"} />
         <ContractModal
+          contract={contract}
           onHideModal={closeFormModal}
           onShowModal={openFormModal}
           dispatchData={dispatchData}
           isOpen={isOpen}
           text='Update Contract'
+          type='edit'
         />
       )}
     </Fragment>
