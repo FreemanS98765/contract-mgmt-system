@@ -282,7 +282,7 @@ const NewContractForm = (props) => {
                           type="submit"
                           disabled={formik.isSubmitting}
                         >
-                          Create Contract
+                          {props.text}
                         </button>
                       </div>
                     </div>

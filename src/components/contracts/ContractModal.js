@@ -64,6 +64,7 @@ const ContractModal = (props) => {
             onCancel={props.onHideModal}
             isLoading={loadingStatus === "pending"}
             onProcessContractHandler={processContractHandler}
+            text={props.text}
           />
         </section>
       </div>

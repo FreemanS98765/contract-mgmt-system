@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import ContractButton from "../components/contracts/ContractButton";
 
 import { Breadcrumbs, BreadcrumbItem } from "../components/UI/Breadcrumbs";
-import { getFormattedDate, formatPrice } from "../utils/utils";
+import { getFormattedDate, getFormattedPrice } from "../utils/utils";
 
 import ContractModal from "../components/contracts/ContractModal.js";
 
@@ -21,8 +21,41 @@ const ContractSingle = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const contracts = props.contracts;
+  let contract = contracts.find((c) => {
+    return c.id.toString() === params.id;
+  });
 
-  //const { id, startDate, endDate, contract, client, amount, status } = props;
+  const {
+    id,
+    client,
+    company,
+    email,
+    phone,
+    address,
+    city,
+    state,
+    zipcode,
+    title,
+    startDate,
+    endDate,
+    price,
+    notes,
+    upload,
+    status,
+  } = contract;
+
+  // let contracts = [];
+
+  // contractState.forEach((c) => {
+  //   push(c);
+  // });
+
+  // map((c) => {
+  //   return c;
+  // });
+
+  console.log("Contracts state: ", contracts);
 
   const openFormModal = () => {
     setIsOpen(true);
@@ -32,30 +65,26 @@ const ContractSingle = (props) => {
     setIsOpen(false);
   };
 
-  const contracts = props.contractState.find(
-    (contract) => contract.id.toString() === params.id
-  );
+  
+
+  console.log("Contract state: ", contract);
 
   const statusVariant =
-    contracts.status === "Active"
+    status === "Active"
       ? "is-success"
-      : contracts.status === "Draft"
+      : status === "Draft"
       ? "is-warning"
-      : contracts.status === "Expired"
+      : status === "Expired"
       ? "is-danger"
       : "primary";
 
-  if (!contracts) {
+  if (!contract) {
     return <p>Contract not found!</p>;
   }
 
   const checkIfEmpty = (data) => {
-    if (data === contracts.email) {
-      return contracts.email ? (
-        <a href={`mailto:${contracts.email}`}>{contracts.email}</a>
-      ) : (
-        `Nothing found`
-      );
+    if (data === email) {
+      return email ? <a href={`mailto:${email}`}>{email}</a> : `Nothing found`;
     }
 
     return data ? data : "Nothing found";
@@ -67,14 +96,12 @@ const ContractSingle = (props) => {
         <div className="level">
           <div className="level-item mr-3">
             <h1 className="title is-3 has-text-weight-bold">
-              {contracts.title
-                ? `Contract #${contracts.id}: ${contracts.title}`
-                : `Contract #${contracts.id}`}
+              {title ? `Contract #${id}: ${title}` : `Contract #${id}`}
             </h1>
           </div>
           <div className="level-item">
             <span className={`tag is-medium ${statusVariant}`}>
-              {contracts.status}
+              {status}
             </span>
           </div>
         </div>
@@ -85,9 +112,9 @@ const ContractSingle = (props) => {
           <BreadcrumbItem to={`/dashboard`}>Dashboard</BreadcrumbItem>
           <BreadcrumbItem to={`/contracts`}>Contracts</BreadcrumbItem>
           <BreadcrumbItem
-            to={`/contracts/${contracts.id}`}
+            to={`/contracts/${id}`}
             className="is-active"
-          >{`Contract #${contracts.id}`}</BreadcrumbItem>
+          >{`Contract #${id}`}</BreadcrumbItem>
         </Breadcrumbs>
       </div>
       <section className="section">
@@ -100,19 +127,19 @@ const ContractSingle = (props) => {
             </div>
             <div className="contract__detail">
               <h5>Contract ID:</h5>
-              <p>{`#${contracts.id}`}</p>
+              <p>{`#${id}`}</p>
             </div>
             <div className="contract__detail">
               <h5>Start Date:</h5>
-              <p>{checkIfEmpty(getFormattedDate(contracts.startDate))}</p>
+              <p>{checkIfEmpty(getFormattedDate(startDate))}</p>
             </div>
             <div className="contract__detail">
               <h5>End Date:</h5>
-              <p>{checkIfEmpty(getFormattedDate(contracts.endDate))}</p>
+              <p>{checkIfEmpty(getFormattedDate(endDate))}</p>
             </div>
             <div className="contract__detail">
               <h5>Contract Amount:</h5>
-              <p>{checkIfEmpty(formatPrice(contracts.price))}</p>
+              <p>{checkIfEmpty(getFormattedPrice(price))}</p>
             </div>
 
             <div className="block">
@@ -121,11 +148,11 @@ const ContractSingle = (props) => {
 
             <div className="contract__detail">
               <h5>Client</h5>
-              <p>{`${contracts.client}`}</p>
+              <p>{`${client}`}</p>
             </div>
             <div className="contract__detail">
               <h5>Company</h5>
-              <p>{`${contracts.company}`}</p>
+              <p>{`${company}`}</p>
             </div>
             <div className="contract__detail is-align-content-flex-start">
               <h5>Contact Information</h5>
@@ -134,13 +161,13 @@ const ContractSingle = (props) => {
                   <span className="icon">
                     <FontAwesomeIcon icon={faPhone} />
                   </span>
-                  <span>{checkIfEmpty(contracts.phone)}</span>
+                  <span>{checkIfEmpty(phone)}</span>
                 </span>
                 <span className="icon-text">
                   <span className="icon">
                     <FontAwesomeIcon icon={faEnvelope} />
                   </span>
-                  <span>{checkIfEmpty(contracts.email)}</span>
+                  <span>{checkIfEmpty(email)}</span>
                 </span>
               </div>
             </div>
@@ -148,10 +175,10 @@ const ContractSingle = (props) => {
               <h5>Address</h5>
 
               <div>
-                <p>{checkIfEmpty(contracts.address)}</p>
-                <p>{checkIfEmpty(contracts.city)}</p>
-                <p>{checkIfEmpty(contracts.state)}</p>
-                <p>{checkIfEmpty(contracts.zipcode)}</p>
+                <p>{checkIfEmpty(address)}</p>
+                <p>{checkIfEmpty(city)}</p>
+                <p>{checkIfEmpty(state)}</p>
+                <p>{checkIfEmpty(zipcode)}</p>
               </div>
             </div>
           </div>
@@ -160,7 +187,7 @@ const ContractSingle = (props) => {
       <section className="section">
         <div className="block">
           <h5 className="title is-3">Notes</h5>
-          <p>{checkIfEmpty(contracts.notes)}</p>
+          <p>{checkIfEmpty(notes)}</p>
         </div>
       </section>
       <section className="section">
@@ -179,6 +206,7 @@ const ContractSingle = (props) => {
           onShowModal={openFormModal}
           dispatchData={dispatchData}
           isOpen={isOpen}
+          text='Update Contract'
         />
       )}
     </Fragment>
@@ -187,7 +215,7 @@ const ContractSingle = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    contractState: state.contracts,
+    contracts: state.contracts,
     dispatchData: state.dispatch,
   };
 };
