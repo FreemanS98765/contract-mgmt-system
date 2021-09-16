@@ -3,10 +3,18 @@ import React, { useState, Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { Formik, Form, useField, useFormik } from "formik";
-import DatePicker from "react-datepicker";
+
 import "react-datepicker/dist/react-datepicker.css";
 import * as yup from "yup";
-import { TextInput, TextareaInput, SelectField, PhoneField, EmailField } from "../UI/FormElements";
+import {
+  TextInput,
+  TextareaInput,
+  SelectField,
+  PhoneField,
+  EmailField,
+  DateField,
+  PriceField
+} from "../UI/FormElements";
 
 import useHttp from "../../hooks/use-http";
 import LoadingSpinner from "../UI/LoadingSpinner";
@@ -19,8 +27,8 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const NewContractForm = (props) => {
   const [isEntering, setIsEntering] = useState(false);
 
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  // const [startDate, setStartDate] = useState();
+  // const [endDate, setEndDate] = useState();
 
   const phoneRegex =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -35,8 +43,7 @@ const NewContractForm = (props) => {
 
   return (
     <Fragment>
-
-      {console.log('The phone number is :', typeof props.contract.phone)}
+      {console.log("The phone number is :", typeof props.contract.phone)}
       <Prompt
         when={isEntering}
         message={(location) =>
@@ -49,7 +56,7 @@ const NewContractForm = (props) => {
           company: props.contract.company || "",
           client: props.contract.client || "",
           email: props.contract.email || "",
-          phone: props.contract.phone || '',
+          phone: props.contract.phone || "",
           address: props.contract.address || "",
           city: props.contract.city || "",
           state: props.contract.state || "",
@@ -57,7 +64,7 @@ const NewContractForm = (props) => {
           title: props.contract.title || "",
           startDate: props.contract.startDate || "",
           endDate: props.contract.endDate || "",
-          price: props.contract.price || 0,
+          price: props.contract.price || '',
           upload: props.contract.upload || "",
           notes: props.contract.notes || "",
           status: props.contract.status || "",
@@ -65,7 +72,7 @@ const NewContractForm = (props) => {
         validationSchema={yup.object({
           company: yup.string().required("Required"),
           client: yup.string().required("Required"),
-          phone: yup.string().matches(/^[0-9]+$/, "Must be only digits"),
+          phone: yup.string(),
           email: yup.string().email("Invalid email address").max(255),
           zipcode: yup
             .string()
@@ -181,10 +188,10 @@ const NewContractForm = (props) => {
                     />
                   </div>
                   <div className="control">
-                    <TextInput
-                      name="amount"
+                    <PriceField
+                      name="price"
                       type="number"
-                      placeholder="Amount"
+                      placeholder="Price"
                     />
                   </div>
                 </div>
@@ -205,23 +212,17 @@ const NewContractForm = (props) => {
                   </div>
 
                   <div className="control is-expanded">
-                    <DatePicker
+                    <DateField
                       name="startDate"
-                      selected={startDate}
-                      onChange={(date) => setStartDate(date)}
-                      onBlur={formik.handleBlur}
-                      className="input is-normal"
                       placeholderText="Start Date"
+                      selected={formik.startDate}
                     />
                   </div>
                   <div className="control is-expanded">
-                    <DatePicker
+                    <DateField
                       name="endDate"
-                      selected={endDate}
-                      onChange={(date) => setEndDate(date)}
-                      onBlur={formik.handleBlur}
-                      className="input is-normal"
                       placeholderText="End Date"
+                      selected={formik.endDate}
                     />
                   </div>
                 </div>
@@ -278,7 +279,12 @@ const NewContractForm = (props) => {
                         <button
                           className="button is-outlined is-white mr-3"
                           type="submit"
-                          onClick={() => props.onDraftContractData(props.contract, props.contract.id)}
+                          onClick={() =>
+                            props.onDraftContractData(
+                              props.contract,
+                              props.contract.id
+                            )
+                          }
                           disabled={formik.isSubmitting}
                         >
                           Draft
