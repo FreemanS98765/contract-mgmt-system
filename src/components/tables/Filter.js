@@ -11,7 +11,6 @@ class Filter extends Component {
 
   dropdownChangeHandler = (event) => {
 
-    console.log(`Event target is ${event.target}`);
     if (event.target.id === "status-menu") {
       this.props.onChangeStatusFilter(event.target.value);
     }

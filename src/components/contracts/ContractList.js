@@ -1,7 +1,6 @@
 import { Fragment, useState } from "react";
 
 import FiltersToolbar from "../tables/FiltersToolbar";
-
 import ContractsTable from "../tables/Table";
 
 import Spinner from "../UI/LoadingSpinner";
@@ -39,8 +38,6 @@ const ContractList = (props) => {
   console.log("Filtered props are: ", props.contracts);
 
   const filteredContracts = props.contracts.filter((contract) => {
-    console.log("Filtered contracts are: ", contract);
-    console.log("Filtered contracts are: ", typeof contract.status);
 
     if (
       (filteredStatus === "All" ||

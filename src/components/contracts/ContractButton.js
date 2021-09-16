@@ -3,7 +3,7 @@ import { uiActions } from "../../reducers/uiSlice";
 
 const ContractButton = (props) => {
   return (
-    <button onClick={props.onShowModal} className="button is-primary">
+    <button onClick={props.onOpenModal} className="button is-primary">
       {props.text}
     </button>
   );

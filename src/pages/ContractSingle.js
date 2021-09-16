@@ -65,8 +65,6 @@ const ContractSingle = (props) => {
     setIsOpen(false);
   };
 
-  
-
   console.log("Contract state: ", contract);
 
   const statusVariant =
@@ -100,12 +98,10 @@ const ContractSingle = (props) => {
             </h1>
           </div>
           <div className="level-item">
-            <span className={`tag is-medium ${statusVariant}`}>
-              {status}
-            </span>
+            <span className={`tag is-medium ${statusVariant}`}>{status}</span>
           </div>
         </div>
-        <ContractButton text="Edit Contract" onShowModal={openFormModal} />
+        <ContractButton text="Edit Contract" onOpenModal={openFormModal} />
       </div>
       <div className="mt-3">
         <Breadcrumbs className="has-arrow-separator">
@@ -207,8 +203,8 @@ const ContractSingle = (props) => {
           onShowModal={openFormModal}
           dispatchData={dispatchData}
           isOpen={isOpen}
-          text='Update Contract'
-          type='edit'
+          text="Update Contract"
+          type="edit"
         />
       )}
     </Fragment>

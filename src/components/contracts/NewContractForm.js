@@ -279,7 +279,7 @@ const NewContractForm = (props) => {
                         <button
                           className="button is-outlined is-white mr-3"
                           type="submit"
-                          onClick={props.onDraftContractData(props.contract, props.contract.id)}
+                          onClick={() => props.onDraftContractData(props.contract, props.contract.id)}
                           disabled={formik.isSubmitting}
                         >
                           Draft

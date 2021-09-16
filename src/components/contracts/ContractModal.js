@@ -35,6 +35,7 @@ const ContractModal = (props) => {
 
     const savedData = {
       ...enteredContractData,
+      status: "Active",
     };
 
     // Update contract data
@@ -51,7 +52,7 @@ const ContractModal = (props) => {
     };
     console.log("On draft: ", draftedData.status);
 
-    if (draftedData.status !== '') {
+    if (draftedData.status !== "") {
       props.dispatchData(editContract(id, draftedData));
     }
 
