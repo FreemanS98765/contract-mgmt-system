@@ -6,7 +6,7 @@ import { Formik, Form, useField, useFormik } from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as yup from "yup";
-import { TextInput, TextareaInput, SelectField } from "../UI/FormElements";
+import { TextInput, TextareaInput, SelectField, PhoneField, EmailField } from "../UI/FormElements";
 
 import useHttp from "../../hooks/use-http";
 import LoadingSpinner from "../UI/LoadingSpinner";
@@ -35,6 +35,8 @@ const NewContractForm = (props) => {
 
   return (
     <Fragment>
+
+      {console.log('The phone number is :', typeof props.contract.phone)}
       <Prompt
         when={isEntering}
         message={(location) =>
@@ -42,14 +44,12 @@ const NewContractForm = (props) => {
         }
       />
 
-      {console.log("Contract form props: ", props.contract)}
-
       <Formik
         initialValues={{
           company: props.contract.company || "",
           client: props.contract.client || "",
           email: props.contract.email || "",
-          phone: props.contract.phone || "",
+          phone: props.contract.phone || '',
           address: props.contract.address || "",
           city: props.contract.city || "",
           state: props.contract.state || "",
@@ -65,8 +65,8 @@ const NewContractForm = (props) => {
         validationSchema={yup.object({
           company: yup.string().required("Required"),
           client: yup.string().required("Required"),
-          phone: yup.string().matches(phoneRegex, "Phone number is invalid."),
-          email: yup.string().email("Invalid email address"),
+          phone: yup.string().matches(/^[0-9]+$/, "Must be only digits"),
+          email: yup.string().email("Invalid email address").max(255),
           zipcode: yup
             .string()
             .matches(/^[0-9]+$/, "Must be only digits")
@@ -79,7 +79,6 @@ const NewContractForm = (props) => {
           console.log("Saving contracts: ", contracts);
 
           if (`${props.type}` === "edit") {
-            console.log("Updating by type: ", contracts);
             props.onUpdateContractData(contracts, props.contract.id);
           } else {
             props.onSaveContractData(contracts);
@@ -90,7 +89,7 @@ const NewContractForm = (props) => {
       >
         {(formik) => (
           <Form
-            // onFocus={formFocusedHandler}
+            onFocus={formFocusedHandler}
             onSubmit={formik.handleSubmit}
             // noValidate
           >
@@ -120,16 +119,16 @@ const NewContractForm = (props) => {
                   </div>
 
                   <div className="control is-expanded">
-                    <TextInput
+                    <EmailField
                       name="email"
                       type="email"
                       placeholder="Client email"
                     />
                   </div>
                   <div className="control is-expanded">
-                    <TextInput
+                    <PhoneField
                       name="phone"
-                      type="text"
+                      type="tel"
                       placeholder="Client phone"
                     />
                   </div>

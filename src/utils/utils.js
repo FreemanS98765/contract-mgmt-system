@@ -18,6 +18,32 @@ export const formatPrice = (x, currency) => {
   }
 };
 
+export const formatPhoneNumber = (value) => {
+  if (!value) return value;
+
+  const phoneRegex =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+  const phoneNumber = value.toString().replace(/[^\d]/g, "");
+
+  const phoneNumberLength = phoneNumber.length;
+
+  if (phoneNumberLength < 4) return phoneNumber;
+
+  if (phoneNumberLength < 7) {
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+  }
+
+  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+    3,
+    6
+  )}-${phoneNumber.slice(6, 10)}`;
+};
+
+export const getFormattedPhone = (phone) => {
+  const formattedInputValue = formatPhoneNumber(phone);
+};
+
 const removeContractHandler = (id) => {};
 
 export default removeContractHandler;
