@@ -135,6 +135,7 @@ const ContractSingle = (props) => {
             </div>
             <div className="contract__detail">
               <h5>Contract Amount:</h5>
+              {console.log("Price is: ", price)}
               <p>{checkIfEmpty(getFormattedPrice(price))}</p>
             </div>
 
@@ -203,6 +204,7 @@ const ContractSingle = (props) => {
           onShowModal={openFormModal}
           dispatchData={dispatchData}
           isOpen={isOpen}
+          contracts={contracts}
           text="Update Contract"
           type="edit"
         />
