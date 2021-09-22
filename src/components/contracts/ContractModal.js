@@ -83,7 +83,7 @@ const ContractModal = (props) => {
             isLoading={loadingStatus === "pending"}
             onProcessContractHandler={processContractHandler}
             text={props.text}
-            contract={props.contract}
+            contract={props.contracts}
           />
         </section>
       </div>

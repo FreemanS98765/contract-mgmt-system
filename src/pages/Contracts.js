@@ -46,7 +46,10 @@ class Contracts extends Component {
       <div>
         <div className="page-header flex space-between">
           <h1 className="is-size-4">Contracts</h1>
-          <ContractButton text='New Contract' onShowModal={this.openFormModal} />
+          <ContractButton
+            text="New Contract"
+            onOpenModal={this.openFormModal}
+          />
         </div>
 
         <div className="container content">
@@ -67,6 +70,8 @@ class Contracts extends Component {
             onShowModal={this.openFormModal}
             dispatchData={dispatchData}
             isOpen={isOpen}
+            contracts={contracts}
+            text="Submit"
           />
         )}
       </div>

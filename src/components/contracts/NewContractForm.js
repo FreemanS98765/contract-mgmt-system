@@ -43,7 +43,6 @@ const NewContractForm = (props) => {
 
   return (
     <Fragment>
-      {console.log("The phone number is :", typeof props.contract.phone)}
       <Prompt
         when={isEntering}
         message={(location) =>
