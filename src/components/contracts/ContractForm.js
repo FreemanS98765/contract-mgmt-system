@@ -13,7 +13,7 @@ import {
   PhoneField,
   EmailField,
   DateField,
-  PriceField
+  PriceField,
 } from "../UI/FormElements";
 
 import useHttp from "../../hooks/use-http";
@@ -24,8 +24,27 @@ import classes from "../../index.css";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const ContractForm = (props) => {
+const ContractForm = (props, { contract }) => {
   const [isEntering, setIsEntering] = useState(false);
+
+  const {
+    id,
+    company,
+    client,
+    email,
+    phone,
+    address,
+    city,
+    state,
+    zipcode,
+    title,
+    startDate,
+    endDate,
+    price,
+    upload,
+    notes,
+    status,
+  } = contract;
 
   // const [startDate, setStartDate] = useState();
   // const [endDate, setEndDate] = useState();
@@ -52,21 +71,21 @@ const ContractForm = (props) => {
 
       <Formik
         initialValues={{
-          company: props.contract.company || "",
-          client: props.contract.client || "",
-          email: props.contract.email || "",
-          phone: props.contract.phone || "",
-          address: props.contract.address || "",
-          city: props.contract.city || "",
-          state: props.contract.state || "",
-          zipcode: props.contract.zipcode || "",
-          title: props.contract.title || "",
-          startDate: props.contract.startDate || "",
-          endDate: props.contract.endDate || "",
-          price: props.contract.price || '',
-          upload: props.contract.upload || "",
-          notes: props.contract.notes || "",
-          status: props.contract.status || "",
+          company: company || "",
+          client: client || "",
+          email: email || "",
+          phone: phone || "",
+          address: address || "",
+          city: city || "",
+          state: state || "",
+          zipcode: zipcode || "",
+          title: title || "",
+          startDate: startDate || "",
+          endDate: endDate || "",
+          price: price || "",
+          upload: upload || "",
+          notes: notes || "",
+          status: status || "",
         }}
         validationSchema={yup.object({
           company: yup.string().required("Required"),
@@ -85,7 +104,7 @@ const ContractForm = (props) => {
           console.log("Saving contracts: ", contracts);
 
           if (`${props.type}` === "edit") {
-            props.onUpdateContractData(contracts, props.contract.id);
+            props.onUpdateContractData(contracts, id);
           } else {
             props.onSaveContractData(contracts);
           }
@@ -281,7 +300,7 @@ const ContractForm = (props) => {
                           onClick={() =>
                             props.onDraftContractData(
                               props.contract,
-                              props.contract.id
+                              id
                             )
                           }
                           disabled={formik.isSubmitting}

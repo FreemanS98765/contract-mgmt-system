@@ -10,7 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Contracts from "./pages/Contracts";
 import ContractSingle from "./pages/ContractSingle";
 import NewContract from "./pages/NewContract";
-import NewContractForm from "./components/contracts/NewContractForm";
+import ContractForm from "./components/contracts/ContractForm";
 import NotFound from "./components/contracts/NoContractsFound";
 
 import Layout from "./components/Layout";
@@ -27,13 +27,13 @@ function App() {
             <Route path="/dashboard">
               <Dashboard />
             </Route>
-            <Route path="/contracts" component={NewContractForm} exact>
+            <Route path="/contracts" component={ContractForm} exact>
               <Contracts />
             </Route>
             <Route path="/contracts/:id">
               <ContractSingle />
             </Route>
-            <Route path="/add" component={NewContractForm}>
+            <Route path="/add" component={ContractForm}>
               <NewContract />
             </Route>
             <Route component={NotFound} />

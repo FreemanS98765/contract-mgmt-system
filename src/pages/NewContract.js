@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import NewContractForm from "../components/contracts/NewContractForm";
+import ContractForm from "../components/contracts/ContractForm";
 
 const NewContract = () => {
   return (
@@ -11,7 +11,7 @@ const NewContract = () => {
       </div>
 
       <div className="container content">
-        <NewContractForm />
+        <ContractForm />
       </div>
     </Fragment>
   );
