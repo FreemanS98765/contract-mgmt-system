@@ -115,7 +115,7 @@ const ContractSingle = (props) => {
       </div>
       <section className="section">
         <div className="container">
-          <div className="column">
+          <div className="column is-two-thirds">
             <div className="contract__detail">
               <h3 className="is-size-3 has-text-weight-bold">
                 Contract Details
@@ -179,26 +179,27 @@ const ContractSingle = (props) => {
               </div>
             </div>
           </div>
+          <div className="column is-one-third">
+            <div className="block">
+              <h5 className="title is-3">Attachments</h5>
+              <span className="icon is-large">
+                <FontAwesomeIcon className="fas fa-2x" icon={faBook} />
+              </span>
+            </div>
+          </div>
         </div>
       </section>
       <section className="section">
-        <div className="block">
+        <div className="block container">
           <h5 className="title is-3">Notes</h5>
           <p>{checkIfEmpty(notes)}</p>
-        </div>
-      </section>
-      <section className="section">
-        <div className="block">
-          <h5 className="title is-3">Attachments</h5>
-          <span className="icon is-large">
-            <FontAwesomeIcon className="fas fa-2x" icon={faBook} />
-          </span>
         </div>
       </section>
 
       {isOpen && (
         //<ContractModal onClose={showContractModal ? "is-active" : "false"} />
         <ContractModal
+          type="edit"
           contract={contract}
           onHideModal={closeFormModal}
           onShowModal={openFormModal}
@@ -206,7 +207,6 @@ const ContractSingle = (props) => {
           isOpen={isOpen}
           contracts={contracts}
           text="Update Contract"
-          type="edit"
         />
       )}
     </Fragment>
