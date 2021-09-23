@@ -24,7 +24,7 @@ import classes from "../../index.css";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const ContractForm = (props, { contract }) => {
+const ContractForm = (props, { contract = {} }) => {
   const [isEntering, setIsEntering] = useState(false);
 
   const {
