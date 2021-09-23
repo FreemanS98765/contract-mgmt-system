@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import NewContractForm from "./NewContractForm";
+import ContractForm from "./ContractForm";
 import useHttp from "../../hooks/use-http";
 
 import { addContract, editContract } from "../../actions/contracts";
@@ -74,7 +74,7 @@ const ContractModal = (props) => {
           </p>
         </header>
         <section className="modal-card-body">
-          <NewContractForm
+          <ContractForm
             type={props.type}
             onSaveContractData={saveContractDataHandler}
             onUpdateContractData={updateContractDataHandler}

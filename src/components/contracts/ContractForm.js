@@ -1,79 +1,313 @@
-import { useRef } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 
-import Card from "../UI/Card";
+import { connect } from "react-redux";
+
+import { Formik, Form, useField, useFormik } from "formik";
+
+import "react-datepicker/dist/react-datepicker.css";
+import * as yup from "yup";
+import {
+  TextInput,
+  TextareaInput,
+  SelectField,
+  PhoneField,
+  EmailField,
+  DateField,
+  PriceField
+} from "../UI/FormElements";
+
+import useHttp from "../../hooks/use-http";
 import LoadingSpinner from "../UI/LoadingSpinner";
-import classes from "./ContractForm.module.css";
+import { Prompt } from "react-router-dom";
+
+import classes from "../../index.css";
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const ContractForm = (props) => {
-  const clientInputRef = useRef();
-  const contractNameInputRef = useRef();
-  const amountInputRef = useRef();
-  const statusInputRef = useRef();
-  const startDateInputRef = useRef();
-  const endDateInputRef = useRef();
+  const [isEntering, setIsEntering] = useState(false);
 
-  function submitFormHandler(event) {
-    event.preventDefault();
+  // const [startDate, setStartDate] = useState();
+  // const [endDate, setEndDate] = useState();
 
-    const enteredClient = clientInputRef.current.value;
-    const enteredContractName = contractNameInputRef.current.value;
-    const enteredAmount = amountInputRef.current.value;
-    const enteredStatus = statusInputRef.current.value;
-    const enteredStartDate = startDateInputRef.current.value;
-    const enteredEndDate = endDateInputRef.current.value;
+  const phoneRegex =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-    props.onAddContract({
-      client: enteredClient,
-      contractName: enteredContractName,
-      amount: enteredAmount,
-      status: enteredStatus,
-      startDate: enteredStartDate,
-      endDate: enteredEndDate,
-    });
-  }
+  const finishEnteringHandler = () => {
+    setIsEntering(false);
+  };
+
+  const formFocusedHandler = () => {
+    setIsEntering(true);
+  };
 
   return (
-    <div className="modal">
-      <div className="modal-background"></div>
-      <div className="modal-card">
-        <form className={classes.form} onSubmit={submitFormHandler}>
-          {props.isLoading && (
-            <div className={classes.loading}>
-              <LoadingSpinner />
+    <Fragment>
+      <Prompt
+        when={isEntering}
+        message={(location) =>
+          "Are you sure you want to leave? All your entered data will be lost!"
+        }
+      />
+
+      <Formik
+        initialValues={{
+          company: props.contract.company || "",
+          client: props.contract.client || "",
+          email: props.contract.email || "",
+          phone: props.contract.phone || "",
+          address: props.contract.address || "",
+          city: props.contract.city || "",
+          state: props.contract.state || "",
+          zipcode: props.contract.zipcode || "",
+          title: props.contract.title || "",
+          startDate: props.contract.startDate || "",
+          endDate: props.contract.endDate || "",
+          price: props.contract.price || '',
+          upload: props.contract.upload || "",
+          notes: props.contract.notes || "",
+          status: props.contract.status || "",
+        }}
+        validationSchema={yup.object({
+          company: yup.string().required("Required"),
+          client: yup.string().required("Required"),
+          phone: yup.string(),
+          email: yup.string().email("Invalid email address").max(255),
+          zipcode: yup
+            .string()
+            .matches(/^[0-9]+$/, "Must be only digits")
+            .min(5, "Must be exactly 5 digits")
+            .max(5, "Must be exactly 5 digits"),
+        })}
+        onSubmit={(contracts, action) => {
+          //await sleep(1000);
+
+          console.log("Saving contracts: ", contracts);
+
+          if (`${props.type}` === "edit") {
+            props.onUpdateContractData(contracts, props.contract.id);
+          } else {
+            props.onSaveContractData(contracts);
+          }
+
+          props.history.push("/");
+        }}
+      >
+        {(formik) => (
+          <Form
+            onFocus={formFocusedHandler}
+            onSubmit={formik.handleSubmit}
+            // noValidate
+          >
+            {props.isLoading && (
+              <div className={classes.loading}>
+                <LoadingSpinner />
+              </div>
+            )}
+
+            <div className="columns">
+              <div className="column form-section">
+                <h5 className="form-section_title">Client Info</h5>
+                <div className="field is-grouped">
+                  <div className="control is-expanded">
+                    <TextInput
+                      name="company"
+                      type="text"
+                      placeholder="Company name"
+                    />
+                  </div>
+                  <div className="control is-expanded">
+                    <TextInput
+                      name="client"
+                      type="text"
+                      placeholder="Client name"
+                    />
+                  </div>
+
+                  <div className="control is-expanded">
+                    <EmailField
+                      name="email"
+                      type="email"
+                      placeholder="Client email"
+                    />
+                  </div>
+                  <div className="control is-expanded">
+                    <PhoneField
+                      name="phone"
+                      type="tel"
+                      placeholder="Client phone"
+                    />
+                  </div>
+                </div>
+
+                <div className="field">
+                  <div className="control">
+                    <TextInput
+                      name="address"
+                      type="text"
+                      placeholder="Address"
+                    />
+                  </div>
+                </div>
+                <div className="field is-grouped">
+                  <div className="control">
+                    <TextInput name="city" type="text" placeholder="City" />
+                  </div>
+
+                  <div className="control">
+                    <SelectField name="state">
+                      <option>Alaska</option>
+                      <option>New Hampshire</option>
+                    </SelectField>
+                  </div>
+
+                  <div className="control">
+                    <TextInput
+                      name="zipcode"
+                      type="text"
+                      placeholder="Zipcode"
+                    />
+                  </div>
+                </div>
+                {/* end of Client Info */}
+              </div>
             </div>
-          )}
+            {/* End of Client Info */}
 
-          <div className={classes.control}>
-            <label htmlFor="client">Client</label>
-            <input type="text" id="client" ref={clientInputRef} />
-          </div>
-          <div className={classes.control}>
-            <label htmlFor="contractName">Contract Name</label>
-            <input type="text" id="contractName" ref={contractNameInputRef} />
-          </div>
-          <div className={classes.control}>
-            <label htmlFor="amount">Amount</label>
-            <input type="text" id="amount" ref={amountInputRef} />
-          </div>
-          <div className={classes.control}>
-            <label htmlFor="status">Status</label>
-            <input type="text" id="status" ref={statusInputRef} />
-          </div>
-          <div className={classes.control}>
-            <label htmlFor="startDate">Start Date</label>
-            <input type="text" id="startDate" ref={startDateInputRef} />
-          </div>
-          <div className={classes.control}>
-            <label htmlFor="endDate">End Date</label>
-            <input type="text" id="endDate" ref={endDateInputRef} />
-          </div>
+            <div className="columns">
+              <div className="column form-section">
+                <h5 className="form-section_title">Contract Info</h5>
 
-          <div className={classes.actions}>
-            <button className="btn">Add Contract</button>
-          </div>
-        </form>
-      </div>
-    </div>
+                <div className="field is-grouped">
+                  <div className="control is-expanded">
+                    <TextInput
+                      name="title"
+                      type="text"
+                      placeholder="Contract Name"
+                    />
+                  </div>
+                  <div className="control">
+                    <PriceField
+                      name="price"
+                      type="number"
+                      placeholder="Price"
+                    />
+                  </div>
+                </div>
+
+                <div className="field is-grouped">
+                  <div className="control">
+                    <SelectField name="category">
+                      <option>Maintenance</option>
+                      <option>Project</option>
+                    </SelectField>
+                  </div>
+
+                  <div className="control">
+                    <SelectField name="level">
+                      <option>Easy</option>
+                      <option>Medium</option>
+                    </SelectField>
+                  </div>
+
+                  <div className="control is-expanded">
+                    <DateField
+                      name="startDate"
+                      placeholderText="Start Date"
+                      selected={formik.startDate}
+                    />
+                  </div>
+                  <div className="control is-expanded">
+                    <DateField
+                      name="endDate"
+                      placeholderText="End Date"
+                      selected={formik.endDate}
+                    />
+                  </div>
+                </div>
+
+                <div className="field">
+                  <div className="control">
+                    <TextareaInput
+                      name="notes"
+                      type="textarea"
+                      className="textarea"
+                      placeholder="Notes"
+                    ></TextareaInput>
+                  </div>
+                </div>
+
+                <div className="form-section">
+                  <div className="field">
+                    <div className="control">
+                      <label className="label">File upload</label>
+                      <input
+                        id="upload"
+                        name="upload"
+                        type="file"
+                        {...formik.getFieldProps("upload")}
+                        className="button link"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* End of Contract Info */}
+
+            <div className="control-panel">
+              <div className="columns">
+                <div className="column">
+                  <div className="field">
+                    <div className="control">
+                      <button
+                        className="button is-outlined is-white"
+                        type="button"
+                        onClick={props.onCancel}
+                        disabled={formik.isSubmitting}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="column">
+                  <div className="field-group is-pulled-right">
+                    <div className="field is-horizontal">
+                      <div className="control">
+                        <button
+                          className="button is-outlined is-white mr-3"
+                          type="submit"
+                          onClick={() =>
+                            props.onDraftContractData(
+                              props.contract,
+                              props.contract.id
+                            )
+                          }
+                          disabled={formik.isSubmitting}
+                        >
+                          Draft
+                        </button>
+                      </div>
+
+                      <div className="control">
+                        <button
+                          className="button is-link"
+                          type="submit"
+                          disabled={formik.isSubmitting}
+                        >
+                          {props.text}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </Fragment>
   );
 };
 
