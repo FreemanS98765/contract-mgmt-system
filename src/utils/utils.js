@@ -48,6 +48,14 @@ export const getFormattedPhone = (phone) => {
   const formattedInputValue = formatPhoneNumber(phone);
 };
 
+export const checkIfEmpty = (data) => {
+  if (data) {
+    return data;
+  }
+
+  return data ? data : "Nothing found";
+}
+
 const removeContractHandler = (id) => {};
 
 export default removeContractHandler;
