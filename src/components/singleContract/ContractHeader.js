@@ -12,7 +12,7 @@ const ContractHeader = (props) => {
       : "primary";
 
   return (
-    <div className="page-header">
+    <section className="page-header">
       <div className="level">
         <div className="level-item level-left">
           <h1 className="title is-3 has-text-weight-bold">
@@ -45,7 +45,7 @@ const ContractHeader = (props) => {
           </Breadcrumbs>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

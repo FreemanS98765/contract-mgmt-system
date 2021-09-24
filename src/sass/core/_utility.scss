@@ -1,0 +1,22 @@
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex.space-between {
+  justify-content: space-between;
+}
+
+.centered {
+  margin: 3rem auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}

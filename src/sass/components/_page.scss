@@ -1,0 +1,39 @@
+.page-header {
+  border-bottom: 1px solid #ccc;
+  align-items: center;
+  background-color: $color-brand-red;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  color: $color-white;
+
+  .breadcrumb {
+
+    li.is-active a {
+      color: $color-alt-teal;
+      font-weight: bold;
+    }
+
+    a {
+      color: $color-white;
+
+      &:hover {
+        color: $color-white;
+        text-decoration: underline;
+      }
+
+      &:active {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0 18px;
+}
+
+.content {
+  padding-top: 7vh;
+}

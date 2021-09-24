@@ -15,8 +15,9 @@ import NotFound from "./components/contracts/NoContractsFound";
 
 import Layout from "./components/Layout";
 
-function App() {
+import "./App.scss";
 
+function App() {
   return (
     <>
       <Router>

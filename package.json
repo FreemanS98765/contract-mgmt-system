@@ -35,6 +35,8 @@
     "yup": "^0.32.9"
   },
   "scripts": {
+    "dev": "webpack --config webpack.config.dev.js",
+    "prod": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -54,5 +56,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "node-sass": "^6.0.1",
+    "sass": "^1.42.1"
   }
 }

@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { getContracts } from "../actions/contracts";
-
 import ContractList from "../components/contracts/ContractList";
-import ContractButton from "../components/contracts/ContractButton";
+import Header from "../components/Header";
 import ContractModal from "../components/contracts/ContractModal.js";
 
 import "bulma/css/bulma.min.css";
@@ -44,14 +42,7 @@ class Contracts extends Component {
 
     return (
       <div>
-        <div className="page-header flex space-between">
-          <h1 className="is-size-4">Contracts</h1>
-          <ContractButton
-            text="New Contract"
-            onOpenModal={this.openFormModal}
-          />
-        </div>
-
+        <Header onOpenModal={this.openFormModal} />
         <div className="container content">
           <ContractList
             contracts={contracts}
