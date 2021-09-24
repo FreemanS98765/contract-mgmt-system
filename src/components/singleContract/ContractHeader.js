@@ -1,4 +1,5 @@
 import ContractButton from "../contracts/ContractButton";
+import { Breadcrumbs, BreadcrumbItem } from "../../components/UI/Breadcrumbs";
 
 const ContractHeader = (props) => {
   const statusVariant =
@@ -11,18 +12,39 @@ const ContractHeader = (props) => {
       : "primary";
 
   return (
-    <div className="page-header flex space-between">
+    <div className="page-header">
       <div className="level">
-        <div className="level-item mr-3">
+        <div className="level-item level-left">
           <h1 className="title is-3 has-text-weight-bold">
-            {props.title ? `Contract #${props.contract.id}: ${props.contract.title}` : `Contract #${props.contract.id}`}
+            {props.title
+              ? `Contract #${props.contract.id}: ${props.contract.title}`
+              : `Contract #${props.contract.id}`}
           </h1>
+          <span className={`tag is-medium ${statusVariant}`}>
+            {props.contract.status}
+          </span>
         </div>
-        <div className="level-item">
-          <span className={`tag is-medium ${statusVariant}`}>{props.contract.status}</span>
+        
+        <div className="level-item level-right">
+          <ContractButton
+            text="Edit Contract"
+            onOpenModal={props.openFormModal}
+          />
         </div>
       </div>
-      <ContractButton text="Edit Contract" onOpenModal={props.openFormModal} />
+
+      <div className="level">
+        <div className="level-item level-left">
+          <Breadcrumbs className="has-arrow-separator">
+            <BreadcrumbItem to={`/dashboard`}>Dashboard</BreadcrumbItem>
+            <BreadcrumbItem to={`/contracts`}>Contracts</BreadcrumbItem>
+            <BreadcrumbItem
+              to={`/contracts/${props.id}`}
+              className="is-active"
+            >{`Contract #${props.id}`}</BreadcrumbItem>
+          </Breadcrumbs>
+        </div>
+      </div>
     </div>
   );
 };

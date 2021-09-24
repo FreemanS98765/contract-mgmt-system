@@ -11,7 +11,7 @@ import ContractAttachments from "../components/singleContract/ContractAttachment
 
 import { checkIfEmpty } from "../utils/utils";
 
-import { Breadcrumbs, BreadcrumbItem } from "../components/UI/Breadcrumbs";
+
 
 import ContractModal from "../components/contracts/ContractModal.js";
 
@@ -84,19 +84,7 @@ const ContractSingle = (props) => {
 
   return (
     <Fragment>
-      <ContractHeader contract={contract} openFormModal={openFormModal} />
-
-      <div className="mt-3">
-        <Breadcrumbs className="has-arrow-separator">
-          <BreadcrumbItem to={`/dashboard`}>Dashboard</BreadcrumbItem>
-          <BreadcrumbItem to={`/contracts`}>Contracts</BreadcrumbItem>
-          <BreadcrumbItem
-            to={`/contracts/${id}`}
-            className="is-active"
-          >{`Contract #${id}`}</BreadcrumbItem>
-        </Breadcrumbs>
-      </div>
-
+      <ContractHeader id={id} contract={contract} openFormModal={openFormModal} />
       <ClientDetails contract={contract} />
       <ContractDetails contract={contract} />
       <ContractAttachments contract={contract} />

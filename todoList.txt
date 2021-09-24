@@ -6,3 +6,6 @@
 #Contract List
 Status filter "All" only displays Active contracts
 Remove contract removes last contract added to list
+
+#Layout
+Add sidebar to main container
