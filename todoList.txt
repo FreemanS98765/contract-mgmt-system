@@ -1,5 +1,4 @@
-1. Dropdown menu on Contracts list will not toggle after adding a new contract. A page refresh is required.
-2. Added contracts are not displaying correct data within table.
 3. Remove contract works within db, but doesn't update state.
 4. Add Contract button on NoContractsPage is not working
 5. For updating client when db changes: Either send a push notification from the server, which the client is listening for, or set up an interval on the client that pings the server for occasional updates, or do another fetch after you POST to the server, or just append the POSTed data directly to state, which should be identical to what the refresh would do
+6. Set table to sort by date added by default.
