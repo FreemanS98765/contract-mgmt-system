@@ -94,7 +94,6 @@ const _removeContract = ({ id = {} }) => ({
 export const removeContract = ({ id } = {}) => {
   return (dispatch) => {
     return axios.delete(`contracts/${id}`).then((res) => {
-      console.log("Remove contract by id: ", { id });
       dispatch(_removeContract({ id }));
     });
   };
@@ -151,8 +150,6 @@ export const getContracts = (callback) => (dispatch, getState) => {
     .get("contracts")
     .then((response) => {
       const contracts = [];
-
-      console.log("Get Contracts: ", contracts);
 
       response.data.forEach((item) => {
         contracts.push(item);

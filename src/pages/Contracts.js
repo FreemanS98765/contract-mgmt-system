@@ -61,8 +61,6 @@ class Contracts extends Component {
           />
         </div>
 
-        {console.log("isOpen: ", isOpen)}
-
         {isOpen && (
           //<ContractModal onClose={showContractModal ? "is-active" : "false"} />
           <ContractModal

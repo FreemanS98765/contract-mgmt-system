@@ -39,8 +39,6 @@ const ContractsTable = (props) => {
     new Array(props.contracts.length).fill(false)
   );
 
-  console.log("Table props are: ", props);
-
   const toggleDropdown = (position) => {
     const updatedToggledState = isSelected.map((item, index) =>
       index === position ? !item : item
@@ -70,12 +68,10 @@ const ContractsTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {console.log('Contracts before tableRow: ', props.contracts)}
             {tableSort(
               props.contracts,
               getComparator(props.order, props.orderBy)
             ).map((c, i) => {
-              console.log("Table Row Id: ", c.id);
               return (
                 <TableRow
                   key={c.id}

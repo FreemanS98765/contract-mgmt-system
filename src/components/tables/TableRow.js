@@ -63,8 +63,9 @@ class TableRow extends Component {
   render() {
     return (
       <tr id={`table-row-${this.props.id}`}>
-      {/* {console.log('Filters are: ', this.props)} */}
-        <td className='is-flex is-justify-content-center is-align-content-center'>{this.createCheckboxes('checkbox')}</td>
+        <td className="is-flex is-justify-content-center is-align-content-center">
+          {this.createCheckboxes("checkbox")}
+        </td>
         <td>{this.props.client}</td>
         <td>{this.props.company}</td>
         <td>
@@ -129,8 +130,6 @@ class TableRow extends Component {
                     //await sleep(1000);
                     //props.dispatchData(removeContract({ id }));
                     this.removeContractHandler(id);
-
-                    console.log("Remove item: ", id);
                   }}
                 >
                   <span className="icon-text has-text-danger">

@@ -19,7 +19,6 @@ const Root = (
 );
 
 console.log("Initial state: ", store.getState());
-console.log("Store is: ", store);
 
 store.dispatch(getContracts()).then(() => {
   ReactDOM.render(Root, document.getElementById("root"));

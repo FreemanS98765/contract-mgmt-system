@@ -27,6 +27,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const ContractForm = (props) => {
   const [isEntering, setIsEntering] = useState(false);
+  const [isDraft, setIsDraft] = useState(false);
 
   let { id } = useParams();
 
@@ -73,19 +74,20 @@ const ContractForm = (props) => {
     setIsEntering(true);
   };
 
-  const onSubmit = (fields, { setStatus, setSubmitting }) => {
-    setStatus();
-    if (isNewContract) {
-      props.onSaveContractData(fields, setSubmitting);
-    } else {
-      props.onUpdateContractData(id, fields, setSubmitting);
-    }
+  const onDraftClick = () => {
+    setIsDraft(true);
+  }
 
-    // if (`${props.type}` === "edit") {
-    //   props.onUpdateContractData(fields, id);
-    // } else {
-    //   props.onSaveContractData(fields);
-    // }
+  const onSubmit = (fields, { setStatus, setSubmitting, resetForm }) => {
+    setStatus();
+
+    console.log('Draft is', isDraft);
+
+    if (isDraft) {
+      props.onDraftContractData(fields, setSubmitting, isNewContract);
+    } else {
+      props.onSaveContractData(fields, setSubmitting, isNewContract, resetForm);
+    }
   };
 
   return (
@@ -107,11 +109,16 @@ const ContractForm = (props) => {
           const [contractDetails, setContractDetails] = useState();
 
           useEffect(() => {
+            let mounted = true;
             if (!isNewContract) {
               setTimeout(() => {
-                setInitialValues(props.contract)
-              }, 1000);
+                if (mounted) {
+                  setInitialValues(props.contract);
+                }
+              }, 500);
             }
+
+            return () => (mounted = false);
           }, []);
 
           return (
@@ -260,7 +267,6 @@ const ContractForm = (props) => {
                           id="upload"
                           name="upload"
                           type="file"
-                          {...formik.getFieldProps("upload")}
                           className="button link"
                         />
                       </div>
@@ -293,30 +299,16 @@ const ContractForm = (props) => {
                           <button
                             className="button is-outlined is-white mr-3"
                             type="submit"
-                            onClick={(fields) => {
-                              formik.setStatus();
-
-                              if (isNewContract) {
-                                props.onDraftContractData(
-                                  fields,
-                                  formik.setSubmitting
-                                );
-                              } else {
-                                props.onUpdateContractData(
-                                  id,
-                                  fields,
-                                  formik.setSubmitting
-                                );
-                              }
-                            }}
+                            onClick={onDraftClick}
                             disabled={formik.isSubmitting}
                           >
-                            {formik.isSubmitting && (
+                            {formik.isSubmitting && isDraft ? (
                               <div className={classes.loading}>
                                 <LoadingSpinner />
                               </div>
+                            ) : (
+                              "Draft"
                             )}
-                            Draft
                           </button>
                         </div>
 

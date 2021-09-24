@@ -22,7 +22,7 @@ const ContractHeader = (props) => {
           <span className={`tag is-medium ${statusVariant}`}>{props.contract.status}</span>
         </div>
       </div>
-      <ContractButton text="Edit Contract" onOpenModal={props.contract.openFormModal} />
+      <ContractButton text="Edit Contract" onOpenModal={props.openFormModal} />
     </div>
   );
 };
