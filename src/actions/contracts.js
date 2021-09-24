@@ -3,6 +3,8 @@ import axios from "../axios/axios";
 import {
   ADD_CONTRACT,
   GET_CONTRACTS,
+  REMOVE_CONTRACT,
+  FETCH_CONTRACT,
   LOAD_TABLE,
   EDIT_CONTRACT,
 } from "../constants/ActionTypes";
@@ -84,21 +86,32 @@ export const addContract =
 //   };
 // };
 
-const _removeContract = ({id = {}}) => ({
-  type: "REMOVE_CONTRACT",
+const _removeContract = ({ id = {} }) => ({
+  type: REMOVE_CONTRACT,
   id,
 });
 
-export const removeContract = ({id} = {}) => {
+export const removeContract = ({ id } = {}) => {
   return (dispatch) => {
-    return axios
-      .delete(`contracts/${id}`)
-      .then((res) => {
-        console.log("Remove contract by id: ", {id});
-        dispatch(_removeContract({id}));
-      });
+    return axios.delete(`contracts/${id}`).then((res) => {
+      console.log("Remove contract by id: ", { id });
+      dispatch(_removeContract({ id }));
+    });
   };
 };
+
+const _fetchContract = (id) => ({
+  type: FETCH_CONTRACT,
+  id,
+});
+
+export const fetchContract =
+  ({ id } = {}) =>
+  (dispatch) => {
+    return axios.get(`contracts/${id}`).then((res) => {
+      dispatch(_fetchContract({ id }));
+    });
+  };
 
 const _editContract = (id, updates) => ({
   type: EDIT_CONTRACT,
@@ -134,30 +147,28 @@ const _getContracts = (contracts, loading) => ({
 // });
 
 export const getContracts = (callback) => (dispatch, getState) => {
-  return (
-    axios
-      .get("contracts")
-      .then((response) => {
-        const contracts = [];
+  return axios
+    .get("contracts")
+    .then((response) => {
+      const contracts = [];
 
-        console.log('Get Contracts: ', contracts);
+      console.log("Get Contracts: ", contracts);
 
-        response.data.forEach((item) => {
-          contracts.push(item);
-        });
+      response.data.forEach((item) => {
+        contracts.push(item);
+      });
 
-        dispatch(_getContracts(contracts));
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response.data);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log("Error", error.message);
-        }
-      })
-  );
+      dispatch(_getContracts(contracts));
+    })
+    .catch((error) => {
+      if (error.response) {
+        console.log(error.response.data);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log("Error", error.message);
+      }
+    });
 };
 
 export const loadTable = (contracts) => ({

@@ -34,7 +34,7 @@ class Contracts extends Component {
   render() {
     console.log("Props are now: ", this.props);
 
-    const contracts = this.props.contractState;
+    let contracts = this.props.contractState;
     const dispatchData = this.props.dispatch;
     const filters = this.props.filters;
     const { isLoading } = this.state;

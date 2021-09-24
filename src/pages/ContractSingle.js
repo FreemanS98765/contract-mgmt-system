@@ -15,19 +15,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhone, faBook } from "@fortawesome/free-solid-svg-icons";
 
 const ContractSingle = (props) => {
-  const params = useParams();
+  //const params = useParams();
   const dispatchData = props.dispatch;
+
+  let { id } = useParams();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const contracts = props.contracts;
+
+  console.log('Id is: ', id);
+
   let contract = contracts.find((c) => {
-    return c.id.toString() === params.id;
+    return c.id.toString() === id;
   });
 
   const {
-    id,
     client,
     company,
     email,
@@ -43,7 +47,9 @@ const ContractSingle = (props) => {
     notes,
     upload,
     status,
-  } = contract;
+  } = contract || {};
+
+  console.log('Contract destructured : ', company)
 
   // let contracts = [];
 
@@ -55,8 +61,6 @@ const ContractSingle = (props) => {
   //   return c;
   // });
 
-  console.log("Contracts state: ", contracts);
-
   const openFormModal = () => {
     setIsOpen(true);
   };
@@ -64,8 +68,6 @@ const ContractSingle = (props) => {
   const closeFormModal = () => {
     setIsOpen(false);
   };
-
-  console.log("Contract state: ", contract);
 
   const statusVariant =
     status === "Active"
@@ -135,7 +137,6 @@ const ContractSingle = (props) => {
             </div>
             <div className="contract__detail">
               <h5>Contract Amount:</h5>
-              {console.log("Price is: ", price)}
               <p>{checkIfEmpty(getFormattedPrice(price))}</p>
             </div>
 
@@ -205,7 +206,6 @@ const ContractSingle = (props) => {
           onShowModal={openFormModal}
           dispatchData={dispatchData}
           isOpen={isOpen}
-          contracts={contracts}
           text="Update Contract"
         />
       )}

@@ -16,6 +16,7 @@ import NotFound from "./components/contracts/NoContractsFound";
 import Layout from "./components/Layout";
 
 function App() {
+
   return (
     <>
       <Router>
@@ -27,10 +28,10 @@ function App() {
             <Route path="/dashboard">
               <Dashboard />
             </Route>
-            <Route path="/contracts" component={ContractForm} exact>
+            <Route path={`/contracts`} component={ContractForm} exact>
               <Contracts />
             </Route>
-            <Route path="/contracts/:id">
+            <Route path={`/contracts/:id`} component={ContractForm}>
               <ContractSingle />
             </Route>
             <Route path="/add" component={ContractForm}>

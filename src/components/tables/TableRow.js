@@ -66,7 +66,7 @@ class TableRow extends Component {
       {/* {console.log('Filters are: ', this.props)} */}
         <td className='is-flex is-justify-content-center is-align-content-center'>{this.createCheckboxes('checkbox')}</td>
         <td>{this.props.client}</td>
-        <td>{this.props.title}</td>
+        <td>{this.props.company}</td>
         <td>
           {!this.props.startDate ? "" : getFormattedDate(this.props.startDate)}
         </td>

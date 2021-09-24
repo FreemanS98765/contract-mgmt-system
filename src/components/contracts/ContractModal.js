@@ -17,51 +17,66 @@ const ContractModal = (props) => {
   //   }
   // }, [loadingStatus, history]);
 
-  const saveContractDataHandler = async (enteredContractData) => {
-    await new Promise((r) => setTimeout(r, 1000));
+  const saveContractDataHandler = async (fields, setSubmitting) => {
+    //await new Promise((r) => setTimeout(r, 1000));
 
     const savedData = {
-      ...enteredContractData,
+      ...fields,
       status: "Active",
     };
 
     // post contract data
-    props.dispatchData(addContract(savedData));
+    props
+      .dispatchData(addContract(savedData))
+      .then(() => {
+        history.push("/contracts");
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        console.log(error);
+      });
+
     props.onHideModal();
   };
 
-  const updateContractDataHandler = async (enteredContractData, id) => {
-    await new Promise((r) => setTimeout(r, 1000));
-
-    const savedData = {
-      ...enteredContractData,
-      status: "Active",
-    };
-
-    // Update contract data
-    props.dispatchData(editContract(id, savedData));
-    props.onHideModal();
-  };
-
-  const draftContractDataHandler = async (enteredContractData, id) => {
+  const draftContractDataHandler = async (fields, setSubmitting) => {
     await new Promise((r) => setTimeout(r, 1000));
 
     const draftedData = {
-      ...enteredContractData,
+      ...fields,
       status: "Draft",
     };
-    console.log("On draft: ", draftedData.status);
 
-    if (draftedData.status !== "") {
-      props.dispatchData(editContract(id, draftedData));
-    }
+    // if (draftedData.status !== "") {
+    //   updateContractDataHandler(id, draftedData);
+    // }
 
-    props.dispatchData(addContract(draftedData));
+    props
+      .dispatchData(addContract(draftedData))
+      .then(() => {
+        history.push("/contracts");
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        console.log(error);
+      });
+
     props.onHideModal();
   };
 
-  const processContractHandler = (contractData) => {
-    sendRequest(contractData);
+  const updateContractDataHandler = async (id, fields, setSubmitting) => {
+    await new Promise((r) => setTimeout(r, 1000));
+
+    // Update contract data
+    props.dispatchData(editContract(id, fields))
+      .then(() => {
+        history.push("/contracts");
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        console.log(error);
+      });
+    props.onHideModal();
   };
 
   return (
@@ -81,9 +96,9 @@ const ContractModal = (props) => {
             onDraftContractData={draftContractDataHandler}
             onCancel={props.onHideModal}
             isLoading={loadingStatus === "pending"}
-            onProcessContractHandler={processContractHandler}
             text={props.text}
             contract={props.contract}
+            dispatchData={props.dispatchData}
           />
         </section>
       </div>

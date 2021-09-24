@@ -1,4 +1,4 @@
-import { GET_CONTRACTS, LOAD_TABLE } from "../constants/ActionTypes";
+import { ADD_CONTRACT, EDIT_CONTRACT, FETCH_CONTRACT, GET_CONTRACTS, LOAD_TABLE, REMOVE_CONTRACT } from "../constants/ActionTypes";
 
 //const initialContractState = [];
 const initialState = {
@@ -11,11 +11,13 @@ const initialState = {
 
 export default function contractReducer(state = initialState, action) {
   switch (action.type) {
-    case "ADD_CONTRACT":
+    case ADD_CONTRACT:
       return [...state, action.contract];
-    case "REMOVE_CONTRACT":
+    case REMOVE_CONTRACT:
       return state.filter(({ id }) => id !== action.id);
-    case "EDIT_CONTRACT":
+    case FETCH_CONTRACT:
+      return state.filter(({id}) => id === action.id)
+    case EDIT_CONTRACT:
       return state.map((contract) => {
         if (contract.id === action.id) {
           return {

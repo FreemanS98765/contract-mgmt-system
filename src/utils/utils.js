@@ -7,7 +7,11 @@ export const getFormattedDate = (val) => {
   return val;
 };
 
-export const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
+export const getFormattedPrice = (price) => {
+  if (!price) return price;
+
+  return `$${price.toFixed(2)}`;
+}
 
 export const formatPrice = (x, currency) => {
   switch (currency) {
