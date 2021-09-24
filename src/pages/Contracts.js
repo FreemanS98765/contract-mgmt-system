@@ -6,8 +6,6 @@ import ContractList from "../components/contracts/ContractList";
 import Header from "../components/Header";
 import ContractModal from "../components/contracts/ContractModal.js";
 
-import "bulma/css/bulma.min.css";
-
 class Contracts extends Component {
   // static propTypes = {
   //   contracts: PropTypes.object,

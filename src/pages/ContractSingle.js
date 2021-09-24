@@ -9,10 +9,6 @@ import ClientDetails from "../components/singleContract/ClientDetails";
 import ContractDetails from "../components/singleContract/ContractDetails";
 import ContractAttachments from "../components/singleContract/ContractAttachments";
 
-import { checkIfEmpty } from "../utils/utils";
-
-
-
 import ContractModal from "../components/contracts/ContractModal.js";
 
 const ContractSingle = (props) => {
@@ -84,10 +80,38 @@ const ContractSingle = (props) => {
 
   return (
     <Fragment>
-      <ContractHeader id={id} contract={contract} openFormModal={openFormModal} />
-      <ClientDetails contract={contract} />
-      <ContractDetails contract={contract} />
-      <ContractAttachments contract={contract} />
+      <ContractHeader
+        id={id}
+        contract={contract}
+        openFormModal={openFormModal}
+      />
+
+      <section id="contractSingle" className="section">
+        <div className="container">
+          <div className="columns">
+            <div className="column is-one-quarter sidebar">
+              <div className="menu">
+                <ul className="menu-list">
+                  <li>
+                    <a href="#" className="is-active">Client Details</a>
+                  </li>
+                  <li>
+                    <a href="#">Contract Details</a>
+                  </li>
+                  <li>
+                    <a href="#">Attachments</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="column is-three-quarters">
+              <ClientDetails contract={contract} />
+              <ContractDetails contract={contract} />
+              <ContractAttachments contract={contract} />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {isOpen && (
         //<ContractModal onClose={showContractModal ? "is-active" : "false"} />

@@ -11,3 +11,8 @@ $color-grey-dark: #353638;
 
 $color-white: #fff;
 $color-black: #000;
+
+// Navigation Styles
+$border: $color-brand-red;
+$menu-item-border-left: 3px solid $border;
+$menu-list-link-padding: 0.75em 1em;

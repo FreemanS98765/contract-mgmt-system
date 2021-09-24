@@ -1,3 +1,28 @@
+#contractSingle {
+  .columns > .column {
+    border-radius: 7px;
+    background-color: $color-grey-light;
+    border: 1px solid $color-grey-medium;
+  }
+}
+
+.sidebar {
+  margin-right: 0.75rem;
+
+  .menu-list li {
+    & > a {
+      padding: $menu-list-link-padding;
+      &.is-active {
+        position: relative;
+        background-color: transparent;
+        border-left: $menu-item-border-left;
+        color: inherit;
+        font-size: 125%;
+      }
+    }
+  }
+}
+
 .contract__detail {
   display: flex;
   justify-content: flex-start;

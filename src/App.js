@@ -15,6 +15,7 @@ import NotFound from "./components/contracts/NoContractsFound";
 
 import Layout from "./components/Layout";
 
+import "bulma/css/bulma.min.css";
 import "./App.scss";
 
 function App() {

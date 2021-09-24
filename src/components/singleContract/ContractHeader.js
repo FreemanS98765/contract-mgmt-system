@@ -13,28 +13,25 @@ const ContractHeader = (props) => {
 
   return (
     <section className="page-header">
-      <div className="level">
-        <div className="level-item level-left">
-          <h1 className="title is-3 has-text-weight-bold">
-            {props.title
-              ? `Contract #${props.contract.id}: ${props.contract.title}`
-              : `Contract #${props.contract.id}`}
-          </h1>
-          <span className={`tag is-medium ${statusVariant}`}>
-            {props.contract.status}
-          </span>
-        </div>
-        
-        <div className="level-item level-right">
+      <div className="container">
+        <div className="row">
+          <div className="is-flex is-align-items-center">
+            <h1 className="is-size-2 mr-3">
+              {props.title
+                ? `Contract #${props.contract.id}: ${props.contract.title}`
+                : `Contract #${props.contract.id}`}
+            </h1>
+            <span className={`tag is-medium ${statusVariant}`}>
+              {props.contract.status}
+            </span>
+          </div>
+
           <ContractButton
             text="Edit Contract"
             onOpenModal={props.openFormModal}
           />
         </div>
-      </div>
-
-      <div className="level">
-        <div className="level-item level-left">
+        <div className="row">
           <Breadcrumbs className="has-arrow-separator">
             <BreadcrumbItem to={`/dashboard`}>Dashboard</BreadcrumbItem>
             <BreadcrumbItem to={`/contracts`}>Contracts</BreadcrumbItem>

@@ -6,7 +6,7 @@ const Header = (props) => {
     <header className="page-header">
       <div className="container">
         <div className="row">
-          <h2 className="is-size-2">Contracts</h2>
+          <h1 className="is-size-2">Contracts</h1>
 
           <ContractButton text="New Contract" onOpenModal={props.onOpenModal} />
         </div>
