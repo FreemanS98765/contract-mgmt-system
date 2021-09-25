@@ -1,20 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+
+import TableDropdown from "./TableDropdown";
 
 import { updateFilters } from "../../filters/actions";
 import { removeContract } from "../../actions/contracts";
 import Checkbox from "./Checkbox";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEllipsisH,
-  faEye,
-  faEdit,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
-
-import { getFormattedPrice, getFormattedDate } from "../../utils/utils";
+import removeContractHandler, {
+  getFormattedPrice,
+  getFormattedDate,
+} from "../../utils/utils";
 
 class TableRow extends Component {
   //const { id, startDate, endDate, contract, client, price, status } = props;
@@ -79,69 +75,12 @@ class TableRow extends Component {
           <span className={this.statusVariant}>{this.props.status}</span>
         </td>
         <td>
-          <div
-            className={`dropdown ${this.props.selected ? "is-active" : ""} `}
-          >
-            <div className="dropdown-trigger">
-              <button
-                className="button"
-                aria-haspopup="true"
-                aria-controls="dropdown-menu"
-                onClick={this.props.onClick}
-              >
-                <span className="icon is-small">
-                  <FontAwesomeIcon icon={faEllipsisH} className="icon-dark" />
-                </span>
-              </button>
-            </div>
-            <div
-              className="dropdown-menu"
-              id={`actions-menu-${this.props.id}`}
-              role="menu"
-            >
-              <div className="dropdown-content">
-                <Link
-                  className="dropdown-item"
-                  to={`/contracts/${this.props.id}`}
-                >
-                  <span className="icon-text">
-                    <span className="icon">
-                      <FontAwesomeIcon icon={faEye} />
-                    </span>
-                    <span>View Details</span>
-                  </span>
-                </Link>
-                <Link
-                  className="dropdown-item"
-                  to={`/contracts/${this.props.id}`}
-                >
-                  <span className="icon-text">
-                    <span className="icon">
-                      <FontAwesomeIcon icon={faEdit} />
-                    </span>
-                    <span>Edit</span>
-                  </span>
-                </Link>
-                <button
-                  className="dropdown-item"
-                  onClick={(e) => {
-                    const id = this.props.id;
-
-                    //await sleep(1000);
-                    //props.dispatchData(removeContract({ id }));
-                    this.removeContractHandler(id);
-                  }}
-                >
-                  <span className="icon-text has-text-danger">
-                    <span className="icon">
-                      <FontAwesomeIcon icon={faTrashAlt} />
-                    </span>
-                    <span>Remove</span>
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
+          <TableDropdown
+            id={this.props.id}
+            selected={this.props.selected}
+            onRemove={removeContractHandler}
+            onClick={this.props.onClick}
+          />
         </td>
       </tr>
     );
