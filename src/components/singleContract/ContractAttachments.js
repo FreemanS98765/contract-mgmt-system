@@ -3,18 +3,18 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
 
 const ContractAttachments = () => {
   return (
-    <section className="section">
+    <div id="attachments" className="box">
       <div className="container">
         <div className="column">
-          <div className="block">
-            <h5 className="title is-3">Attachments</h5>
-            <span className="icon is-large">
-              <FontAwesomeIcon className="fas fa-2x" icon={faBook} />
-            </span>
+          <div className="block entry-title">
+            <h4 className="title">Attachments</h4>
           </div>
+          <span className="icon is-large">
+            <FontAwesomeIcon className="fas fa-2x" icon={faBook} />
+          </span>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -5,9 +5,9 @@ import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 
 const ClientDetails = (props) => {
   return (
-    <>
-      <div className="block">
-        <h3 className="is-size-3 has-text-weight-bold">Client Details</h3>
+    <div id="clientDetails" className="client-details box">
+      <div className="block entry-title">
+        <h4 className="title">Client Details</h4>
       </div>
 
       <div className="contract__detail">
@@ -45,7 +45,7 @@ const ClientDetails = (props) => {
           <p>{checkIfEmpty(props.contract.zipcode)}</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

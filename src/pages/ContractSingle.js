@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { Fragment } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
+import { NavHashLink } from "react-router-hash-link";
 
 import ContractHeader from "../components/singleContract/ContractHeader";
 import ClientDetails from "../components/singleContract/ClientDetails";
@@ -19,6 +20,11 @@ const ContractSingle = (props) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
+
+  const setActiveLink = (e) => {
+    setIsSelected(true);
+  };
 
   const contracts = props.contracts;
 
@@ -28,35 +34,7 @@ const ContractSingle = (props) => {
     return c.id.toString() === id;
   });
 
-  // const {
-  //   client,
-  //   company,
-  //   email,
-  //   phone,
-  //   address,
-  //   city,
-  //   state,
-  //   zipcode,
-  //   title,
-  //   startDate,
-  //   endDate,
-  //   price,
-  //   notes,
-  //   upload,
-  //   status,
-  // } = contract || {};
-
   console.log("Contract destructured : ", contract);
-
-  // let contracts = [];
-
-  // contractState.forEach((c) => {
-  //   push(c);
-  // });
-
-  // map((c) => {
-  //   return c;
-  // });
 
   const openFormModal = () => {
     setIsOpen(true);
@@ -90,23 +68,43 @@ const ContractSingle = (props) => {
         <div className="container">
           <div className="columns">
             <div className="column is-one-quarter sidebar">
-              <div className="menu">
-                <ul className="menu-list">
-                  <li>
-                    <a href="#" className="is-active">Client Details</a>
-                  </li>
-                  <li>
-                    <a href="#">Contract Details</a>
-                  </li>
-                  <li>
-                    <a href="#">Attachments</a>
-                  </li>
-                </ul>
+              <div className="box">
+                <div className="menu">
+                  <ul className="menu-list">
+                    <li>
+                      <NavHashLink
+                        activeClassName="is-active"
+                        smooth
+                        to="#clientDetails"
+                      >
+                        Client Details
+                      </NavHashLink>
+                    </li>
+                    <li>
+                      <NavHashLink
+                        activeClassName="is-active"
+                        smooth
+                        to="#contractDetails"
+                      >
+                        Contract Details
+                      </NavHashLink>
+                    </li>
+                    <li>
+                      <NavHashLink
+                        activeClassName="is-active"
+                        smooth
+                        to="#attachments"
+                      >
+                        Attachments
+                      </NavHashLink>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
             <div className="column is-three-quarters">
-              <ClientDetails contract={contract} />
               <ContractDetails contract={contract} />
+              <ClientDetails contract={contract} />
               <ContractAttachments contract={contract} />
             </div>
           </div>

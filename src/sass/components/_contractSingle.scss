@@ -1,19 +1,25 @@
 #contractSingle {
+  background-color: $color-alt-teal;
+
   .columns > .column {
     border-radius: 7px;
-    background-color: $color-grey-light;
-    border: 1px solid $color-grey-medium;
+    //background-color: $color-grey-light;
   }
 }
 
 .sidebar {
   margin-right: 0.75rem;
 
+  .box {
+    height: 100%;
+  }
+
   .menu-list li {
     & > a {
       padding: $menu-list-link-padding;
       &.is-active {
-        position: relative;
+        box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 15%),
+          0 0 0 1px rgb(10 10 10 / 2%);
         background-color: transparent;
         border-left: $menu-item-border-left;
         color: inherit;
@@ -23,30 +29,42 @@
   }
 }
 
-.contract__detail {
-  display: flex;
-  justify-content: flex-start;
+.entry-title {
+  padding-bottom: 1em;
+  border-bottom: 1px solid $border-light;
 }
 
-.contract__detail > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin-bottom: 0.5em;
-}
+.contract {
+  &__detail {
+    display: flex;
+    justify-content: flex-start;
 
-.contract__detail.is-align-content-flex-start {
-  align-items: flex-start;
-}
+    & > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-bottom: 0.5em;
+    }
 
-.contract__detail h5 {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: #dd3333;
-  margin-right: 1em;
-}
+    &.is-align-content-flex-start {
+      align-items: flex-start;
+    }
 
-.contract__contact-info {
-  display: flex;
-  flex-direction: column;
+    & h5 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-right: 1em;
+    }
+  }
+
+  &__notes {
+    padding-top: 2em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__contact-info {
+    display: flex;
+    flex-direction: column;
+  }
 }
