@@ -34,7 +34,7 @@ const ContractModal = (props) => {
       props
         .dispatchData(addContract(savedData))
         .then(() => {
-          history.push("/contracts");
+          //history.push(".");
         })
         .catch((error) => {
           setSubmitting(false);
@@ -63,7 +63,7 @@ const ContractModal = (props) => {
       props
         .dispatchData(addContract(draftedData))
         .then(() => {
-          history.push("/contracts");
+          //history.push(".");
         })
         .catch((error) => {
           console.log(error);
@@ -81,7 +81,7 @@ const ContractModal = (props) => {
     props
       .dispatchData(editContract(id, fields))
       .then(() => {
-        history.push("/contracts");
+        //history.push(".");
       })
       .catch((error) => {
         console.log(error);

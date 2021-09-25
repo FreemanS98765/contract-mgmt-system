@@ -75,18 +75,18 @@ const ContractSingle = (props) => {
                       <NavHashLink
                         activeClassName="is-active"
                         smooth
-                        to="#clientDetails"
+                        to="#contractDetails"
                       >
-                        Client Details
+                        Contract Details
                       </NavHashLink>
                     </li>
                     <li>
                       <NavHashLink
                         activeClassName="is-active"
                         smooth
-                        to="#contractDetails"
+                        to="#clientDetails"
                       >
-                        Contract Details
+                        Client Details
                       </NavHashLink>
                     </li>
                     <li>

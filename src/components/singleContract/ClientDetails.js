@@ -5,46 +5,66 @@ import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 
 const ClientDetails = (props) => {
   return (
-    <div id="clientDetails" className="client-details box">
-      <div className="block entry-title">
+    <div className="details-wrap box">
+      <div id="clientDetails" className="block entry-title">
         <h4 className="title">Client Details</h4>
       </div>
 
-      <div className="contract__detail">
-        <h5>Client</h5>
-        <p>{`${props.contract.client}`}</p>
-      </div>
-      <div className="contract__detail">
-        <h5>Company</h5>
-        <p>{`${props.contract.company}`}</p>
-      </div>
-      <div className="contract__detail is-align-content-flex-start">
-        <h5>Contact Information</h5>
-        <div className="contract__contact-info">
-          <span className="icon-text">
-            <span className="icon">
-              <FontAwesomeIcon icon={faPhone} />
+      <table className="table">
+        <tr>
+          <td>
+            <h5>Client:</h5>
+          </td>
+          <td>
+            <p>{`${props.contract.client}`}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h5>Company:</h5>
+          </td>
+          <td>
+            <p>{`${props.contract.company}`}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h5>Phone:</h5>
+          </td>
+          <td>
+            <span className="icon-text">
+              <span className="icon">
+                <FontAwesomeIcon icon={faPhone} />
+              </span>
+              <span>{checkIfEmpty(props.contract.phone)}</span>
             </span>
-            <span>{checkIfEmpty(props.contract.phone)}</span>
-          </span>
-          <span className="icon-text">
-            <span className="icon">
-              <FontAwesomeIcon icon={faEnvelope} />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h5>Email:</h5>
+          </td>
+          <td>
+            <span className="icon-text">
+              <span className="icon">
+                <FontAwesomeIcon icon={faEnvelope} />
+              </span>
+              <span>{checkIfEmpty(props.contract.email)}</span>
             </span>
-            <span>{checkIfEmpty(props.contract.email)}</span>
-          </span>
-        </div>
-      </div>
-      <div className="contract__detail">
-        <h5>Address</h5>
-
-        <div>
-          <p>{checkIfEmpty(props.contract.address)}</p>
-          <p>{checkIfEmpty(props.contract.city)}</p>
-          <p>{checkIfEmpty(props.contract.state)}</p>
-          <p>{checkIfEmpty(props.contract.zipcode)}</p>
-        </div>
-      </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h5>Address</h5>
+          </td>
+          <td>
+            <p>{checkIfEmpty(props.contract.address)}</p>
+            <p>{checkIfEmpty(props.contract.city)}</p>
+            <p>{checkIfEmpty(props.contract.state)}</p>
+            <p>{checkIfEmpty(props.contract.zipcode)}</p>
+          </td>
+        </tr>
+      </table>
     </div>
   );
 };

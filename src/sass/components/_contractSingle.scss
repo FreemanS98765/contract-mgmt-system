@@ -7,6 +7,27 @@
   }
 }
 
+.details-wrap {
+
+  .table {
+    width: 100%;
+
+    td {
+      border: none;
+    }
+
+    tr {
+      td:first-of-type {
+        width: 24%;
+      }
+    }
+
+    h5 {
+      font-weight: 500;
+    }
+  }
+}
+
 .sidebar {
   margin-right: 0.75rem;
 
