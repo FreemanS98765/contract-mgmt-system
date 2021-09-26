@@ -40,7 +40,7 @@ class Contracts extends Component {
 
     return (
       <div>
-        <Header onOpenModal={this.openFormModal} />
+        <Header title='Contracts' onOpenModal={this.openFormModal} />
        
         <div className="container content">
           <ContractList

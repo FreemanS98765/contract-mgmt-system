@@ -2,24 +2,22 @@ import ContractButton from "./contracts/ContractButton";
 //import { Breadcrumbs, BreadcrumbItem } from "./UI/Breadcrumbs";
 
 const Header = (props) => {
+  const getTemplate = (title) => {
+    if (title === "Contracts") {
+      return (
+        <ContractButton text="New Contract" onOpenModal={props.onOpenModal} />
+      );
+    }
+    return;
+  };
+
   return (
     <header className="page-header">
       <div className="container">
         <div className="row">
-          <h1 className="is-size-2">Contracts</h1>
-
-          <ContractButton text="New Contract" onOpenModal={props.onOpenModal} />
+          <h1 className="is-size-2">{props.title}</h1>
+          {getTemplate(props.title)}
         </div>
-        {/* <div className="row">
-          <Breadcrumbs className="has-arrow-separator">
-            <BreadcrumbItem to={`/dashboard`}>Dashboard</BreadcrumbItem>
-            <BreadcrumbItem to={`/contracts`}>Contracts</BreadcrumbItem>
-            <BreadcrumbItem
-              to={`/contracts/${props.id}`}
-              className="is-active"
-            >{`Contract #${props.id}`}</BreadcrumbItem>
-          </Breadcrumbs>
-        </div> */}
       </div>
     </header>
   );

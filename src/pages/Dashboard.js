@@ -66,7 +66,7 @@ const Dashboard = (props) => {
 
   return (
     <div>
-      <Header />
+      <Header title='Dashboard' />
       <section>
         <Route path="/dashboard/new-user">
           <p>Welcome, new user!</p>
