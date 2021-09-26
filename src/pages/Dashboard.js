@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import Header from "../components/Header";
 
@@ -12,11 +13,56 @@ import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
 import StatBox from "../components/dashboard/StatBox";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const colorSuccess = "#48c78e";
   const colorInfo = "#3e8ed0";
   const colorWarning = "#ffe08a";
   const colorDanger = "#dd3333";
+
+  let contracts = props.contractState;
+  let total = contracts.length;
+
+  let active = contracts.filter(function (e) {
+    return e.status === "Active";
+  });
+  let draft = contracts.filter(function (e) {
+    return e.status === "Draft";
+  });
+  let expired = contracts.filter(function (e) {
+    return e.status === "Expired";
+  });
+
+  const currentTimestamp = Date.now()
+
+  const getActiveUpdate = new Date(
+    Math.max(...active.map((e) => new Date(e.updatedAt)))
+  );
+  const getDraftUpdate = new Date(
+    Math.max(...draft.map((e) => new Date(e.updatedAt)))
+  );
+  const getExpiredUpdate = new Date(
+    Math.max(...expired.map((e) => new Date(e.updatedAt)))
+  );
+
+  const updatedAt = new Date(
+    Math.max(...contracts.map((e) => new Date(e.updatedAt)))
+  );
+
+  const getLastUpdated = (lastUpdated) => {
+    return ((Date.now() - lastUpdated) / 60000).toFixed(0);
+  };
+
+  const lastActiveUpdate = getLastUpdated(getActiveUpdate);
+  const lastDraftUpdate = getLastUpdated(getDraftUpdate);
+  const lastExpiredUpdate = getLastUpdated(getExpiredUpdate);
+
+  
+
+  
+
+  let lastUpdated = getLastUpdated(updatedAt);
+
+  console.log("Contracts on dashboard: ", lastUpdated);
 
   return (
     <div>
@@ -34,7 +80,8 @@ const Dashboard = () => {
                 icon={faGrinStars}
                 color={colorInfo}
                 title="Total Contracts"
-                figure="20"
+                figure={total}
+                lastUpdated={lastUpdated}
               />
             </div>
           </div>
@@ -44,7 +91,8 @@ const Dashboard = () => {
                 icon={faGrin}
                 color={colorSuccess}
                 title="Active Contracts"
-                figure="10"
+                figure={active.length}
+                lastUpdated={lastActiveUpdate}
               />
             </div>
           </div>
@@ -54,7 +102,8 @@ const Dashboard = () => {
                 icon={faGrinBeamSweat}
                 color={colorWarning}
                 title="Draft Contracts"
-                figure="5"
+                figure={draft.length}
+                lastUpdated={lastDraftUpdate}
               />
             </div>
           </div>
@@ -64,7 +113,8 @@ const Dashboard = () => {
                 icon={faFrown}
                 color={colorDanger}
                 title="Expired Contracts"
-                figure="5"
+                figure={expired.length}
+                lastUpdated={lastExpiredUpdate}
               />
             </div>
           </div>
@@ -74,4 +124,11 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    contractState: state.contracts,
+    dispatchData: state.dispatch,
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard);

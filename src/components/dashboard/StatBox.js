@@ -15,7 +15,8 @@ const StatBox = (props) => {
         </div>
       </div>
       <div className="card-footer">
-        <span className="card-footer-item">Last updated:</span>
+          {console.log('Last updated: ', props.lastUpdated)}
+        <span className="card-footer-item"><span className='light-text'>Last updated: {!isNaN(props.lastUpdated) ? `${props.lastUpdated} ago` : `No updates!`}</span></span>
       </div>
     </div>
   );
