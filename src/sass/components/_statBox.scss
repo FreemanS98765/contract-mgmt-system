@@ -1,0 +1,46 @@
+.statbox {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  border-radius: 10px;
+  border: 1px solid $border-light;
+  padding: 1em;
+  padding-top: 0;
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+
+    & > div {
+      text-align: center;
+
+      p,
+      span {
+        display: block;
+      }
+    }
+
+    .card-header-title {
+      font-size: 38px;
+      font-weight: 500;
+      padding: 0;
+    }
+
+    .icon-text {
+      margin-top: 1.5em;
+      margin-left: 1em;
+    }
+
+    .icon {
+      padding: 1em;
+    }
+  }
+
+  .card-footer {
+    border-top: 1px solid $color-grey-light;
+  }
+
+  .card-footer-item {
+    justify-content: flex-start;
+    font-size: small;
+  }
+}
