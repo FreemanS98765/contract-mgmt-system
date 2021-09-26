@@ -1,5 +1,5 @@
 import ContractButton from "./contracts/ContractButton";
-import { Breadcrumbs, BreadcrumbItem } from "./UI/Breadcrumbs";
+//import { Breadcrumbs, BreadcrumbItem } from "./UI/Breadcrumbs";
 
 const Header = (props) => {
   return (
@@ -10,7 +10,7 @@ const Header = (props) => {
 
           <ContractButton text="New Contract" onOpenModal={props.onOpenModal} />
         </div>
-        <div className="row">
+        {/* <div className="row">
           <Breadcrumbs className="has-arrow-separator">
             <BreadcrumbItem to={`/dashboard`}>Dashboard</BreadcrumbItem>
             <BreadcrumbItem to={`/contracts`}>Contracts</BreadcrumbItem>
@@ -19,7 +19,7 @@ const Header = (props) => {
               className="is-active"
             >{`Contract #${props.id}`}</BreadcrumbItem>
           </Breadcrumbs>
-        </div>
+        </div> */}
       </div>
     </header>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import App from "./App";
 import getAppStore from "./store/store";
 import { getContracts } from "./actions/contracts";
@@ -8,7 +9,6 @@ import "./index.css";
 import { Provider } from "react-redux";
 
 import * as serviceWorker from "./serviceWorker";
-
 
 const store = getAppStore();
 

@@ -15,8 +15,12 @@ export const Breadcrumbs = (props) => {
 export const BreadcrumbItem = (props) => {
   return (
     <Fragment>
-      <li className={` ${props.className ? props.className : ""}`} aria-current={props.active ? 'page' : undefined}>
+      <li
+        className={` ${props.className ? props.className : ""}`}
+        aria-current={props.active ? "page" : undefined}
+      >
         <Link
+          activeClassName="is-active"
           to={props.to}
           title={props.title}
           target={props.target}

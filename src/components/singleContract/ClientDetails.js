@@ -11,59 +11,61 @@ const ClientDetails = (props) => {
       </div>
 
       <table className="table">
-        <tr>
-          <td>
-            <h5>Client:</h5>
-          </td>
-          <td>
-            <p>{`${props.contract.client}`}</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h5>Company:</h5>
-          </td>
-          <td>
-            <p>{`${props.contract.company}`}</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h5>Phone:</h5>
-          </td>
-          <td>
-            <span className="icon-text">
-              <span className="icon">
-                <FontAwesomeIcon icon={faPhone} />
+        <tbody>
+          <tr>
+            <td>
+              <h5>Client:</h5>
+            </td>
+            <td>
+              <p>{`${props.contract.client}`}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>Company:</h5>
+            </td>
+            <td>
+              <p>{`${props.contract.company}`}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>Phone:</h5>
+            </td>
+            <td>
+              <span className="icon-text">
+                <span className="icon">
+                  <FontAwesomeIcon icon={faPhone} />
+                </span>
+                <span>{checkIfEmpty(props.contract.phone)}</span>
               </span>
-              <span>{checkIfEmpty(props.contract.phone)}</span>
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h5>Email:</h5>
-          </td>
-          <td>
-            <span className="icon-text">
-              <span className="icon">
-                <FontAwesomeIcon icon={faEnvelope} />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>Email:</h5>
+            </td>
+            <td>
+              <span className="icon-text">
+                <span className="icon">
+                  <FontAwesomeIcon icon={faEnvelope} />
+                </span>
+                <span>{checkIfEmpty(props.contract.email)}</span>
               </span>
-              <span>{checkIfEmpty(props.contract.email)}</span>
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h5>Address</h5>
-          </td>
-          <td>
-            <p>{checkIfEmpty(props.contract.address)}</p>
-            <p>{checkIfEmpty(props.contract.city)}</p>
-            <p>{checkIfEmpty(props.contract.state)}</p>
-            <p>{checkIfEmpty(props.contract.zipcode)}</p>
-          </td>
-        </tr>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>Address</h5>
+            </td>
+            <td>
+              <p>{checkIfEmpty(props.contract.address)}</p>
+              <p>{checkIfEmpty(props.contract.city)}</p>
+              <p>{checkIfEmpty(props.contract.state)}</p>
+              <p>{checkIfEmpty(props.contract.zipcode)}</p>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   );

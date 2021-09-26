@@ -19,6 +19,7 @@ import "bulma/css/bulma.min.css";
 import "./App.scss";
 
 function App() {
+
   return (
     <>
       <Router>
@@ -27,18 +28,23 @@ function App() {
             <Route path="/" exact>
               <Redirect to="/dashboard" />
             </Route>
+
             <Route path="/dashboard">
               <Dashboard />
             </Route>
+
             <Route path={`/contracts`} component={ContractForm} exact>
               <Contracts />
             </Route>
+
             <Route path={`/contracts/:id`} component={ContractForm}>
               <ContractSingle />
             </Route>
+
             <Route path="/add" component={ContractForm}>
               <NewContract />
             </Route>
+
             <Route component={NotFound} />
           </Switch>
         </Layout>
