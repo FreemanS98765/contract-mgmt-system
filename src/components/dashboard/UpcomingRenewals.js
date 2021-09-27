@@ -30,8 +30,6 @@ const UpcomingRenewals = (props) => {
   //     return renewalDates.push(date.endDate);
   //   });
 
-  console.log("Renewal dates are: ", sortedDates);
-
   return (
     <div className="card upcoming-renewals">
       <div className="card-header">
@@ -46,7 +44,6 @@ const UpcomingRenewals = (props) => {
         <aside className="menu">
           <ul className="menu-list">
             {sortedDates.map((date) => {
-              console.log(typeof date);
               return <RenewalItem date={date.endDate} id={date.id} />;
             })}
           </ul>

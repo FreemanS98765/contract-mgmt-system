@@ -15,11 +15,8 @@ export const getLongFormattedDate = (val) => {
     day: "numeric",
   };
 
-
-  console.log('Date object is: ', val);
   // Converts date object to string
   if (Object.prototype.toString.call(val) === "[object Date]") {
-    //return `${val.getDay()}, ${val.getMonth() + 1}/${val.getDate()}/${val.getFullYear()}`;
     return val.toLocaleString("en-US", options);
   }
 

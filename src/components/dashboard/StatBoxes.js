@@ -11,10 +11,9 @@ import {
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
 const StatBoxes = (props) => {
-
   const colorSuccess = "#48c78e";
   const colorInfo = "#3e8ed0";
-  const colorWarning = "#ffe08a";
+  const colorWarning = "#d6b457";
   const colorDanger = "#dd3333";
 
   let contracts = props.contractState;
@@ -46,8 +45,25 @@ const StatBoxes = (props) => {
     Math.max(...contracts.map((e) => new Date(e.updatedAt)))
   );
 
+  // const getLastUpdated = (lastUpdated) => {
+  //   return ((currentTimestamp - lastUpdated) / 60000).toFixed(0);
+  // };
+
   const getLastUpdated = (lastUpdated) => {
-    return ((currentTimestamp - lastUpdated) / 60000).toFixed(0);
+    const minutes = (currentTimestamp - lastUpdated) / 60000;
+    const hours = minutes / 60;
+    const days = hours / 24;
+    const months = days / 12;
+
+    if (minutes >= 60 && minutes < 1440) {
+      return `${hours.toFixed(0)} hrs`;
+    } else if (minutes >= 1440 && minutes < 43800) {
+      return `${days.toFixed(0)} days`;
+    } else if (minutes >= 43800) {
+      return `${months.toFixed(0)} months`;
+    } else {
+      return "No Updates!";
+    }
   };
 
   const lastActiveUpdate = getLastUpdated(getActiveUpdate);

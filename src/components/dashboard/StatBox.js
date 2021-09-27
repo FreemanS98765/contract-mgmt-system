@@ -6,7 +6,7 @@ const StatBox = (props) => {
       <div className="card-header">
         <span className="icon-text">
           <span className="icon">
-            <FontAwesomeIcon size='4x' color={props.color} icon={props.icon} />
+            <FontAwesomeIcon size="4x" color={props.color} icon={props.icon} />
           </span>
         </span>
         <div>
@@ -15,8 +15,11 @@ const StatBox = (props) => {
         </div>
       </div>
       <div className="card-footer">
-          {console.log('Last updated: ', props.lastUpdated)}
-        <span className="card-footer-item"><span className='light-text'>Last updated: {!isNaN(props.lastUpdated) ? `${props.lastUpdated} ago` : `No updates!`}</span></span>
+        <span className="card-footer-item">
+          <span className="light-text">
+            {`Last updated: ${props.lastUpdated} ago`}
+          </span>
+        </span>
       </div>
     </div>
   );

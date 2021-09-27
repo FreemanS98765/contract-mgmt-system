@@ -17,10 +17,10 @@ const RenewalItem = (props) => {
       return `${hours.toFixed(0)} hrs`;
     } else if (minutes >= 1440 && minutes < 43800) {
       return `${days.toFixed(0)} days`;
-    } else if (minutes < 0) {
-      return "Past Due";
-    } else {
+    } else if (minutes >= 43800) {
       return `${months.toFixed(0)} months`;
+    } else {
+      return "Past Due";
     }
   };
 
