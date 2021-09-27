@@ -7,11 +7,30 @@ export const getFormattedDate = (val) => {
   return val;
 };
 
+export const getLongFormattedDate = (val) => {
+  let options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+
+  console.log('Date object is: ', val);
+  // Converts date object to string
+  if (Object.prototype.toString.call(val) === "[object Date]") {
+    //return `${val.getDay()}, ${val.getMonth() + 1}/${val.getDate()}/${val.getFullYear()}`;
+    return val.toLocaleString("en-US", options);
+  }
+
+  return val;
+};
+
 export const getFormattedPrice = (price) => {
   if (!price) return price;
 
   return `$${price.toFixed(2)}`;
-}
+};
 
 export const formatPrice = (x, currency) => {
   switch (currency) {
@@ -54,7 +73,7 @@ export const checkIfEmpty = (data) => {
   }
 
   return data ? data : "Nothing found";
-}
+};
 
 const removeContractHandler = (id) => {};
 

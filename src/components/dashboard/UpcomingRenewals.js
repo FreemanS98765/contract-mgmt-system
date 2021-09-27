@@ -46,7 +46,7 @@ const UpcomingRenewals = (props) => {
         <aside className="menu">
           <ul className="menu-list">
             {sortedDates.map((date) => {
-              console.log(date.endDate);
+              console.log(typeof date);
               return <RenewalItem date={date.endDate} id={date.id} />;
             })}
           </ul>
