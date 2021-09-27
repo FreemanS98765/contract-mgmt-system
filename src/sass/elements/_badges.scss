@@ -1,0 +1,9 @@
+.badge {
+  padding: 2em;
+  border-radius: 3px;
+
+  &-is-success {
+    background-color: $color-success;
+    color: $color-white;
+  }
+}

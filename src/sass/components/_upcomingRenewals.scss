@@ -1,0 +1,23 @@
+.upcoming-renewals {
+  .menu-list {
+    li {
+      padding: 1.05em 0.375em;
+      border-bottom: 1px solid $border-light;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      a {
+        margin-right: 0.5em;
+        transition: all 0.5s ease;
+        &:hover {
+          transform: translateY(-5px);
+        }
+
+        span {
+          padding: 0.5em;
+        }
+      }
+    }
+  }
+}

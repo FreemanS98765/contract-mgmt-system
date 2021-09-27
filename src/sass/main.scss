@@ -14,9 +14,12 @@
 @import "components/navigation";
 @import "components/page";
 @import "components/statBox";
+@import "components/upcomingRenewals";
 
 // Elements
 
+@import "elements/badges";
 @import "elements/buttons";
+@import "elements/card";
 @import "elements/forms";
 @import "elements/table";

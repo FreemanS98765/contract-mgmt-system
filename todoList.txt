@@ -8,5 +8,9 @@ Status filter "All" only displays Active contracts
 Remove contract removes last contract added to list
 Add duplicate option
 
+#Dashboard
+Last updated requires page refresh to show actual timestamps
+Format last updated to show min, weeks, etc.. 
+
 #Layout
 Add sidebar to main container

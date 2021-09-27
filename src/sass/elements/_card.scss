@@ -1,0 +1,24 @@
+.card {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 10px;
+  border: 1px solid $border-light;
+  padding: 1em;
+
+  &-header {
+    border-bottom: 1px solid $border-medium;
+    padding-bottom: 1em;
+  }
+
+  .icon-text {
+    margin-left: 1em;
+  }
+
+  &-footer {
+    border-top: 1px solid $border-medium;
+  }
+
+  &-footer-item {
+    justify-content: flex-start;
+    font-size: small;
+  }
+}
