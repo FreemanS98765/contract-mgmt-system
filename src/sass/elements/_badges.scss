@@ -1,9 +1,27 @@
 .badge {
-  padding: 2em;
+  padding: 0.5em;
   border-radius: 3px;
+  font-size: small;
+  text-align: center;
 
   &-is-success {
     background-color: $color-success;
     color: $color-white;
+  }
+
+  &-round {
+    border-radius: 50%;
+    padding: 0.375em;
+    font-size: small;
+  }
+
+  &-is-danger {
+    background-color: $color-danger;
+    color: $color-white;
+  }
+
+  &-is-warning {
+    background-color: $color-warning;
+    color: $color-black;
   }
 }

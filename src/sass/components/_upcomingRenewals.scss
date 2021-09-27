@@ -7,17 +7,27 @@
       align-items: center;
       justify-content: space-between;
 
+      div {
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+
+          .badge {
+            min-width: 75px;
+          }
+      }
+
       a {
         margin-right: 0.5em;
         transition: all 0.5s ease;
         &:hover {
           transform: translateY(-5px);
         }
-
-        span {
-          padding: 0.5em;
-        }
       }
     }
   }
+}
+
+.renewal-date {
+    margin-left: .5em;
 }
