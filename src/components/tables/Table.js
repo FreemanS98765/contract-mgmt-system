@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import LoadingSpinner from "../UI/LoadingSpinner";
 
+import EventsTableRow from "./EventsTableRow";
 import TableRow from "./TableRow";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -74,6 +75,67 @@ const ContractsTable = (props) => {
             ).map((c, i) => {
               return (
                 <TableRow
+                  key={c.id}
+                  id={c.id}
+                  {...c}
+                  selected={isSelected[i]}
+                  onClick={() => toggleDropdown(i)}
+                  dispatchData={props.dispatchData}
+                  filters={props.filters}
+                  //onRemove={props.removeContractHandler.bind(null, c.id)}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+      )}
+    </>
+  );
+};
+
+export const EventsTable = (props) => {
+
+  const events = props.events;
+
+  const [isSelected, setIsSelected] = useState(
+    new Array(events.length).fill(false)
+  );
+
+  const toggleDropdown = (position) => {
+    const updatedToggledState = isSelected.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setIsSelected(updatedToggledState);
+  };
+
+  return (
+    <>
+      {props.isLoading ? (
+        <div className="center">
+          <LoadingSpinner />
+        </div>
+      ) : (
+        <table className="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Event</th>
+              <th>Company</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Last Year's Price</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableSort(
+              events,
+              getComparator(props.order, props.orderBy)
+            ).map((c, i) => {
+              return (
+                <EventsTableRow
                   key={c.id}
                   id={c.id}
                   {...c}

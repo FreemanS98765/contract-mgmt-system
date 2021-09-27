@@ -72,6 +72,6 @@ export const checkIfEmpty = (data) => {
   return data ? data : "Nothing found";
 };
 
-const removeContractHandler = (id) => {};
+const removeItemHandler = (id) => {};
 
-export default removeContractHandler;
+export default removeItemHandler;
