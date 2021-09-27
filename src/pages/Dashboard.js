@@ -13,8 +13,8 @@ const Dashboard = () => {
           <p>Welcome, new user!</p>
         </Route>
       </section> */}
-      <StatBoxes />
       <section className="section">
+        <StatBoxes />
         <div className="columns">
           <div className="column is-one-third">
             <UpcomingRenewals />

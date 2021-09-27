@@ -73,54 +73,52 @@ const StatBoxes = (props) => {
   let lastUpdated = getLastUpdated(updatedAt);
 
   return (
-    <section id="statBoxes" className="section">
-      <div className="columns">
-        <div className="column">
-          <div className="block">
-            <StatBox
-              icon={faGrinStars}
-              color={colorInfo}
-              title="Total Contracts"
-              figure={total}
-              lastUpdated={lastUpdated}
-            />
-          </div>
-        </div>
-        <div className="column">
-          <div className="block">
-            <StatBox
-              icon={faGrin}
-              color={colorSuccess}
-              title="Active Contracts"
-              figure={active.length}
-              lastUpdated={lastActiveUpdate}
-            />
-          </div>
-        </div>
-        <div className="column">
-          <div className="block">
-            <StatBox
-              icon={faGrinBeamSweat}
-              color={colorWarning}
-              title="Draft Contracts"
-              figure={draft.length}
-              lastUpdated={lastDraftUpdate}
-            />
-          </div>
-        </div>
-        <div className="column">
-          <div className="block">
-            <StatBox
-              icon={faFrown}
-              color={colorDanger}
-              title="Expired Contracts"
-              figure={expired.length}
-              lastUpdated={lastExpiredUpdate}
-            />
-          </div>
+    <div className="columns">
+      <div className="column">
+        <div className="block">
+          <StatBox
+            icon={faGrinStars}
+            color={colorInfo}
+            title="Total Contracts"
+            figure={total}
+            lastUpdated={lastUpdated}
+          />
         </div>
       </div>
-    </section>
+      <div className="column">
+        <div className="block">
+          <StatBox
+            icon={faGrin}
+            color={colorSuccess}
+            title="Active Contracts"
+            figure={active.length}
+            lastUpdated={lastActiveUpdate}
+          />
+        </div>
+      </div>
+      <div className="column">
+        <div className="block">
+          <StatBox
+            icon={faGrinBeamSweat}
+            color={colorWarning}
+            title="Draft Contracts"
+            figure={draft.length}
+            lastUpdated={lastDraftUpdate}
+          />
+        </div>
+      </div>
+      <div className="column">
+        <div className="block">
+          <StatBox
+            icon={faFrown}
+            color={colorDanger}
+            title="Expired Contracts"
+            figure={expired.length}
+            lastUpdated={lastExpiredUpdate}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 
