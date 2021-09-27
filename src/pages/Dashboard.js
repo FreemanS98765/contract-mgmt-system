@@ -3,6 +3,7 @@ import Header from "../components/Header";
 
 import UpcomingRenewals from "../components/dashboard/UpcomingRenewals";
 import StatBoxes from "../components/dashboard/StatBoxes";
+import UpcomingEvents from "../components/events/UpcomingEvents";
 
 const Dashboard = () => {
   return (
@@ -18,6 +19,9 @@ const Dashboard = () => {
         <div className="columns">
           <div className="column is-one-third">
             <UpcomingRenewals />
+          </div>
+          <div className="column is-one-third">
+            <UpcomingEvents />
           </div>
         </div>
       </section>

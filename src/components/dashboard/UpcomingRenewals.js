@@ -1,11 +1,7 @@
 import { connect } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleDown,
-  faCalendar,
-  faSort,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 import RenewalItem from "./RenewalItem";
 
 const UpcomingRenewals = (props) => {
@@ -36,7 +32,7 @@ const UpcomingRenewals = (props) => {
         <h5>Upcoming Renewals</h5>
         <span className="icon-text is-align-items-center">
           <span className="icon">
-            <FontAwesomeIcon size="lg" icon={faCalendar} />
+            <FontAwesomeIcon size="lg" icon={faBell} />
           </span>
         </span>
       </div>
