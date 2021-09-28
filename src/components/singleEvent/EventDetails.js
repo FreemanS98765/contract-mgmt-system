@@ -61,7 +61,7 @@ const EventDetails = (props) => {
               <h5>Last Year's Amount:</h5>
             </td>
             <td>
-              <p>{checkIfEmpty(getFormattedPrice(event.price))}</p>
+              <p>{checkIfEmpty(getFormattedPrice(event.lastYearsPrice))}</p>
             </td>
           </tr>
           <tr>

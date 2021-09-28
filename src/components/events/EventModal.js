@@ -10,7 +10,7 @@ const EventModal = (props) => {
   const { sendRequest, loadingStatus } = useHttp(addEvent);
   const history = useHistory();
 
-  const postTypeState = props.postTypeState;
+  const event = props.event;
 
   // useEffect(() => {
   //   if (loadingStatus === "completed") {
@@ -107,7 +107,7 @@ const EventModal = (props) => {
             onCancel={props.onHideModal}
             isLoading={loadingStatus === "pending"}
             text={props.text}
-            event={postTypeState}
+            event={event}
             dispatchData={props.dispatchData}
           />
         </section>
