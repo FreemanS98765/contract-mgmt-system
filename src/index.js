@@ -2,15 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import App from "./App";
-import getAppStore from "./store/store";
+import configureStore from "./store/store";
 import { getContracts } from "./actions/contracts";
+import { getEvents } from "./actions/events";
 import "./index.css";
 
 import { Provider } from "react-redux";
 
 import * as serviceWorker from "./serviceWorker";
 
-const store = getAppStore();
+import combineActions from "./actions/combineActions";
+
+
+const store = configureStore();
 
 const Root = (
   <Provider store={store}>
@@ -23,6 +27,10 @@ console.log("Initial state: ", store.getState());
 store.dispatch(getContracts()).then(() => {
   ReactDOM.render(Root, document.getElementById("root"));
 });
+
+// store.dispatch(getContracts()).then(() => {
+//   ReactDOM.render(Root, document.getElementById("root"));
+// });
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

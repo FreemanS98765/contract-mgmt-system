@@ -1,14 +1,16 @@
 import { Fragment, useState } from "react";
 
 import FiltersToolbar from "../tables/FiltersToolbar";
-import ContractsTable from "../tables/Table";
+import { EventsTable } from "../tables/Table";
 
 import Spinner from "../UI/LoadingSpinner";
 
 import "bulma/css/bulma.min.css";
 
-const ContractList = (props) => {
-  const contracts = props.contracts;
+const EventList = (props) => {
+  const events = props.events;
+
+  console.log("Events inside list ", events);
 
   const [filteredStatus, setFilteredStatus] = useState();
   const [filteredDate, setFilteredDate] = useState();
@@ -37,10 +39,7 @@ const ContractList = (props) => {
     setOrderBy(property);
   };
 
-  console.log('Props contracts before filter', props.contracts);
-
-  const filteredContracts = contracts.filter((item) => {
-
+  const filteredEvents = events.filter((item) => {
     if (
       (filteredStatus === "All" ||
         filteredStatus === "draft" ||
@@ -79,7 +78,7 @@ const ContractList = (props) => {
     });
   });
 
-  if (!filteredContracts || filteredContracts.length === 0) {
+  if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
         <FiltersToolbar
@@ -89,7 +88,7 @@ const ContractList = (props) => {
           onChangeDateFilter={dateFilterChangeHandler}
           searchValue={query}
         />
-        <h2>No contracts found.</h2>
+        <h2>No events found.</h2>
       </Fragment>
     );
   } else {
@@ -108,8 +107,8 @@ const ContractList = (props) => {
 
         {props.isLoading && <Spinner />}
 
-        <ContractsTable
-          contracts={filteredContracts}
+        <EventsTable
+          events={filteredEvents}
           order={order}
           orderBy={orderBy}
           dispatchData={props.dispatchData}
@@ -120,4 +119,4 @@ const ContractList = (props) => {
   }
 };
 
-export default ContractList;
+export default EventList;

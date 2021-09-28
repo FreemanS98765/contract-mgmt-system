@@ -6,10 +6,11 @@ import {EventsTable} from "./Table";
 import Spinner from "../UI/LoadingSpinner";
 
 import "bulma/css/bulma.min.css";
+import { checkIfEmpty } from "../../utils/utils";
 
 const TableList = (props) => {
 
-  const postTypeArr = props.postTypeState;
+  const postTypeArr = props.events;
 
   const [filteredStatus, setFilteredStatus] = useState();
   const [filteredDate, setFilteredDate] = useState();
@@ -37,8 +38,6 @@ const TableList = (props) => {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-
-  console.log("Filtered props are: ", props.postTypeState);
 
   const filteredPostType = postTypeArr.filter((postType) => {
 

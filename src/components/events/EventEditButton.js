@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../reducers/uiSlice";
 
-const ContractEditButton = (props) => {
+const EventEditButton = (props) => {
 
   const dispatch = useDispatch();
 
@@ -11,9 +11,9 @@ const ContractEditButton = (props) => {
 
   return (
     <button onClick={toggleButtonHandler} className="button is-primary">
-      Edit Contract
+      Edit Event
     </button>
   );
 };
 
-export default ContractEditButton;
+export default EventEditButton;

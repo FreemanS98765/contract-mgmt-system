@@ -9,8 +9,10 @@ import {
 import Dashboard from "./pages/Dashboard";
 import Contracts from "./pages/Contracts";
 import ContractSingle from "./pages/ContractSingle";
-import NewContract from "./pages/NewContract";
 import ContractForm from "./components/contracts/ContractForm";
+import Events from "./pages/Events";
+import EventSingle from "./pages/EventSingle";
+import EventForm from "./components/events/EventForm";
 import NotFound from "./components/contracts/NoContractsFound";
 
 import Layout from "./components/Layout";
@@ -19,7 +21,6 @@ import "bulma/css/bulma.min.css";
 import "./App.scss";
 
 function App() {
-
   return (
     <>
       <Router>
@@ -41,8 +42,20 @@ function App() {
               <ContractSingle />
             </Route>
 
-            <Route path="/add" component={ContractForm}>
-              <NewContract />
+            <Route path={`/contracts`} component={ContractForm} exact>
+              <Contracts />
+            </Route>
+
+            <Route path={`/events`} component={EventForm} exact>
+              <Events />
+            </Route>
+
+            <Route path={`/events/:id`} component={EventForm}>
+              <EventSingle />
+            </Route>
+
+            <Route path={`/events`} component={EventForm} exact>
+              <Events />
             </Route>
 
             <Route component={NotFound} />

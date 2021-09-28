@@ -3,7 +3,7 @@ import {
   EDIT_EVENT,
   FETCH_EVENT,
   GET_EVENTS,
-  LOAD_TABLE,
+  LOAD_EVENTS_TABLE,
   REMOVE_EVENT,
 } from "../constants/ActionTypes";
 
@@ -33,7 +33,7 @@ export default function eventReducer(state = initialState, action) {
           return event;
         }
       });
-    case LOAD_TABLE:
+    case LOAD_EVENTS_TABLE:
       return {
         ...state,
         events: action.payload,

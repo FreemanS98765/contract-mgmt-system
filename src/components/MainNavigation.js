@@ -15,8 +15,8 @@ const MainNavigation = (props) => {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="active" to="/new-contract">
-            New Contract
+          <NavLink activeClassName="active" to="/events">
+            Events
           </NavLink>
         </li>
       </ul>

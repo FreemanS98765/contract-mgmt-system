@@ -11,13 +11,16 @@ export const EDIT_CONTRACT = "EDIT_CONTRACT";
 export const FETCH_CONTRACT = "FETCH_CONTRACT";
 export const REMOVE_CONTRACT = "REMOVE_CONTRACT";
 
-export const ADD_EVENT = 'ADD_EVENT';
-export const REMOVE_EVENT = 'REMOVE_EVENT';
-export const EDIT_EVENT = 'EDIT_EVENT';
-export const FETCH_EVENT = 'FETCH_EVENT';
-export const GET_EVENTS = 'GET_EVENTS';
-export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
-export const REQUEST_EVENTS = 'REQUEST_EVENTS';
+export const ADD_EVENT = "ADD_EVENT";
+export const REMOVE_EVENT = "REMOVE_EVENT";
+export const EDIT_EVENT = "EDIT_EVENT";
+export const FETCH_EVENT = "FETCH_EVENT";
+export const GET_EVENTS = "GET_EVENTS";
+export const RECEIVE_EVENTS = "RECEIVE_EVENTS";
+export const REQUEST_EVENTS = "REQUEST_EVENTS";
 export const EVENT_REQUEST = "EVENT_REQUEST";
 export const EVENT_SUCCESS = "EVENT_SUCCESS";
 export const EVENT_FAILURE = "EVENT_FAILURE";
+export const LOAD_EVENTS_TABLE = "LOAD_EVENTS_TABLE";
+
+export const COMBINE_ACTIONS = "COMBINE_ACTIONS";

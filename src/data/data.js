@@ -9,12 +9,13 @@ export const CONTRACT_DATA = [
     status: "Active",
     company: "Company 1",
     phone: 6032643904,
-    email: 'Freeman@danfreedesign.com',
-    address: 'Address 1',
-    city: 'Some City',
-    state: 'Some State',
-    zipcode: '03054',
-    notes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.'
+    email: "Freeman@danfreedesign.com",
+    address: "Address 1",
+    city: "Some City",
+    state: "Some State",
+    zipcode: "03054",
+    notes:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.",
   },
   {
     id: 2,
@@ -26,12 +27,13 @@ export const CONTRACT_DATA = [
     status: "Draft",
     company: "Company 2",
     phone: "(603) 264-3904",
-    email: 'Freeman@danfreedesign.com',
-    address: 'Address 1',
-    city: 'Some City',
-    state: 'Some State',
-    zipcode: '03054',
-    notes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.'
+    email: "Freeman@danfreedesign.com",
+    address: "Address 1",
+    city: "Some City",
+    state: "Some State",
+    zipcode: "03054",
+    notes:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.",
   },
   {
     id: 3,
@@ -43,12 +45,13 @@ export const CONTRACT_DATA = [
     status: "Expired",
     company: "Company 3",
     phone: "(603) 264-3904",
-    email: 'Freeman@danfreedesign.com',
-    address: 'Address 1',
-    city: 'Some City',
-    state: 'Some State',
-    zipcode: '03054',
-    notes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.'
+    email: "Freeman@danfreedesign.com",
+    address: "Address 1",
+    city: "Some City",
+    state: "Some State",
+    zipcode: "03054",
+    notes:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.",
   },
   {
     id: 4,
@@ -56,16 +59,17 @@ export const CONTRACT_DATA = [
     endDate: new Date(2020, 6, 27),
     title: "Contract 4",
     client: "Client 4",
-    price: 585.00,
+    price: 585.0,
     status: "Active",
     company: "Company 4",
     phone: "(603) 264-3904",
-    email: 'Freeman@danfreedesign.com',
-    address: 'Address 1',
-    city: 'Some City',
-    state: 'Some State',
-    zipcode: '03054',
-    notes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.'
+    email: "Freeman@danfreedesign.com",
+    address: "Address 1",
+    city: "Some City",
+    state: "Some State",
+    zipcode: "03054",
+    notes:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.",
   },
   {
     id: 5,
@@ -77,12 +81,13 @@ export const CONTRACT_DATA = [
     status: "Draft",
     company: "Company 5",
     phone: "(603) 264-3904",
-    email: 'Freeman@danfreedesign.com',
-    address: 'Address 1',
-    city: 'Some City',
-    state: 'Some State',
-    zipcode: '03054',
-    notes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.'
+    email: "Freeman@danfreedesign.com",
+    address: "Address 1",
+    city: "Some City",
+    state: "Some State",
+    zipcode: "03054",
+    notes:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.",
   },
   {
     id: 6,
@@ -94,12 +99,13 @@ export const CONTRACT_DATA = [
     status: "Expired",
     company: "Company 6",
     phone: "(603) 264-3904",
-    email: 'Freeman@danfreedesign.com',
-    address: 'Address 1',
-    city: 'Some City',
-    state: 'Some State',
-    zipcode: '03054',
-    notes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.'
+    email: "Freeman@danfreedesign.com",
+    address: "Address 1",
+    city: "Some City",
+    state: "Some State",
+    zipcode: "03054",
+    notes:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.",
   },
   {
     id: 7,
@@ -111,12 +117,13 @@ export const CONTRACT_DATA = [
     status: "Active",
     company: "Company 7",
     phone: "(603) 264-3904",
-    email: 'Freeman@danfreedesign.com',
-    address: 'Address 1',
-    city: 'Some City',
-    state: 'Some State',
-    zipcode: '03054',
-    notes: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.'
+    email: "Freeman@danfreedesign.com",
+    address: "Address 1",
+    city: "Some City",
+    state: "Some State",
+    zipcode: "03054",
+    notes:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.",
   },
 ];
 
@@ -139,4 +146,21 @@ export const CONTRACTS_GRID_HEADERS = [
   { field: "price", headerName: "Price" },
   { field: "status", headerName: "Status" },
   { field: "action", headerName: "Action" },
+];
+
+export const EVENT_DATA = [
+  {
+    client: "Client 1",
+    company: "Company 1",
+    event: "Event 1",
+    startDate: "2012-04-23",
+    startTime: "10:00 AM",
+    endDate: "2013-04-23",
+    endTime: "5:00 PM",
+    lastYearsPrice: 65.25,
+    eventItems: "",
+    status: "Active",
+    notes:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus et elit tempor, in lacinia elit rhoncus. In lectus ipsum, aliquam vel nisi nec, feugiat commodo dui. Cras pretium lacinia quam, a sagittis massa blandit at. Donec mollis dui et augue tempus, at accumsan quam tristique. Cras aliquam nibh eros, id facilisis lectus porttitor ut. Vestibulum ex enim, dapibus eu feugiat at, eleifend sit amet felis. Mauris et turpis id felis consectetur faucibus. Nulla euismod porttitor arcu, eget convallis velit tempus id. Pellentesque pretium egestas tellus vel mollis. Etiam viverra hendrerit mi, tempus fermentum libero posuere facilisis. Morbi bibendum eros ipsum, vel volutpat purus efficitur sit amet. Fusce ac enim elit. Etiam scelerisque semper magna, suscipit ornare dui accumsan eget. Sed eu lectus nec est pulvinar ultrices. Curabitur euismod felis quis euismod bibendum.",
+  },
 ];

@@ -29,7 +29,7 @@ const TableDropdown = (props) => {
         role="menu"
       >
         <div className="dropdown-content">
-          <Link className="dropdown-item" to={`/contracts/${props.id}`}>
+          <Link className="dropdown-item" to={`/${props.postType}/${props.id}`}>
             <span className="icon-text">
               <span className="icon">
                 <FontAwesomeIcon icon={faEye} />

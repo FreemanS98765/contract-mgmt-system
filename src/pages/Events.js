@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import ContractList from "../components/contracts/ContractList";
+import EventList from "../components/events/EventList";
 import Header from "../components/Header";
-import ContractModal from "../components/contracts/ContractModal.js";
+import EventModal from "../components/events/EventModal.js";
 
 class Events extends Component {
 
@@ -24,21 +24,19 @@ class Events extends Component {
   render() {
     console.log("Props are now: ", this.props);
 
-    let postTypeState = this.props.eventState;
+    let events = this.props.eventState;
     const dispatchData = this.props.dispatch;
     const filters = this.props.filters;
     const { isLoading } = this.state;
     const { isOpen } = this.state;
-
-    console.log("Events are: ", postTypeState);
 
     return (
       <div>
         <Header title='Events' onOpenModal={this.openFormModal} />
        
         <div className="container content">
-          <TableList
-            postTypeState={postTypeState}
+          <EventList
+            events={events}
             isLoading={isLoading}
             dispatchData={dispatchData}
             filters={filters}
@@ -46,13 +44,13 @@ class Events extends Component {
         </div>
 
         {isOpen && (
-          //<ContractModal onClose={showContractModal ? "is-active" : "false"} />
-          <FormModal
+          //<EventModal onClose={showEventModal ? "is-active" : "false"} />
+          <EventModal
             onHideModal={this.closeFormModal}
             onShowModal={this.openFormModal}
             dispatchData={dispatchData}
             isOpen={isOpen}
-            postTypeState={postTypeState}
+            events={events}
             text="Submit"
           />
         )}

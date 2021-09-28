@@ -2,9 +2,9 @@ const db = require("../config/db.config.js");
 const Events = db.events;
 //const Op = db.Sequelize.Op;
 
-// Create and Save a new Contract with Express API
+// Create and Save a new Event with Express API
 exports.create = (req, res) => {
-  // Create a Contract
+  // Create a Event
   const event = {
     event: req.body.event,
     client: req.body.client,
@@ -21,13 +21,15 @@ exports.create = (req, res) => {
     notes: req.body.notes,
   };
 
-  // Save Contract in the database
+  // Save Event in the database
   Events.create(event)
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send("Error -> " + err);
+      res.status(500).send("Error -> " + err.response.data);
+      console.log(err.response.status);
+      console.log(err.response.data);
     });
 };
 
@@ -44,7 +46,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single Contract with an id
+// Find a single Event with an id
 exports.findById = (req, res) => {
   Events.findByPk(req.params.id)
     .then((data) => {
@@ -58,7 +60,7 @@ exports.findById = (req, res) => {
     });
 };
 
-// Update a Contract by the id in the request
+// Update an Event by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
 
@@ -68,29 +70,29 @@ exports.update = (req, res) => {
     .then((num) => {
       if (num === 1) {
         res.send({
-          message: "Contract was updated successfully.",
+          message: "Event was updated successfully.",
         });
       } else {
         res.send({
-          message: `Cannot update Contract with id=${id}. Maybe Contract was not found or req.body is empty!`,
+          message: `Cannot update Event with id=${id}. Maybe Event was not found or req.body is empty!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Error updating Contract with id=" + id,
+        message: err.message || "Error updating Event with id=" + id,
       });
     });
 };
 
-// Delete a Contract with the specified id in the request
+// Delete a Event with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
 
   console.log("Within delete controller function: ", req.params);
   Events.destroy({ where: { id: id } })
     .then(() => {
-      res.status(200).send("Contract has been deleted!");
+      res.status(200).send("Event has been deleted!");
     })
     .catch((err) => {
       res.status(500).send("Fail to delete!");
@@ -104,17 +106,17 @@ exports.deleteAll = (req, res) => {
     truncate: false,
   })
     .then((nums) => {
-      res.send({ message: `${nums} Contracts were deleted successfully!` });
+      res.send({ message: `${nums} Events were deleted successfully!` });
     })
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while removing all contracts.",
+          err.message || "Some error occurred while removing all Events.",
       });
     });
 };
 
-// Find all published Contracts
+// Find all published Events
 exports.findAllPublished = (req, res) => {
   Events.findAll({ where: { published: true } })
     .then((data) => {
@@ -126,7 +128,3 @@ exports.findAllPublished = (req, res) => {
       });
     });
 };
-
-function validateEvent(event) {
-  console.log(event);
-}

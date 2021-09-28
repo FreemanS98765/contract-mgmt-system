@@ -5,7 +5,7 @@ import {
   GET_EVENTS,
   REMOVE_EVENT,
   FETCH_EVENT,
-  LOAD_TABLE,
+  LOAD_EVENTS_TABLE,
   EDIT_EVENT,
 } from "../constants/ActionTypes";
 
@@ -23,7 +23,7 @@ const initialState = {
   startTime: "",
   endDate: "",
   endTime: "",
-  eventItems: [],
+  eventItems: '',
   notes: "",
   lastYearsPrice: "",
   upload: "",
@@ -43,6 +43,7 @@ export const addEvent =
       endDate: eventData.endDate,
       endTime: eventData.endTime,
       lastYearsPrice: eventData.lastYearsPrice,
+      eventItems: eventData.eventItems,
       notes: eventData.notes,
       upload: eventData.upload,
       status: eventData.status,
@@ -122,7 +123,7 @@ export const getEvents = (callback) => (dispatch, getState) => {
     });
 };
 
-export const loadTable = (events) => ({
-  type: LOAD_TABLE,
+export const loadEventsTable = (events) => ({
+  type: LOAD_EVENTS_TABLE,
   payload: events,
 });

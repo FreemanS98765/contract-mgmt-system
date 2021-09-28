@@ -75,6 +75,7 @@ class TableRow extends Component {
         <td>
           <TableDropdown
             id={this.props.id}
+            postType='events'
             selected={this.props.selected}
             onRemove={removeItemHandler}
             onClick={this.props.onClick}

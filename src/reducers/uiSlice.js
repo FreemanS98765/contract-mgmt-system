@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const uiReducer = createSlice({
   name: "ui",
-  initialState: { contractModalIsVisible: false },
+  initialState: { modalIsVisible: false },
   reducers: {
-    toggleNewContract(state) {
-      state.contractModalIsVisible = !state.contractModalIsVisible;
+    toggleNewItem(state) {
+      state.modalIsVisible = !state.modalIsVisible;
     },
   },
 });

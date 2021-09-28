@@ -1,4 +1,5 @@
 import ContractButton from "./contracts/ContractButton";
+import EventButton from "./events/EventButton";
 //import { Breadcrumbs, BreadcrumbItem } from "./UI/Breadcrumbs";
 
 const Header = (props) => {
@@ -7,6 +8,8 @@ const Header = (props) => {
       return (
         <ContractButton text="New Contract" onOpenModal={props.onOpenModal} />
       );
+    } else if (title === "Events") {
+      return <EventButton text="New Event" onOpenModal={props.onOpenModal} />;
     }
     return;
   };
