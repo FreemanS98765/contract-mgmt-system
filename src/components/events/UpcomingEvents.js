@@ -9,13 +9,13 @@ import "swiper/swiper.scss";
 import 'swiper/components/scrollbar/scrollbar.scss';
 // import 'swiper/css/grid';
 
-import SwiperCore, { Scrollbar, EffectFade } from "swiper";
+import SwiperCore, { Scrollbar, EffectCoverflow } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const UpcomingEvents = (props) => {
   let events = props.eventState;
 
-  SwiperCore.use([Scrollbar, EffectFade]);
+  SwiperCore.use([Scrollbar, EffectCoverflow]);
 
   return (
     <div className="card upcoming-events">
@@ -30,7 +30,7 @@ const UpcomingEvents = (props) => {
       <div className="card-content">
         <div className="upcoming-events">
           <Swiper
-            modules={[Scrollbar, EffectFade]}
+            modules={[Scrollbar, EffectCoverflow]}
             spaceBetween={5}
             slidesPerView={3}
             scrollbar={{ draggable: true }}
