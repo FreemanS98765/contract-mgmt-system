@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const uiReducer = createSlice({
   name: "ui",
-  initialState: { modalIsVisible: false },
+  initialState: { modalIsVisible: false, notification: null },
   reducers: {
     toggleNewItem(state) {
       state.modalIsVisible = !state.modalIsVisible;

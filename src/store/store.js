@@ -1,8 +1,9 @@
 import { compose, createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducers";
 import thunk from "redux-thunk";
-import { getContracts } from "../actions/contracts";
 import { getEvents } from "../actions/events";
+import { getNotifications } from "../actions/notifications";
+
 
 //const middlewareEnhancer = applyMiddleware(thunk);
 
@@ -24,12 +25,14 @@ const configureStore = (preloadedState) => {
   );
 
   store.dispatch(getEvents());
+  store.dispatch(getNotifications());
 
   store.subscribe(() => {
     const state = store.getState();
     const persist = {
       contracts: state.contracts,
       events: state.events,
+      notifications: state.notifications,
       isLoading: state.isLoading,
     };
 

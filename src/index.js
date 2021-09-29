@@ -4,14 +4,11 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import configureStore from "./store/store";
 import { getContracts } from "./actions/contracts";
-import { getEvents } from "./actions/events";
 import "./index.css";
 
 import { Provider } from "react-redux";
 
 import * as serviceWorker from "./serviceWorker";
-
-import combineActions from "./actions/combineActions";
 
 
 const store = configureStore();

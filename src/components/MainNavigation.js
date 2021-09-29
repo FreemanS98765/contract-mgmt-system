@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import Notification from "./UI/Notification";
+import NotificationButton from "./UI/NotificationButton";
 
 const MainNavigation = (props) => {
   return (
@@ -18,6 +20,9 @@ const MainNavigation = (props) => {
           <NavLink activeClassName="active" to="/events">
             Events
           </NavLink>
+        </li>
+        <li>
+          <NotificationButton />
         </li>
       </ul>
     </nav>
