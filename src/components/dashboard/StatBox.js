@@ -17,7 +17,7 @@ const StatBox = (props) => {
       <div className="card-footer">
         <span className="card-footer-item">
           <span className="light-text">
-            {`Last updated: ${props.lastUpdated} ago`}
+            {`Last updated: ${props.lastUpdated}`}
           </span>
         </span>
       </div>

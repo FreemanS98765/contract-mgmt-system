@@ -56,11 +56,11 @@ const StatBoxes = (props) => {
     const months = days / 12;
 
     if (minutes >= 60 && minutes < 1440) {
-      return `${hours.toFixed(0)} hrs`;
+      return `${hours.toFixed(0)} hrs ago`;
     } else if (minutes >= 1440 && minutes < 43800) {
-      return `${days.toFixed(0)} days`;
+      return `${days.toFixed(0)} days ago`;
     } else if (minutes >= 43800) {
-      return `${months.toFixed(0)} months`;
+      return `${months.toFixed(0)} months ago`;
     } else {
       return "No Updates!";
     }
