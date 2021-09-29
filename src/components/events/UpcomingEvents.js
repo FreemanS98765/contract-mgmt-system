@@ -5,10 +5,17 @@ import EventItem from "./EventItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
-const UpcomingEvents = (props) => {
-  let contracts = props.contractState;
+import "swiper/swiper.scss";
+import 'swiper/components/scrollbar/scrollbar.scss';
+// import 'swiper/css/grid';
 
-  const sortedEvents = [];
+import SwiperCore, { Scrollbar, EffectFade } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+const UpcomingEvents = (props) => {
+  let events = props.eventState;
+
+  SwiperCore.use([Scrollbar, EffectFade]);
 
   return (
     <div className="card upcoming-events">
@@ -21,20 +28,29 @@ const UpcomingEvents = (props) => {
         </span>
       </div>
       <div className="card-content">
-        <aside className="menu">
-          <ul className="menu-list">
-            {sortedEvents.map((date) => {
+        <div className="upcoming-events">
+          <Swiper
+            modules={[Scrollbar, EffectFade]}
+            spaceBetween={5}
+            slidesPerView={3}
+            scrollbar={{ draggable: true }}
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            {events.map((date) => {
               return (
-                <EventItem
-                  id={date.id}
-                  event="An upcoming event"
-                  date={date.endDate}
-                  company="Some Company"
-                />
+                <SwiperSlide>
+                  <EventItem
+                    id={date.id}
+                    event="An upcoming event"
+                    date={date.endDate}
+                    company="Some Company"
+                  />
+                </SwiperSlide>
               );
             })}
-          </ul>
-        </aside>
+          </Swiper>
+        </div>
       </div>
       <div className="card-footer"></div>
     </div>
@@ -43,7 +59,7 @@ const UpcomingEvents = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    contractState: state.contracts,
+    eventState: state.events,
     dispatchData: state.dispatch,
   };
 };

@@ -62,7 +62,7 @@ const EventSingle = (props) => {
         openFormModal={openFormModal}
       />
 
-      <section id="eventSingle" className="section">
+      <section id="eventSingle" className="section page-single">
         <div className="container">
           <div className="columns">
             <div className="column is-one-quarter sidebar">

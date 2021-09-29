@@ -64,7 +64,7 @@ const ContractSingle = (props) => {
         openFormModal={openFormModal}
       />
 
-      <section id="contractSingle" className="section">
+      <section id="contractSingle" className="section page-single">
         <div className="container">
           <div className="columns">
             <div className="column is-one-quarter sidebar">

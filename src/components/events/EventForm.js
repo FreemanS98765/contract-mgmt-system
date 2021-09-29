@@ -38,7 +38,7 @@ const EventForm = (props) => {
     startTime: "",
     endDate: "",
     endTime: "",
-    eventItems: [],
+    eventItems: '',
     lastYearsPrice: "",
     upload: "",
     notes: "",

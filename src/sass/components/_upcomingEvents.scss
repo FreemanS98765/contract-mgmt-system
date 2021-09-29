@@ -1,0 +1,54 @@
+.upcoming-events {
+
+    .swiper-scrollbar {
+        height: 7px;
+    }
+
+  .swiper-wrapper {
+    background-color: $color-grey-medium-light;
+  }
+  .swiper-slide {
+    padding: 1em;
+  }
+
+  .swiper-slide-active {
+    background-color: $color-brand-red;
+    color: $color-white;
+    transition: background-color 0.3s ease;
+
+    a {
+      color: $color-alt-teal;
+
+      &:hover {
+          color: $color-alt-teal-dark;
+      }
+    }
+  }
+
+  .block {
+    & > * {
+      display: block;
+    }
+  }
+
+  &__day {
+    font-size: 2em;
+
+    & > span {
+      font-size: medium;
+    }
+  }
+
+  &__unavailable {
+      margin-top: 1em;
+  }
+
+  &__title {
+    font-weight: bold;
+    word-wrap: wrap;
+  }
+
+  &__meta {
+    font-size: small;
+  }
+}
