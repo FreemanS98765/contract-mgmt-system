@@ -21,7 +21,10 @@ const MainNavigation = (props) => {
           </NavLink>
         </li>
         <li>
-          <NotificationButton onShowNotification={props.onShowNotification} />
+          <NotificationButton
+            onShowNotification={props.onShowNotification}
+            notifications={props.notifications}
+          />
         </li>
       </ul>
     </nav>

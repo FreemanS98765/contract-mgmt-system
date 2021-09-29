@@ -7,6 +7,9 @@ const NotificationButton = (props) => {
       <span className="icon">
         {<FontAwesomeIcon size="2x" icon={faBell} />}
       </span>
+      <span className="notification-counter">
+        {props.notifications.length > 0 ? props.notifications.length : '0'}
+      </span>
     </button>
   );
 };

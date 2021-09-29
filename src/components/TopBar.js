@@ -7,6 +7,7 @@ const TopBar = (props) => {
       <MainNavigation
         onShowNotification={props.onShowNotification}
         onHideNotification={props.onHideNotification}
+        notifications={props.notifications}
       />
     </section>
   );

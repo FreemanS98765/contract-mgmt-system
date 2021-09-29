@@ -24,6 +24,7 @@ const Layout = (props) => {
       <TopBar
         onShowNotification={showNotifications}
         onHideNotification={hideNotifications}
+        notifications={notifications}
       />
       <main>{props.children}</main>
       {notificationIsShown && (
