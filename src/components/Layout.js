@@ -1,15 +1,46 @@
-import { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import { connect } from "react-redux";
 
 import TopBar from "./TopBar";
 import Header from "./Header";
+import Notification from "./UI/Notification";
 
 const Layout = (props) => {
+  const notifications = props.notifications;
+  const [notificationIsShown, setNotificationIsShown] = useState(false);
+
+  const showNotifications = () => {
+    setNotificationIsShown(true);
+  };
+
+  const hideNotifications = () => {
+    setNotificationIsShown(false);
+  };
+
+  console.log("Notifications are: ", notificationIsShown);
+
   return (
     <Fragment>
-      <TopBar />
+      <TopBar
+        onShowNotification={showNotifications}
+        onHideNotification={hideNotifications}
+      />
       <main>{props.children}</main>
+      {notificationIsShown && (
+        <Notification
+          notifications={notifications}
+          onClick={hideNotifications}
+          isToggled={notificationIsShown}
+        />
+      )}
     </Fragment>
   );
 };
 
-export default Layout;
+const mapStateToProps = (state) => {
+  return {
+    notifications: state.notifications,
+  };
+};
+
+export default connect(mapStateToProps)(Layout);

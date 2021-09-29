@@ -1,0 +1,33 @@
+.slide-in-left {
+  animation: slide-in-left 0.5s forwards;
+  animation-delay: .375s;
+}
+
+.slide-out-right {
+  animation: slide-out-right 0.5s forwards;
+  animation-delay: .375s;
+}
+
+@-webkit-keyframes slide-in-left {
+  100% {
+    right: 0;
+  }
+}
+
+@keyframes slide-in-left {
+  100% {
+    right: 0;
+  }
+}
+
+@-webkit-keyframes slide-out-right {
+  100% {
+    right: -350px;
+  }
+}
+
+@keyframes slide-out-right {
+  100% {
+    right: -350px;
+  }
+}

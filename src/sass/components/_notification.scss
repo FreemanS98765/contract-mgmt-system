@@ -6,15 +6,68 @@
   justify-content: space-between;
   padding: 0.5rem 10%;
   align-items: center;
-  color: white;
 
   &-bell {
     background-color: $color-black;
     box-shadow: none;
     border: none;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     .icon {
       color: $color-alt-teal;
+    }
+  }
+
+  &-sidebar {
+    position: fixed;
+    width: 350px;
+    height: 100%;
+    top: 0;
+    right: -350px;
+    background-color: $color-grey-medium-light;
+    padding: 0.75em 0;
+    border-radius: 0;
+
+    &.is-active {
+      display: block;
+    }
+
+    .card-header {
+      box-shadow: none;
+      border-bottom: 1px solid $color-grey-medium;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 15px;
+    }
+  }
+
+  &-item {
+    background-color: $color-grey-lighter;
+
+    .delete {
+      display: none;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 10px;
+      background-color: $color-grey-light;
+
+      span {
+        &:first-of-type {
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    .card-content {
+      padding: 5px 1rem;
     }
   }
 }

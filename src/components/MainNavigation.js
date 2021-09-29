@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import Notification from "./UI/Notification";
 import NotificationButton from "./UI/NotificationButton";
 
 const MainNavigation = (props) => {
@@ -22,7 +21,7 @@ const MainNavigation = (props) => {
           </NavLink>
         </li>
         <li>
-          <NotificationButton />
+          <NotificationButton onShowNotification={props.onShowNotification} />
         </li>
       </ul>
     </nav>

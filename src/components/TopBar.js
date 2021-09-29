@@ -1,10 +1,13 @@
 import MainNavigation from "./MainNavigation";
 
-const TopBar = () => {
+const TopBar = (props) => {
   return (
     <section className="topBar">
       <div className="logo">DanFree Design</div>
-      <MainNavigation />
+      <MainNavigation
+        onShowNotification={props.onShowNotification}
+        onHideNotification={props.onHideNotification}
+      />
     </section>
   );
 };
