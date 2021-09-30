@@ -17,7 +17,6 @@ const Layout = (props) => {
     setNotificationIsShown(false);
   };
 
-  console.log("Notifications are: ", notificationIsShown);
 
   return (
     <Fragment>

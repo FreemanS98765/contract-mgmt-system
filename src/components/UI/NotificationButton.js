@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 
 const NotificationButton = (props) => {
+  console.log('Notifications are: ', props.notifications);
   return (
     <button onClick={props.onShowNotification} className="notification-bell">
       <span className="icon">

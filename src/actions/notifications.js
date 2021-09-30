@@ -46,10 +46,9 @@ export const removeNotification = ({ id } = {}) => {
   };
 };
 
-const _getNotificaitons = (events, loading) => ({
+const _getNotifications = (notifications) => ({
   type: GET_NOTIFICATIONS,
-  events,
-  isLoading: true,
+  notifications,
 });
 
 export const getNotifications = (callback) => (dispatch, getState) => {
@@ -62,7 +61,7 @@ export const getNotifications = (callback) => (dispatch, getState) => {
         notifications.push(item);
       });
 
-      dispatch(_getNotificaitons(notifications));
+      dispatch(_getNotifications(notifications));
     })
     .catch((error) => {
       if (error.response) {

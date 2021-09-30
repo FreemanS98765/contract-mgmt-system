@@ -26,6 +26,7 @@ db.sequelize.sync({ force: true }).then(() => {
 
 require("./src/routes/contract.routes.js")(app);
 require("./src/routes/event.routes.js")(app);
+require("./src/routes/notification.routes.js")(app);
 
 //simple route
 // app.get("/", (req, res) => {

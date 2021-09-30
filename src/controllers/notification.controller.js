@@ -18,6 +18,8 @@ exports.create = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send("Error -> " + err);
+      console.log(err.response.status);
+      console.log(err.response.data);
     });
 };
 

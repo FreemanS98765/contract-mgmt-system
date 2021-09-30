@@ -14,7 +14,7 @@ const initialState = {
 export default function notificationReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_NOTIFICATION:
-      return [...state, action.contract];
+      return [...state, action.notification];
     case REMOVE_NOTIFICATION:
       return state.filter(({ id }) => id !== action.id);
     case LOAD_NOTIFICATION_TABLE:
