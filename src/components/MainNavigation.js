@@ -24,6 +24,7 @@ const MainNavigation = (props) => {
           <NotificationButton
             onShowNotification={props.onShowNotification}
             notifications={props.notifications}
+            onShowToast={props.onShowToast}
           />
         </li>
       </ul>

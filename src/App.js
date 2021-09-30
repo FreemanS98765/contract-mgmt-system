@@ -17,10 +17,14 @@ import NotFound from "./components/contracts/NoContractsFound";
 
 import Layout from "./components/Layout";
 
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 import "bulma/css/bulma.min.css";
 
 import "./App.scss";
 
+toast.configure();
 function App() {
   return (
     <>

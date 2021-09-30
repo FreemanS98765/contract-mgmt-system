@@ -1,4 +1,6 @@
+import { transformFromAst } from "babel-core";
 import axios from "../axios/axios";
+import { toast } from "react-toastify";
 
 import {
   ADD_NOTIFICATION,
@@ -17,6 +19,7 @@ const initialState = {
   title: "",
   status: "",
   message: "",
+  url: "",
 };
 
 export const addNotification =
@@ -62,6 +65,7 @@ export const getNotifications = (callback) => (dispatch, getState) => {
       });
 
       dispatch(_getNotifications(notifications));
+      toast.default();
     })
     .catch((error) => {
       if (error.response) {

@@ -91,6 +91,24 @@ export const checkIfEmpty = (data) => {
   return data ? data : "Nothing found";
 };
 
+export const getCreatedAt = (date) => {
+  let currentTimestamp = Date.now();
+  const minutes = (date - currentTimestamp) / 60000;
+  const hours = minutes / 60;
+  const days = hours / 24;
+  const months = days / 12;
+
+  if (minutes >= 60 && minutes < 1440) {
+    return `${hours.toFixed(0)} hrs`;
+  } else if (minutes >= 1440 && minutes < 43800) {
+    return `${days.toFixed(0)} days`;
+  } else if (minutes >= 43800) {
+    return `${months.toFixed(0)} months`;
+  } else {
+    return "Just Now";
+  }
+};
+
 const removeItemHandler = (id) => {};
 
 export default removeItemHandler;

@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useRef } from "react";
+import { ToastContainer } from "react-toastify";
 
 import OutsideClick from "../../hooks/outside-click";
 
@@ -28,7 +27,7 @@ const Notification = (props) => {
     }
   };
 
-  const createdAt = getCreatedAt(notifications.createdAt)
+  const createdAt = getCreatedAt(notifications.createdAt);
 
   if (props.status === "pending") {
     return <span className="is-warning">{props.status}</span>;
