@@ -1,8 +1,8 @@
 export const CONTRACT_DATA = [
   {
     id: 1,
-    startDate: new Date(2020, 7, 14),
-    endDate: new Date(2020, 7, 14),
+    startDate: '2021-04-23',
+    endDate: '2021-05-23',
     title: "Contract 1",
     client: "Client 1",
     price: 65.25,

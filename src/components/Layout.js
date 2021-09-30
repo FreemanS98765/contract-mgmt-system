@@ -9,6 +9,8 @@ const Layout = (props) => {
   const notifications = props.notifications;
   const [notificationIsShown, setNotificationIsShown] = useState(false);
 
+  console.log('Notification state: ', notifications);
+
   const showNotifications = () => {
     setNotificationIsShown(true);
   };
