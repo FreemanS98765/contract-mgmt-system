@@ -52,7 +52,6 @@ const UpcomingEvents = (props) => {
           </Swiper>
         </div>
       </div>
-      <div className="card-footer"></div>
     </div>
   );
 };

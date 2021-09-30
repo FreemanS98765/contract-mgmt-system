@@ -114,6 +114,7 @@ const ContractList = (props) => {
           orderBy={orderBy}
           dispatchData={props.dispatchData}
           filters={props.filters}
+          postType='contracts'
         />
       </Fragment>
     );

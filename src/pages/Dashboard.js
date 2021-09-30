@@ -15,13 +15,17 @@ const Dashboard = () => {
         </Route>
       </section> */}
       <section className="section">
-        <StatBoxes />
-        <div className="columns">
-          <div className="column is-one-third">
-            <UpcomingRenewals />
-          </div>
-          <div className="column is-one-third">
-            <UpcomingEvents />
+        <div className="container-fluid">
+          <StatBoxes />
+        </div>
+        <div className="container-fluid">
+          <div className="columns">
+            <div className="column is-one-third">
+              <UpcomingRenewals />
+            </div>
+            <div className="column is-one-third">
+              <UpcomingEvents />
+            </div>
           </div>
         </div>
       </section>

@@ -13,16 +13,20 @@ $color-grey-dark: #353638;
 
 $color-success: #48c78e;
 $color-info: #3e8ed0;
-$color-warning: #d6b457; 
+$color-warning: #d6b457;
 $color-danger: $color-brand-red;
 
 $border-light: rgba(0, 0, 0, 0.15);
 $border-medium: rgba(0, 0, 0, 0.24);
 
 $color-white: #fff;
+$color-off-white: #fafafa;
 $color-black: #000;
 
 // Navigation Styles
 $border: $color-brand-red;
 $menu-item-border-left: 3px solid $border;
 $menu-list-link-padding: 0.75em 1em;
+
+// Box Shadows
+$box-shadow-default: rgba(0, 0, 0, 0.24) 0px 3px 8px;

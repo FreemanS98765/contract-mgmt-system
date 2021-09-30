@@ -45,7 +45,6 @@ const UpcomingRenewals = (props) => {
           </ul>
         </aside>
       </div>
-      <div className="card-footer"></div>
     </div>
   );
 };

@@ -82,6 +82,7 @@ const ContractsTable = (props) => {
                   onClick={() => toggleDropdown(i)}
                   dispatchData={props.dispatchData}
                   filters={props.filters}
+                  postType={props.postType}
                   //onRemove={props.removeContractHandler.bind(null, c.id)}
                 />
               );
@@ -94,7 +95,6 @@ const ContractsTable = (props) => {
 };
 
 export const EventsTable = (props) => {
-
   const events = props.events;
 
   const [isSelected, setIsSelected] = useState(
@@ -130,23 +130,22 @@ export const EventsTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {tableSort(
-              events,
-              getComparator(props.order, props.orderBy)
-            ).map((c, i) => {
-              return (
-                <EventsTableRow
-                  key={c.id}
-                  id={c.id}
-                  {...c}
-                  selected={isSelected[i]}
-                  onClick={() => toggleDropdown(i)}
-                  dispatchData={props.dispatchData}
-                  filters={props.filters}
-                  //onRemove={props.removeContractHandler.bind(null, c.id)}
-                />
-              );
-            })}
+            {tableSort(events, getComparator(props.order, props.orderBy)).map(
+              (c, i) => {
+                return (
+                  <EventsTableRow
+                    key={c.id}
+                    id={c.id}
+                    {...c}
+                    selected={isSelected[i]}
+                    onClick={() => toggleDropdown(i)}
+                    dispatchData={props.dispatchData}
+                    filters={props.filters}
+                    //onRemove={props.removeContractHandler.bind(null, c.id)}
+                  />
+                );
+              }
+            )}
           </tbody>
         </table>
       )}

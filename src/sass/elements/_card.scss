@@ -1,4 +1,6 @@
 .card {
+  background-color: $color-off-white;
+  box-shadow: $box-shadow-default;
   &-header {
     padding-bottom: 1em;
     padding-left: 0.75em;
@@ -8,8 +10,13 @@
     margin-left: 1em;
   }
 
+  &-header {
+    padding-top: 1em;
+  }
+
   &-footer {
     border-top: 1px solid $border-medium;
+    background-color: $color-grey-lighter;
   }
 
   &-footer-item {

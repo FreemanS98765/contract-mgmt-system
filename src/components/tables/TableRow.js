@@ -80,6 +80,7 @@ class TableRow extends Component {
             selected={this.props.selected}
             onRemove={removeContractHandler}
             onClick={this.props.onClick}
+            postType={this.props.postType}
           />
         </td>
       </tr>
