@@ -1,4 +1,3 @@
-import { transformFromAst } from "babel-core";
 import axios from "../axios/axios";
 import { toast } from "react-toastify";
 
@@ -17,9 +16,10 @@ const _addNotification = (notification) => ({
 
 const initialState = {
   title: "",
-  status: "",
+  status: "pending",
   message: "",
   url: "",
+  itemTitle: ''
 };
 
 export const addNotification =
@@ -29,6 +29,8 @@ export const addNotification =
       title: notificationData.title,
       status: notificationData.status,
       message: notificationData.message,
+      url: notificationData.url,
+      itemTitle: notificationData.itemTitle
     };
 
     return axios.post("notifications/add", notification).then((result) => {
@@ -65,7 +67,7 @@ export const getNotifications = (callback) => (dispatch, getState) => {
       });
 
       dispatch(_getNotifications(notifications));
-      toast.default();
+      //toast.default();
     })
     .catch((error) => {
       if (error.response) {

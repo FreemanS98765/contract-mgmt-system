@@ -39,8 +39,12 @@ const UpcomingRenewals = (props) => {
       <div className="card-content">
         <aside className="menu">
           <ul className="menu-list">
-            {sortedDates.map((date) => {
-              return <RenewalItem date={date.endDate} id={date.id} />;
+            {sortedDates.map((date, index) => {
+              return (
+                <li key={index}>
+                  <RenewalItem index={index} date={date.endDate} id={date.id} />
+                </li>
+              );
             })}
           </ul>
         </aside>

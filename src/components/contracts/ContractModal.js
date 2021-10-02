@@ -1,14 +1,23 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import ContractForm from "./ContractForm";
 import useHttp from "../../hooks/use-http";
 
-import { addContract, editContract } from "../../actions/contracts";
+import {
+  addContract,
+  editContract,
+  getContracts,
+} from "../../actions/contracts";
+
+import { addNotification } from "../../actions/notifications";
 
 const ContractModal = (props) => {
   const { sendRequest, loadingStatus } = useHttp(addContract);
   const history = useHistory();
+  const [id, setId] = useState();
+
+  const contracts = props.contracts;
 
   // useEffect(() => {
   //   if (loadingStatus === "completed") {
@@ -17,7 +26,20 @@ const ContractModal = (props) => {
   //   }
   // }, [loadingStatus, history]);
 
-  const saveContractDataHandler = async (
+  // useEffect(() => {
+  //   if (loadingStatus === "completed") {
+  //     props.dispatchData(
+  //       addNotification({
+  //         title: "A new contract was created!",
+  //         itemTitle: contracts.title,
+  //         message: `A new contract was created for ${contracts.company}`,
+  //         url: `/contracts/${contracts.id}`,
+  //       })
+  //     );
+  //   }
+  // }, [loadingStatus]);
+
+  const saveContractDataHandler = (
     fields,
     setSubmitting,
     isNewContract,
@@ -28,13 +50,31 @@ const ContractModal = (props) => {
     const savedData = {
       ...fields,
       status: "Active",
+      slug: fields.title
     };
+
+    // if (contracts.length > 0) {
+    //   let lastCreated = contracts.pop();
+    //   console.log('Last created is: ', lastCreated.id);
+    //   setId(lastCreated.id);
+    // } else {
+    //   setId(1)
+    // }
+
+    console.log("Contracts are ", contracts);
 
     if (isNewContract) {
       props
         .dispatchData(addContract(savedData))
         .then(() => {
-          //history.push(".");
+          props.dispatchData(
+            addNotification({
+              title: "A new contract was created!",
+              itemTitle: savedData.title,
+              message: `A new contract was created for ${savedData.company}`,
+              url: `/contracts/${savedData.slug}`,
+            })
+          );
         })
         .catch((error) => {
           setSubmitting(false);
@@ -57,14 +97,10 @@ const ContractModal = (props) => {
       status: "Draft",
     };
 
-    console.log("Drafted Data status: ", draftedData.status);
-
     if (isNewContract) {
       props
         .dispatchData(addContract(draftedData))
-        .then(() => {
-          //history.push(".");
-        })
+        .then(props.dispatchData(addNotification()))
         .catch((error) => {
           console.log(error);
           setSubmitting(false);

@@ -11,8 +11,6 @@ const Layout = (props) => {
   const notifications = props.notifications;
   const [notificationIsShown, setNotificationIsShown] = useState(false);
 
-  console.log("Notification state: ", notifications);
-
   const showNotifications = () => {
     setNotificationIsShown(true);
   };
@@ -41,10 +39,8 @@ const Layout = (props) => {
   };
 
   const showToast = () => {
-    console.log("Show Toast CLicked");
-
-    notifications.map((notification) => {
-      return toast(<ToastMsg notification={notification} />, {
+    notifications.map((notification, index) => {
+      return toast(<ToastMsg notification={notification} index={index} />, {
         position: "top-right",
         autoClose: true,
         hideProgressBar: true,

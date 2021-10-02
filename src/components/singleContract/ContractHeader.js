@@ -18,8 +18,8 @@ const ContractHeader = (props) => {
           <div className="is-flex is-align-items-center">
             <h1 className="is-size-2 mr-3">
               {props.title
-                ? `Contract #${props.contract.id}: ${props.contract.title}`
-                : `Contract #${props.contract.id}`}
+                ? `Contract #${props.slug}: ${props.contract.title}`
+                : `Contract #${props.slug}`}
             </h1>
             <span className={`tag is-medium ${statusVariant}`}>
               {props.contract.status}
@@ -36,9 +36,9 @@ const ContractHeader = (props) => {
             <BreadcrumbItem to={`/dashboard`}>Dashboard</BreadcrumbItem>
             <BreadcrumbItem to={`/contracts`}>Contracts</BreadcrumbItem>
             <BreadcrumbItem
-              to={`/contracts/${props.id}`}
+              to={`/contracts/${props.slug}`}
               className="is-active"
-            >{`Contract #${props.id}`}</BreadcrumbItem>
+            >{`Contract #${props.slug}`}</BreadcrumbItem>
           </Breadcrumbs>
         </div>
       </div>

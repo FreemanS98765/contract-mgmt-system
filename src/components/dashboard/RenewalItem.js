@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 import { getFormattedDate, getLongFormattedDate } from "../../utils/utils";
@@ -31,13 +32,11 @@ const RenewalItem = (props) => {
       return <span className="badge badge-is-danger">{item}</span>;
     }
 
-    return <span className="badge badge-is-warning">{item}</span>
+    return <span className="badge badge-is-warning">{item}</span>;
   };
 
-
-
   return (
-    <li>
+    <Fragment>
       <div>
         {setBadge(timeToRenewal)}
         <span className="renewal-date">{getLongFormattedDate(dateObj)}</span>
@@ -45,7 +44,7 @@ const RenewalItem = (props) => {
       <Link to={`/contracts/${props.id}`}>
         <span className="badge badge-is-success">view</span>
       </Link>
-    </li>
+    </Fragment>
   );
 };
 

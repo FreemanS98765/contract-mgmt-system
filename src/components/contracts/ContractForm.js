@@ -79,6 +79,7 @@ const ContractForm = (props) => {
   }
 
   const onSubmit = (fields, { setStatus, setSubmitting, resetForm }) => {
+
     setStatus();
 
     console.log('Draft is', isDraft);

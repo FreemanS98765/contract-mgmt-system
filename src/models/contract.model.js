@@ -1,5 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
   const Contract = sequelize.define("Contract", {
+    slug: {
+      type: Sequelize.STRING,
+    },
     client: {
       type: Sequelize.STRING,
     },

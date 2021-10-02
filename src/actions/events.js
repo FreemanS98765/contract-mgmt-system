@@ -1,4 +1,3 @@
-import { setNestedObjectValues } from "formik";
 import axios from "../axios/axios";
 import {
   ADD_EVENT,

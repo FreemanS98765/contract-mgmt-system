@@ -10,6 +10,7 @@ exports.create = (req, res) => {
     status: req.body.status,
     message: req.body.message,
     url: req.body.url,
+    itemTitle: req.body.itemTitle,
   };
 
   // Save Notification in the database

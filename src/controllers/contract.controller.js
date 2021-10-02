@@ -6,6 +6,7 @@ const Contracts = db.contracts;
 exports.create = (req, res) => {
   // Create a Contract
   const contract = {
+    slug: req.body.slug,
     title: req.body.title,
     client: req.body.client,
     startDate: req.body.startDate,
@@ -49,9 +50,9 @@ exports.findAll = (req, res) => {
 
 // Find a single Contract with an id
 exports.findById = (req, res) => {
-  Contracts.findByPk(req.params.id)
+  Contracts.findByPk(req.params.slug)
     .then((data) => {
-      console.log(req.params.id);
+      console.log(req.params.slug);
       res.send(data);
     })
     .catch((err) => {
@@ -59,6 +60,17 @@ exports.findById = (req, res) => {
         message: "Error -> " + err,
       });
     });
+
+  // Contracts.findByPk(req.params.id)
+  //   .then((data) => {
+  //     console.log(req.params.id);
+  //     res.send(data);
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send({
+  //       message: "Error -> " + err,
+  //     });
+  //   });
 };
 
 // Update a Contract by the id in the request
@@ -130,7 +142,3 @@ exports.findAllPublished = (req, res) => {
       });
     });
 };
-
-function validateContract(contract) {
-  console.log(contract);
-}

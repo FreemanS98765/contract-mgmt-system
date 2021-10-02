@@ -10,8 +10,6 @@ const ToastMsg = (props) => {
   const createdAt = getCreatedAt(notification.createdAt);
   const url = notification.url;
 
-  console.log('Notification url is: ', url);
-
   if (props.status === "pending") {
     return <span className="is-warning">{props.status}</span>;
   }
@@ -20,9 +18,9 @@ const ToastMsg = (props) => {
   }
 
   return (
-    <div className="card">
+    <div className="card" key={props.index}>
       <div className="card-header">
-        <span className="is-small notification__title">
+        <span className="h6 notification__title">
           <Link to={`${url}`}>{title}</Link>
         </span>
 

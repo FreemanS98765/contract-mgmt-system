@@ -16,7 +16,7 @@ const ContractSingle = (props) => {
   //const params = useParams();
   const dispatchData = props.dispatch;
 
-  let { id } = useParams();
+  let { slug, id } = useParams();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,10 +28,10 @@ const ContractSingle = (props) => {
 
   const contracts = props.contracts;
 
-  console.log("Id is: ", id);
+  console.log("Slug is: ", slug);
 
   let contract = contracts.find((c) => {
-    return c.id.toString() === id;
+    return c.slug === slug;
   });
 
   console.log("Contract destructured : ", contract);
@@ -59,7 +59,7 @@ const ContractSingle = (props) => {
   return (
     <Fragment>
       <ContractHeader
-        id={id}
+        slug={slug}
         contract={contract}
         openFormModal={openFormModal}
       />

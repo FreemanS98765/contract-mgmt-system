@@ -3,6 +3,8 @@ import {
   Redirect,
   Route,
   Switch,
+  useParams,
+  useRouteMatch,
   BrowserRouter as Router,
 } from "react-router-dom";
 
@@ -26,6 +28,7 @@ import "./App.scss";
 
 toast.configure();
 function App() {
+
   return (
     <>
       <Router>
@@ -43,7 +46,7 @@ function App() {
               <Contracts />
             </Route>
 
-            <Route path={`/contracts/:id`} component={ContractForm}>
+            <Route path={`/contracts/:slug`}>
               <ContractSingle />
             </Route>
 
@@ -55,7 +58,7 @@ function App() {
               <Events />
             </Route>
 
-            <Route path={`/events/:id`} component={EventForm}>
+            <Route path={`/events/:slug`}>
               <EventSingle />
             </Route>
 

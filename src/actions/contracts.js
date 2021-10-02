@@ -1,4 +1,3 @@
-import { setNestedObjectValues } from "formik";
 import axios from "../axios/axios";
 import {
   ADD_CONTRACT,
@@ -15,6 +14,7 @@ const _addContract = (contract) => ({
 });
 
 const initialState = {
+  key: null,
   client: "",
   company: "",
   email: "",
@@ -36,6 +36,7 @@ export const addContract =
   (contractData = initialState) =>
   (dispatch) => {
     const contract = {
+      slug: contractData.slug,
       client: contractData.client,
       company: contractData.company,
       email: contractData.email,
