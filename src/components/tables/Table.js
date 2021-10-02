@@ -77,6 +77,7 @@ const ContractsTable = (props) => {
                 <TableRow
                   key={c.id}
                   id={c.id}
+                  slug={c.slug}
                   {...c}
                   selected={isSelected[i]}
                   onClick={() => toggleDropdown(i)}

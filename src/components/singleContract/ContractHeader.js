@@ -18,8 +18,8 @@ const ContractHeader = (props) => {
           <div className="is-flex is-align-items-center">
             <h1 className="is-size-2 mr-3">
               {props.title
-                ? `Contract #${props.slug}: ${props.contract.title}`
-                : `Contract #${props.slug}`}
+                ? `Contract ${props.slug}: ${props.contract.title}`
+                : `Contract ${props.slug}`}
             </h1>
             <span className={`tag is-medium ${statusVariant}`}>
               {props.contract.status}
