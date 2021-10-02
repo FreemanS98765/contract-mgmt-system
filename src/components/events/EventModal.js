@@ -30,13 +30,19 @@ const EventModal = (props) => {
     const savedData = {
       ...fields,
       status: "Active",
+      slug: fields.event,
     };
 
     if (isNewItem) {
       props
         .dispatchData(addEvent(savedData))
         .then(() => {
-          //history.push(".");
+          props.addNotification({
+            title: "A new event was created!",
+            itemTitle: savedData.title,
+            message: `A new event was created for ${savedData.company}`,
+            url: `/events/${savedData.slug}`,
+          })
         })
         .catch((error) => {
           setSubmitting(false);
@@ -57,13 +63,19 @@ const EventModal = (props) => {
     const draftedData = {
       ...fields,
       status: "Draft",
+      slug: fields.slug,
     };
 
     if (isNewItem) {
       props
         .dispatchData(addEvent(draftedData))
         .then(() => {
-          //history.push(".");
+          props.addNotification({
+            title: "A drafted event was created!",
+            itemTitle: draftedData.title,
+            message: `A drafted event was created for ${draftedData.company}`,
+            url: `/events/${draftedData.slug}`,
+          })
         })
         .catch((error) => {
           console.log(error);

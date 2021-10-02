@@ -38,7 +38,7 @@ const ContractHeader = (props) => {
             <BreadcrumbItem
               to={`/contracts/${props.slug}`}
               className="is-active"
-            >{`Contract #${props.slug}`}</BreadcrumbItem>
+            >{`Contract ${props.slug}`}</BreadcrumbItem>
           </Breadcrumbs>
         </div>
       </div>

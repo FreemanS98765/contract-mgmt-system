@@ -19,8 +19,8 @@ const EventHeader = (props) => {
           <div className="is-flex is-align-items-center">
             <h1 className="is-size-2 mr-3">
               {props.title
-                ? `Event #${event.id}: ${event.title}`
-                : `Event #${event.id}`}
+                ? `Event ${event.slug}: ${event.title}`
+                : `Event ${event.slug}`}
             </h1>
             <span className={`tag is-medium ${statusVariant}`}>
               {event.status}
@@ -37,9 +37,9 @@ const EventHeader = (props) => {
             <BreadcrumbItem to={`/dashboard`}>Dashboard</BreadcrumbItem>
             <BreadcrumbItem to={`/events`}>Contracts</BreadcrumbItem>
             <BreadcrumbItem
-              to={`/events/${props.id}`}
+              to={`/events/${props.slug}`}
               className="is-active"
-            >{`Event #${props.id}`}</BreadcrumbItem>
+            >{`Event ${props.slug}`}</BreadcrumbItem>
           </Breadcrumbs>
         </div>
       </div>

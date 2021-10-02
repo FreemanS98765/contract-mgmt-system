@@ -137,6 +137,7 @@ export const EventsTable = (props) => {
                   <EventsTableRow
                     key={c.id}
                     id={c.id}
+                    slug={c.slug}
                     {...c}
                     selected={isSelected[i]}
                     onClick={() => toggleDropdown(i)}

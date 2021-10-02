@@ -14,7 +14,7 @@ const _addContract = (contract) => ({
 });
 
 const initialState = {
-  key: null,
+  slug: '',
   client: "",
   company: "",
   email: "",

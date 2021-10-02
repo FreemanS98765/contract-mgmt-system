@@ -13,10 +13,8 @@ import Attachments from "../components/singleEvent/Attachments";
 import EventModal from "../components/events/EventModal.js";
 
 const EventSingle = (props) => {
-  //const params = useParams();
   const dispatchData = props.dispatch;
-
-  let { id } = useParams();
+  let { slug, id } = useParams();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,10 +26,10 @@ const EventSingle = (props) => {
 
   const events = props.events;
 
-  console.log('Events in single are ', props.events);
+  console.log("Events in single are ", props.events);
 
   let event = events.find((c) => {
-    return c.id.toString() === id;
+    return c.slug === slug;
   });
 
   const openFormModal = () => {
@@ -43,7 +41,7 @@ const EventSingle = (props) => {
   };
 
   if (!event) {
-    return <p>Contract not found!</p>;
+    return <p>Event not found!</p>;
   }
 
   // const checkIfEmpty = (data) => {
@@ -56,11 +54,7 @@ const EventSingle = (props) => {
 
   return (
     <Fragment>
-      <EventHeader
-        id={id}
-        event={event}
-        openFormModal={openFormModal}
-      />
+      <EventHeader id={id} slug={slug} event={event} openFormModal={openFormModal} />
 
       <section id="eventSingle" className="section page-single">
         <div className="container">

@@ -30,7 +30,7 @@ const EventItem = (props) => {
         <span>{eventMonth}</span>
       </div>
       <div className="block">
-        <Link to={`/events/${props.id}`}>
+        <Link to={`/events/${props.slug}`}>
           <h6 className="upcoming-events__title">{props.event}</h6>
         </Link>
       </div>

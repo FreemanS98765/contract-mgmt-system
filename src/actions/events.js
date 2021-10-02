@@ -14,6 +14,7 @@ const _addEvent = (event) => ({
 });
 
 const initialState = {
+  slug: '',
   event: "",
   client: "",
   company: "",
@@ -33,6 +34,7 @@ export const addEvent =
   (eventData = initialState) =>
   (dispatch) => {
     const event = {
+      slug: eventData.slug,
       event: eventData.event,
       client: eventData.client,
       company: eventData.company,

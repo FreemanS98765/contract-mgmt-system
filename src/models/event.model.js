@@ -1,5 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
   const Event = sequelize.define("Event", {
+    slug: {
+      type: Sequelize.STRING,
+    },
     client: {
       type: Sequelize.STRING,
     },

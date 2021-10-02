@@ -6,6 +6,7 @@ const Events = db.events;
 exports.create = (req, res) => {
   // Create a Event
   const event = {
+    slug: req.body.slug,
     event: req.body.event,
     client: req.body.client,
     company: req.body.company,
