@@ -6,6 +6,8 @@ import useHttp from "../../hooks/use-http";
 
 import { addEvent, editEvent } from "../../actions/events";
 
+import { addNotification } from "../../actions/notifications";
+
 const EventModal = (props) => {
   const { sendRequest, loadingStatus } = useHttp(addEvent);
   const history = useHistory();
@@ -37,12 +39,14 @@ const EventModal = (props) => {
       props
         .dispatchData(addEvent(savedData))
         .then(() => {
-          props.addNotification({
-            title: "A new event was created!",
-            itemTitle: savedData.title,
-            message: `A new event was created for ${savedData.company}`,
-            url: `/events/${savedData.slug}`,
-          })
+          props.dispatchData(
+            addNotification({
+              title: "A new event was created!",
+              itemTitle: savedData.title,
+              message: `A new event was created for ${savedData.event}`,
+              url: `/events/${savedData.slug}`,
+            })
+          );
         })
         .catch((error) => {
           setSubmitting(false);
@@ -75,7 +79,7 @@ const EventModal = (props) => {
             itemTitle: draftedData.title,
             message: `A drafted event was created for ${draftedData.company}`,
             url: `/events/${draftedData.slug}`,
-          })
+          });
         })
         .catch((error) => {
           console.log(error);

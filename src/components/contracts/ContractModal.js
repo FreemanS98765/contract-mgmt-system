@@ -50,7 +50,7 @@ const ContractModal = (props) => {
     const savedData = {
       ...fields,
       status: "Active",
-      slug: fields.title
+      slug: fields.title,
     };
 
     // if (contracts.length > 0) {
@@ -95,12 +95,22 @@ const ContractModal = (props) => {
     const draftedData = {
       ...fields,
       status: "Draft",
+      slug: fields.title
     };
 
     if (isNewContract) {
       props
         .dispatchData(addContract(draftedData))
-        .then(props.dispatchData(addNotification()))
+        .then(
+          props.dispatchData(
+            addNotification({
+              title: "A drafted contract was created!",
+              itemTitle: draftedData.title,
+              message: `A drafted contract was created for ${draftedData.company}`,
+              url: `/contracts/${draftedData.slug}`,
+            })
+          )
+        )
         .catch((error) => {
           console.log(error);
           setSubmitting(false);
