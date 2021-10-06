@@ -12,10 +12,10 @@
 
   &-header {
     padding-top: 1em;
+    border-bottom: 1px solid $border-medium;
   }
 
   &-footer {
-    border-top: 1px solid $border-medium;
     background-color: $color-grey-lighter;
   }
 

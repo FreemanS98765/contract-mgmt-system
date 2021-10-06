@@ -1,12 +1,13 @@
 import { connect } from "react-redux";
 
 import EventItem from "./EventItem";
+import NoEventsFound from "./NoEventsFound";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 import "swiper/swiper.scss";
-import 'swiper/components/scrollbar/scrollbar.scss';
+import "swiper/components/scrollbar/scrollbar.scss";
 // import 'swiper/css/grid';
 
 import SwiperCore, { Scrollbar, EffectCoverflow } from "swiper";
@@ -28,29 +29,33 @@ const UpcomingEvents = (props) => {
         </span>
       </div>
       <div className="card-content">
-        <div className="upcoming-events">
-          <Swiper
-            modules={[Scrollbar, EffectCoverflow]}
-            spaceBetween={5}
-            slidesPerView={3}
-            scrollbar={{ draggable: true }}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
-          >
-            {events.map((date) => {
-              return (
-                <SwiperSlide>
-                  <EventItem
-                    id={date.id}
-                    event="An upcoming event"
-                    date={date.endDate}
-                    company="Some Company"
-                  />
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        </div>
+        {!events || events.length === 0 ? (
+          <NoEventsFound />
+        ) : (
+          <div className="upcoming-events">
+            <Swiper
+              modules={[Scrollbar, EffectCoverflow]}
+              spaceBetween={5}
+              slidesPerView={3}
+              scrollbar={{ draggable: true }}
+              onSlideChange={() => console.log("slide change")}
+              onSwiper={(swiper) => console.log(swiper)}
+            >
+              {events.map((date) => {
+                return (
+                  <SwiperSlide>
+                    <EventItem
+                      id={date.id}
+                      event="An upcoming event"
+                      date={date.endDate}
+                      company="Some Company"
+                    />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -9,8 +9,10 @@
 @import "core/utility";
 
 // Components
+@import "components/contracts";
 @import "components/contractSingle";
 @import "components/controlPanel";
+@import "components/events";
 @import "components/loader";
 @import "components/navigation";
 @import "components/notification";

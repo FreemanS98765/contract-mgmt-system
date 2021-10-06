@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import RenewalItem from "./RenewalItem";
+import NoContractsFound from "../contracts/NoContractsFound";
 
 const UpcomingRenewals = (props) => {
   let contracts = props.contractState;
@@ -19,6 +20,10 @@ const UpcomingRenewals = (props) => {
   let sortedDates = contracts.filter(function (e) {
     return e.endDate;
   });
+
+  // if (!contracts || contracts.length === 0) {
+  //   return <NoContractsFound />;
+  // }
 
   sortedDates = sortedDates.sort((a, b) => b - a);
 
@@ -37,17 +42,25 @@ const UpcomingRenewals = (props) => {
         </span>
       </div>
       <div className="card-content">
-        <aside className="menu">
-          <ul className="menu-list">
-            {sortedDates.map((date, index) => {
-              return (
-                <li key={index}>
-                  <RenewalItem index={index} date={date.endDate} id={date.id} />
-                </li>
-              );
-            })}
-          </ul>
-        </aside>
+        {!contracts || contracts.length === 0 ? (
+          <NoContractsFound />
+        ) : (
+          <aside className="menu">
+            <ul className="menu-list">
+              {sortedDates.map((date, index) => {
+                return (
+                  <li key={index}>
+                    <RenewalItem
+                      index={index}
+                      date={date.endDate}
+                      id={date.id}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </aside>
+        )}
       </div>
     </div>
   );
