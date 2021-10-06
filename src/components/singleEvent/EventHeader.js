@@ -35,7 +35,7 @@ const EventHeader = (props) => {
         <div className="row">
           <Breadcrumbs className="has-arrow-separator">
             <BreadcrumbItem to={`/dashboard`}>Dashboard</BreadcrumbItem>
-            <BreadcrumbItem to={`/events`}>Contracts</BreadcrumbItem>
+            <BreadcrumbItem to={`/events`}>Events</BreadcrumbItem>
             <BreadcrumbItem
               to={`/events/${props.slug}`}
               className="is-active"
