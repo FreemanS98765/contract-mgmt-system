@@ -25,3 +25,27 @@
 .is-expanded > .select {
   width: 100%;
 }
+
+.file {
+  margin-bottom: 1em;
+}
+
+.file-cta {
+  background-color: $color-grey-light;
+  border-radius: 0;
+  transition: background-color .2s;
+
+  &:hover {
+    background-color: $color-grey-medium-light;
+  }
+}
+
+.file-label {
+  width: 100%;
+}
+
+.file-name {
+  border-radius: 0;
+  width: 100%;
+  max-width: 20em;
+}

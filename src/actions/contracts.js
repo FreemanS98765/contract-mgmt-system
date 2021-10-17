@@ -133,19 +133,6 @@ const _getContracts = (contracts, loading) => ({
   isLoading: true,
 });
 
-// export const _requestContracts = (contracts) => ({
-//   type: "REQUEST_CONTRACTS",
-//   contracts,
-//   isLoading: true,
-// });
-
-// const _receiveContracts = (contracts) => ({
-//   type: "RECEIVE_CONTRACTS",
-//   contracts,
-//   receivedAt: Date.now(),
-//   isLoading: false,
-// });
-
 export const getContracts = (callback) => (dispatch, getState) => {
   return axios
     .get("contracts")
@@ -174,13 +161,3 @@ export const loadTable = (contracts) => ({
   payload: contracts,
 });
 
-const shouldFetchContracts = (state, contracts) => {
-  const allContracts = state.contractsBySubreddit[contracts];
-  if (!contracts) {
-    return true;
-  }
-  if (contracts.isLoading) {
-    return false;
-  }
-  return contracts.didInvalidate;
-};

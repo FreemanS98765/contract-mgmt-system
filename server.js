@@ -10,8 +10,10 @@ const db = require("./src/config/db.config.js");
 var corsOptions = {
   origin: "http://localhost:3000",
   optionsSuccessStatus: 200,
+  credentials: true,
 };
 app.use(cors(corsOptions));
+//app.use(express.static("./public"));
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -27,16 +29,7 @@ db.sequelize.sync({ force: true }).then(() => {
 require("./src/routes/contract.routes.js")(app);
 require("./src/routes/event.routes.js")(app);
 require("./src/routes/notification.routes.js")(app);
-
-//simple route
-// app.get("/", (req, res) => {
-//   res.send({ message: "Welcome to the Contract Management System." });
-// });
-
-// set port, listen for requests
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}.`);
-// });
+require("./src/routes/upload.routes.js")(app);
 
 var server = app.listen(3306, function (err) {
   var host = server.address().address;

@@ -16,8 +16,10 @@ const StatBoxes = (props) => {
   const colorWarning = "#d6b457";
   const colorDanger = "#dd3333";
 
-  let contracts = props.contractState;
+  let contracts = props.contracts;
   let total = contracts.length;
+
+  console.log('Contracts in statboxes are: ', contracts);
 
   let active = contracts.filter(function (e) {
     return e.status === "Active";

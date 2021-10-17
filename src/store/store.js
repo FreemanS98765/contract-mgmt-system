@@ -3,6 +3,7 @@ import rootReducer from "./reducers";
 import thunk from "redux-thunk";
 import { getEvents } from "../actions/events";
 import { getNotifications } from "../actions/notifications";
+import { getUploads } from "../actions/uploads";
 
 
 //const middlewareEnhancer = applyMiddleware(thunk);
@@ -26,6 +27,7 @@ const configureStore = (preloadedState) => {
 
   store.dispatch(getEvents());
   store.dispatch(getNotifications());
+  store.dispatch(getUploads());
 
   store.subscribe(() => {
     const state = store.getState();
@@ -33,6 +35,7 @@ const configureStore = (preloadedState) => {
       contracts: state.contracts,
       events: state.events,
       notifications: state.notifications,
+      uploads: state.uploads,
       isLoading: state.isLoading,
     };
 

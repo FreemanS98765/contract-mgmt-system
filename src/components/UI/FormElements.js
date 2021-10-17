@@ -3,6 +3,11 @@ import { useField, useFormikContext } from "formik";
 import { formatPhoneNumber, getFormattedPhone } from "../../utils/utils";
 import DatePicker from "react-datepicker";
 
+import UploadThumb from "../UI/UploadThumb";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+
 export const TextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
@@ -113,11 +118,7 @@ export const PriceField = ({ label, ...props }) => {
   return (
     <Fragment>
       <label htmlFor={props.name}>{label}</label>
-      <input
-        className="input"
-        {...field}
-        {...props}
-      />
+      <input className="input" {...field} {...props} />
       {meta.touched && meta.error ? (
         <span className="error-message">{meta.error}</span>
       ) : null}
@@ -167,6 +168,60 @@ export const DateField = ({ ...props }) => {
       placeholderText={field.placeholderText}
       value={value}
     />
+  );
+};
+
+export const UploadInput = ({ ...props }) => {
+  const { setFieldValue } = useFormikContext();
+  const [selected, setSelected] = useState(undefined);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    console.log("File is ", file);
+
+    setFieldValue("files", file);
+    setSelected(file);
+  };
+
+  const handleRemoveFile = () => {
+    props.onChange(props.id);
+  };
+
+  const fileUploadHandler = () => {};
+
+  return (
+    <div className="file">
+      <div>
+        {/* {props.value !== "" && progress === -1 && (
+          <UploadThumb path={props.value} />
+        )} */}
+      </div>
+      {/* {props.value && (
+        <a className="button" role="button" onClick={handleRemoveFile}>
+          Remove
+        </a>
+      )} */}
+      <div>
+        <label className="file-label">
+          <input
+            className="file-input"
+            type="file"
+            name="files"
+            id="upload"
+            onChange={handleFileChange}
+          />
+          <span className="file-cta">
+            <span className="file-icon">
+              <FontAwesomeIcon size="lg" icon={faUpload} />
+            </span>
+            <span className="file-label">Choose a file...</span>
+          </span>
+          <span className="file-name">File name</span>
+        </label>
+        <UploadThumb file={selected} />
+      </div>
+    </div>
   );
 };
 

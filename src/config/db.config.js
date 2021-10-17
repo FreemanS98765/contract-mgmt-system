@@ -31,6 +31,7 @@ db.sequelize = sequelize;
 //Models/tables
 db.contracts = require("../models/contract.model.js")(sequelize, Sequelize);
 db.events = require("../models/event.model.js")(sequelize, Sequelize);
+db.uploads = require("../models/upload.model.js")(sequelize, Sequelize);
 db.notifications = require("../models/notification.model.js")(sequelize, Sequelize);
 
 module.exports = db;

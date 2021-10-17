@@ -1,12 +1,10 @@
-import { connect } from "react-redux";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import RenewalItem from "./RenewalItem";
 import NoContractsFound from "../contracts/NoContractsFound";
 
 const UpcomingRenewals = (props) => {
-  let contracts = props.contractState;
+  let contracts = props.contracts;
 
   let renewalDates = [];
 
@@ -66,11 +64,4 @@ const UpcomingRenewals = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    contractState: state.contracts,
-    dispatchData: state.dispatch,
-  };
-};
-
-export default connect(mapStateToProps)(UpcomingRenewals);
+export default UpcomingRenewals;

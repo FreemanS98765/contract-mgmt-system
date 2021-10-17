@@ -9,7 +9,7 @@ import "bulma/css/bulma.min.css";
 
 const ContractList = (props) => {
   const contracts = props.contracts;
-
+  
   const [filteredStatus, setFilteredStatus] = useState();
   const [filteredDate, setFilteredDate] = useState();
 
@@ -37,10 +37,7 @@ const ContractList = (props) => {
     setOrderBy(property);
   };
 
-  console.log('Props contracts before filter', props.contracts);
-
   const filteredContracts = contracts.filter((item) => {
-
     if (
       (filteredStatus === "All" ||
         filteredStatus === "draft" ||
@@ -114,7 +111,7 @@ const ContractList = (props) => {
           orderBy={orderBy}
           dispatchData={props.dispatchData}
           filters={props.filters}
-          postType='contracts'
+          postType="contracts"
         />
       </Fragment>
     );

@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import configureStore from "./store/store";
 import { getContracts } from "./actions/contracts";
-import { fetchBundle } from "./actions/bundle";
 import "./index.css";
 
 import { Provider } from "react-redux";

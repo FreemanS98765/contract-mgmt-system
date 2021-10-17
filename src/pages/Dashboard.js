@@ -1,11 +1,15 @@
-import { Route } from "react-router-dom";
+import { connect } from "react-redux";
 import Header from "../components/Header";
 
 import UpcomingRenewals from "../components/dashboard/UpcomingRenewals";
 import StatBoxes from "../components/dashboard/StatBoxes";
 import UpcomingEvents from "../components/events/UpcomingEvents";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
+
+  let contracts = props.contractState;
+  let events = props.eventState;
+
   return (
     <div>
       <Header title="Dashboard" />
@@ -16,15 +20,15 @@ const Dashboard = () => {
       </section> */}
       <section className="section">
         <div className="container-fluid">
-          <StatBoxes />
+          <StatBoxes contracts={contracts} />
         </div>
         <div className="container-fluid">
           <div className="columns">
             <div className="column is-one-third">
-              <UpcomingRenewals />
+              <UpcomingRenewals contracts={contracts} />
             </div>
             <div className="column is-one-third">
-              <UpcomingEvents />
+              <UpcomingEvents events={events} />
             </div>
           </div>
         </div>
@@ -33,4 +37,12 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    contractState: state.contracts,
+    eventState: state.events,
+    dispatchData: state.dispatch,
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard);

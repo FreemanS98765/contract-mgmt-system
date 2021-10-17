@@ -1,7 +1,8 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { Prompt, Link } from "react-router-dom";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
+import UploadThumb from "../UI/UploadThumb";
 
 import "react-datepicker/dist/react-datepicker.css";
 import * as yup from "yup";
@@ -13,6 +14,7 @@ import {
   EmailField,
   DateField,
   PriceField,
+  UploadInput,
 } from "../UI/FormElements";
 
 import { useParams } from "react-router-dom";
@@ -20,14 +22,14 @@ import { useParams } from "react-router-dom";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 import classes from "../../index.css";
-import { fetchContract } from "../../actions/contracts";
-import { bindActionCreators } from "redux";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const ContractForm = (props) => {
   const [isEntering, setIsEntering] = useState(false);
   const [isDraft, setIsDraft] = useState(false);
+
+  const [selectedFile, setSelectedFile] = useState(null);
 
   let { id } = useParams();
 
@@ -49,6 +51,7 @@ const ContractForm = (props) => {
     upload: "",
     notes: "",
     status: "",
+    file: null,
   });
 
   const validationSchema = yup.object().shape({
@@ -61,6 +64,7 @@ const ContractForm = (props) => {
       .matches(/^[0-9]+$/, "Must be only digits")
       .min(5, "Must be exactly 5 digits")
       .max(5, "Must be exactly 5 digits"),
+    file: yup.mixed(),
   });
 
   const phoneRegex =
@@ -76,13 +80,10 @@ const ContractForm = (props) => {
 
   const onDraftClick = () => {
     setIsDraft(true);
-  }
+  };
 
   const onSubmit = (fields, { setStatus, setSubmitting, resetForm }) => {
-
     setStatus();
-
-    console.log('Draft is', isDraft);
 
     if (isDraft) {
       props.onDraftContractData(fields, setSubmitting, isNewContract);
@@ -126,6 +127,7 @@ const ContractForm = (props) => {
             <Form
               onFocus={formFocusedHandler}
               onSubmit={formik.handleSubmit}
+              encType="multipart/form-data"
               // noValidate
             >
               <div className="columns">
@@ -263,13 +265,7 @@ const ContractForm = (props) => {
                   <div className="form-section">
                     <div className="field">
                       <div className="control">
-                        <label className="label">File upload</label>
-                        <input
-                          id="upload"
-                          name="upload"
-                          type="file"
-                          className="button link"
-                        />
+                        <UploadInput />
                       </div>
                     </div>
                   </div>

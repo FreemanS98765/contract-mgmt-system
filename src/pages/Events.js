@@ -22,9 +22,7 @@ class Events extends Component {
   };
 
   render() {
-    console.log("Props are now: ", this.props);
-
-    let events = this.props.eventState;
+    let events = this.props.events;
     const dispatchData = this.props.dispatch;
     const filters = this.props.filters;
     const { isLoading } = this.state;

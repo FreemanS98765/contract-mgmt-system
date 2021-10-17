@@ -4,12 +4,9 @@ import { useHistory } from "react-router-dom";
 import ContractForm from "./ContractForm";
 import useHttp from "../../hooks/use-http";
 
-import {
-  addContract,
-  editContract,
-  getContracts,
-} from "../../actions/contracts";
+import { addContract, editContract } from "../../actions/contracts";
 
+import { addUpload } from "../../actions/uploads";
 import { addNotification } from "../../actions/notifications";
 
 const ContractModal = (props) => {
@@ -19,53 +16,26 @@ const ContractModal = (props) => {
 
   const contracts = props.contracts;
 
-  // useEffect(() => {
-  //   if (loadingStatus === "completed") {
-  //     history.push("/contracts");
-  //     props.onHideModal();
-  //   }
-  // }, [loadingStatus, history]);
-
-  // useEffect(() => {
-  //   if (loadingStatus === "completed") {
-  //     props.dispatchData(
-  //       addNotification({
-  //         title: "A new contract was created!",
-  //         itemTitle: contracts.title,
-  //         message: `A new contract was created for ${contracts.company}`,
-  //         url: `/contracts/${contracts.id}`,
-  //       })
-  //     );
-  //   }
-  // }, [loadingStatus]);
-
   const saveContractDataHandler = (
     fields,
     setSubmitting,
     isNewContract,
     resetForm
   ) => {
-    //await new Promise((r) => setTimeout(r, 1000));
-
     const savedData = {
       ...fields,
       status: "Active",
       slug: fields.title,
     };
 
-    // if (contracts.length > 0) {
-    //   let lastCreated = contracts.pop();
-    //   console.log('Last created is: ', lastCreated.id);
-    //   setId(lastCreated.id);
-    // } else {
-    //   setId(1)
-    // }
-
-    console.log("Contracts are ", contracts);
+    console.log("SavedData is : ", savedData.files);
 
     if (isNewContract) {
       props
         .dispatchData(addContract(savedData))
+        .then(() => {
+          props.dispatchData(addUpload(savedData.files));
+        })
         .then(() => {
           props.dispatchData(
             addNotification({
@@ -95,12 +65,15 @@ const ContractModal = (props) => {
     const draftedData = {
       ...fields,
       status: "Draft",
-      slug: fields.title
+      slug: fields.title,
     };
 
     if (isNewContract) {
       props
         .dispatchData(addContract(draftedData))
+        .then(() => {
+          props.dispatchData(addUpload(draftedData));
+        })
         .then(
           props.dispatchData(
             addNotification({

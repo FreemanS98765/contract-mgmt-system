@@ -1,5 +1,3 @@
-import { connect } from "react-redux";
-
 import EventItem from "./EventItem";
 import NoEventsFound from "./NoEventsFound";
 
@@ -14,7 +12,7 @@ import SwiperCore, { Scrollbar, EffectCoverflow } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const UpcomingEvents = (props) => {
-  let events = props.eventState;
+  let events = props.events;
 
   SwiperCore.use([Scrollbar, EffectCoverflow]);
 
@@ -61,11 +59,4 @@ const UpcomingEvents = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    eventState: state.events,
-    dispatchData: state.dispatch,
-  };
-};
-
-export default connect(mapStateToProps)(UpcomingEvents);
+export default UpcomingEvents;
