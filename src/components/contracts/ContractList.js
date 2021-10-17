@@ -9,7 +9,7 @@ import "bulma/css/bulma.min.css";
 
 const ContractList = (props) => {
   const contracts = props.contracts;
-  
+
   const [filteredStatus, setFilteredStatus] = useState();
   const [filteredDate, setFilteredDate] = useState();
 
@@ -67,7 +67,6 @@ const ContractList = (props) => {
 
       if (searchItem === null) {
         console.log("Search value is null");
-        return;
       }
 
       return (

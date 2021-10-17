@@ -50,8 +50,6 @@ class TableRow extends Component {
       : "primary";
 
   removeContractHandler = (id) => {
-    //await new Promise((r) => setTimeout(r, 2000));
-
     // post contract data
     this.props.dispatchData(removeContract({ id }));
   };
