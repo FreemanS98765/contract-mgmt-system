@@ -5,7 +5,7 @@ import "bulma/css/bulma.min.css";
 
 class Checkbox extends Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     handleCheckboxChange: PropTypes.func.isRequired,
   };
 
