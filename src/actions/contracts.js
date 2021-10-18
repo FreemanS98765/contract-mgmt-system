@@ -14,7 +14,7 @@ const _addContract = (contract) => ({
 });
 
 const initialState = {
-  slug: '',
+  slug: "",
   client: "",
   company: "",
   email: "",
@@ -160,4 +160,3 @@ export const loadTable = (contracts) => ({
   type: LOAD_TABLE,
   payload: contracts,
 });
-

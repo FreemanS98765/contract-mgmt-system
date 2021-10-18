@@ -74,9 +74,10 @@ class TableRow extends Component {
         </td>
         <td>
           <TableDropdown
+            id={this.props.id}
             slug={this.props.slug}
             selected={this.props.selected}
-            onRemove={removeContractHandler}
+            onRemove={this.removeContractHandler}
             onClick={this.props.onClick}
             postType={this.props.postType}
           />

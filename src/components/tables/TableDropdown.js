@@ -9,6 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const TableDropdown = (props) => {
+
+  console.log('Props slug is: ', props);
   return (
     <div className={`dropdown ${props.selected ? "is-active" : ""} `}>
       <div className="dropdown-trigger">
@@ -29,7 +31,10 @@ const TableDropdown = (props) => {
         role="menu"
       >
         <div className="dropdown-content">
-          <Link className="dropdown-item" to={`/${props.postType}/${props.slug}`}>
+          <Link
+            className="dropdown-item"
+            to={`/${props.postType}/${props.slug}`}
+          >
             <span className="icon-text">
               <span className="icon">
                 <FontAwesomeIcon icon={faEye} />
@@ -42,7 +47,6 @@ const TableDropdown = (props) => {
             onClick={(e) => {
               const id = props.id;
 
-              //await sleep(1000);
               //props.dispatchData(removeContract({ id }));
               props.onRemove(id);
             }}

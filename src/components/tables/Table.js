@@ -45,6 +45,8 @@ const ContractsTable = (props) => {
       index === position ? !item : item
     );
 
+    console.log(position);
+
     setIsSelected(updatedToggledState);
   };
 

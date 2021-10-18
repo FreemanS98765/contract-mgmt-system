@@ -209,6 +209,7 @@ const ContractForm = (props) => {
                         name="title"
                         type="text"
                         placeholder="Contract Name"
+                        required
                       />
                     </div>
                     <div className="control">
