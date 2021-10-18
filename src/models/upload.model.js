@@ -1,9 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
   const Upload = sequelize.define(
-    "Upload",
+    "Uploads",
     {
       files: {
-        type: Sequelize.BLOB,
+        type: Sequelize.ARRAY,
       },
       filename: {
         type: Sequelize.STRING,

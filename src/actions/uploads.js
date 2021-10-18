@@ -12,38 +12,33 @@ const _addUpload = (upload) => ({
   upload,
 });
 
-
-export const addUpload =
-  (uploadData) =>
-  (dispatch) => {
-    const upload = {
-      files: uploadData,
-      filename: uploadData.name
-    };
-
-    // const formData = new FormData();
-    // formData.append(
-    //   'files',
-    //   uploadData,
-    //   uploadData.name
-    // )
-
-  console.log("Axios upload is: ", upload);
-
-    return axios
-      .post("uploads/add", upload, {
-        onUploadProgress: progressEvent => {
-          console.log((progressEvent.loaded / progressEvent.total * 100) + '%');
-        }
-      })
-      .then((result) => {
-        console.log('Result is: ', result);
-        dispatch(_addUpload(result.data));
-      })
-      .then((res) => {
-        console.log(res);
-      });
+export const addUpload = (uploadData) => (dispatch) => {
+  const upload = {
+    files: uploadData,
+    filename: uploadData.name,
   };
+
+  // const formData = new FormData();
+  // formData.append(
+  //   'files',
+  //   uploadData,
+  //   uploadData.name
+  // )
+
+  return axios
+    .post("uploads/add", upload, {
+      onUploadProgress: (progressEvent) => {
+        console.log((progressEvent.loaded / progressEvent.total) * 100 + "%");
+      },
+    })
+    .then((result) => {
+      console.log("Result is: ", result);
+      dispatch(_addUpload(result.data));
+    })
+    .then((res) => {
+      console.log(res);
+    });
+};
 
 const _removeUpload = ({ id = {} }) => ({
   type: REMOVE_UPLOAD,

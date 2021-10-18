@@ -22,7 +22,6 @@ exports.create = (req, res) => {
     zipcode: req.body.zipcode,
     upload: req.body.upload,
     notes: req.body.notes,
-    file: req.file
   };
 
   // Save Contract in the database

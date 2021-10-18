@@ -27,14 +27,20 @@ const ContractSingle = (props) => {
   };
 
   const contracts = props.contracts;
-
-  console.log("Slug is: ", slug);
+  console.log(typeof contracts);
 
   let contract = contracts.find((c) => {
     return c.slug === slug;
   });
 
-  console.log("Contract destructured : ", contract);
+  const uploads = props.uploads;
+
+  let upload = uploads.filter((c) => {
+    return c.id === contract.id;
+  });
+
+  console.log("Id is: ", id);
+  console.log("Upload is: ", upload);
 
   const openFormModal = () => {
     setIsOpen(true);
@@ -105,14 +111,13 @@ const ContractSingle = (props) => {
             <div className="column is-three-quarters">
               <ContractDetails contract={contract} />
               <ClientDetails contract={contract} />
-              <ContractAttachments contract={contract} />
+              <ContractAttachments upload={upload} slug={slug} />
             </div>
           </div>
         </div>
       </section>
 
       {isOpen && (
-        //<ContractModal onClose={showContractModal ? "is-active" : "false"} />
         <ContractModal
           type="edit"
           contract={contract}
@@ -131,6 +136,7 @@ const mapStateToProps = (state) => {
   return {
     contracts: state.contracts,
     dispatchData: state.dispatch,
+    uploads: state.uploads,
   };
 };
 

@@ -84,9 +84,11 @@ exports.findAll = (req, res) => {
 
 // Find a single upload with an id
 exports.findById = (req, res) => {
-  Uploads.findByPk(req.params.slug)
+  const id = req.params.id;
+
+  Uploads.findByPk(id)
     .then((data) => {
-      console.log(req.params.slug);
+      console.log('Id is: ', id);
       res.send(data);
     })
     .catch((err) => {

@@ -1,5 +1,4 @@
-import React, { useState, Component } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import ContractList from "../components/contracts/ContractList";
@@ -11,7 +10,6 @@ const Contracts = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   let contracts = props.contractState;
-
 
   //let contracts = props.contractState.contractObj.contracts === undefined ? [] : props.contractState.contractObj.contracts;
   const dispatchData = props.dispatch;
