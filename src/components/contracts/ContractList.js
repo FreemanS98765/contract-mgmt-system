@@ -10,8 +10,6 @@ import "bulma/css/bulma.min.css";
 const ContractList = (props) => {
   const contracts = props.contracts;
 
-  console.log('Contracts are: ', contracts);
-
   const [filteredStatus, setFilteredStatus] = useState();
   const [filteredDate, setFilteredDate] = useState();
 

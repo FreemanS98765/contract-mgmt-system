@@ -9,8 +9,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const TableDropdown = (props) => {
-
-  console.log('Props slug is: ', props);
   return (
     <div className={`dropdown ${props.selected ? "is-active" : ""} `}>
       <div className="dropdown-trigger">

@@ -7,38 +7,48 @@ import {
   LOAD_UPLOADS_TABLE,
 } from "../constants/ActionTypes";
 
+const initialState = {
+  filename: "",
+  files: null,
+};
+
+let formData = new FormData();
+
+const config = {
+  headers: { "Content-Type": "multipart/form-data" },
+  onUploadProgress: (progressEvent) => {
+    console.log((progressEvent.loaded / progressEvent.total) * 100 + "%");
+  },
+};
+
 const _addUpload = (upload) => ({
   type: ADD_UPLOAD,
   upload,
 });
 
-export const addUpload = (uploadData) => (dispatch) => {
-  const upload = {
-    files: uploadData,
-    filename: uploadData.name,
-  };
+export const addUpload =
+  (uploadData = initialState) =>
+  async (dispatch) => {
+    formData.append("filename", uploadData.filename);
+    formData.append("files", uploadData.files);
 
-  // const formData = new FormData();
-  // formData.append(
-  //   'files',
-  //   uploadData,
-  //   uploadData.name
-  // )
+    console.log("Upload is: ", uploadData);
 
-  return axios
-    .post("uploads/add", upload, {
-      onUploadProgress: (progressEvent) => {
-        console.log((progressEvent.loaded / progressEvent.total) * 100 + "%");
-      },
-    })
-    .then((result) => {
-      console.log("Result is: ", result);
+    try {
+      const result = await axios
+        .post("uploads/add", formData, config);
+      console.log("result is: ", result);
       dispatch(_addUpload(result.data));
-    })
-    .then((res) => {
-      console.log(res);
-    });
-};
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log("Error", error.message);
+      }
+    }
+  };
 
 const _removeUpload = ({ id = {} }) => ({
   type: REMOVE_UPLOAD,

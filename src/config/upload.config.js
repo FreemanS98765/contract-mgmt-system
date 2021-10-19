@@ -12,19 +12,16 @@ const fileFilter = (req, file, cb) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "../../uploads/");
+    cb(null, "./uploads/");
   },
-  filename: (req, file, cb) => {
-    let extArray = file.mimetype.split("/");
-    let ext = extArray[extArray.length - 1];
+  filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, `${file.fieldname}-${uniqueSuffix}.${ext}`);
+    cb(null, file.originalname);
   },
 });
 
 const upload = multer({
   storage: storage,
-  fileFilter: fileFilter,
 });
 
 module.exports = upload;

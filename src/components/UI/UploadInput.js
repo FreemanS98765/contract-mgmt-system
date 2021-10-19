@@ -9,7 +9,7 @@ const UploadInput = (props) => {
 
   const setFile = (event) => {
     props.formik.setFieldValue("file", event.target.files[0]);
-    props.formik.setFieldValue("upload", event.target.files[0].name);
+    props.formik.setValue("upload", event.target.files[0].name);
     setFileName(event.target.files[0].name);
   };
 

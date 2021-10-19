@@ -2,7 +2,6 @@ import React, { useState, Fragment, useEffect } from "react";
 import { Prompt, Link } from "react-router-dom";
 
 import { Formik, Form } from "formik";
-import UploadThumb from "../UI/UploadThumb";
 
 import "react-datepicker/dist/react-datepicker.css";
 import * as yup from "yup";
@@ -23,13 +22,13 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 
 import classes from "../../index.css";
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+//const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const ContractForm = (props) => {
   const [isEntering, setIsEntering] = useState(false);
   const [isDraft, setIsDraft] = useState(false);
 
-  const [selectedFile, setSelectedFile] = useState(null);
+  //const [selectedFile, setSelectedFile] = useState(null);
 
   let { id } = useParams();
 
@@ -51,12 +50,13 @@ const ContractForm = (props) => {
     upload: "",
     notes: "",
     status: "",
-    file: null,
+    files: null,
+    filename: ''
   });
 
   const validationSchema = yup.object().shape({
-    company: yup.string().required("Required"),
-    client: yup.string().required("Required"),
+    company: yup.string(),
+    client: yup.string(),
     phone: yup.string(),
     email: yup.string().email("Invalid email address").max(255),
     zipcode: yup

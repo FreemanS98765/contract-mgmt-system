@@ -26,15 +26,16 @@ const ContractModal = (props) => {
       ...fields,
       status: "Active",
       slug: fields.title,
+      upload: fields.files.name,
+      filename: fields.files.name,
     };
-
-    console.log("SavedData is : ", savedData.files);
 
     if (isNewContract) {
       props
         .dispatchData(addContract(savedData))
         .then(() => {
-          props.dispatchData(addUpload(savedData.files));
+          console.log("Saved data is: ", savedData);
+          props.dispatchData(addUpload(savedData));
         })
         .then(() => {
           props.dispatchData(

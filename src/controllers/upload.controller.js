@@ -1,72 +1,23 @@
-const fs = require("fs");
-
 const db = require("../config/db.config.js");
 const Uploads = db.uploads;
 
 // Create and Save a new upload with Express API
 exports.create = (req, res) => {
-  // const upload = {
-  //   filename: req.body.filename,
-  //   files: fs.readFileSync(
-  //     `../../uploads/${req.body.filename}`,
-  //     (err, data) => {
-  //       if (err) {
-  //         console.log(err.stack);
-  //         return;
-  //       }
-  //       console.log(data.toString());
-  //     }
-  //   ),
-  // };
+  console.log("Req is: ", req.file);
 
   const upload = {
-    filename: req.body.filename,
-    files: req.body.files,
+    filename: req.file.filename,
+    files: req.file,
   };
 
-  Uploads.create(upload);
-  // .then((upload) => {
-  //   fs.writeFileSync(
-  //     `../../public/assets/tmp/${upload.filename}`,
-  //     upload.files
-  //   );
-  //   const file = req.body;
-
-  //   return res.send(file);
-  // })
-  // .catch((err) => {
-  //   console.log(err);
-  //   res.send(`Error while uploading images: ${err}`);
-  // });
   Uploads.create(upload)
     .then((data) => {
+      console.log("Data is: ", data);
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send("Error -> " + err);
+      res.status(500).send("Upload Error -> " + err);
     });
-
-  // Uploads.create(upload)
-  //   .then((upload) => {
-  //     fs.writeFileSync(`../../public/assets/tmp/${upload.name}`, upload.data);
-  //     const files = req.files;
-
-  //     return res.send(files);
-  //   })
-  //   .then(() => {
-  //     const img = fs.readFileSync(req.file.path);
-  //     const enconde_image = img.toString("base64");
-
-  //     const upload = {
-  //       type: req.file.mimetype,
-  //       name: req.file.originalname,
-  //       data: fs.readFileSync("/uploads" + req.file.filename),
-  //     };
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //     return res.send(`Error while uploading images: ${err}`);
-  //   });
 };
 
 // Retrieve all uploads from the database.
@@ -88,7 +39,7 @@ exports.findById = (req, res) => {
 
   Uploads.findByPk(id)
     .then((data) => {
-      console.log('Id is: ', id);
+      console.log("Id is: ", id);
       res.send(data);
     })
     .catch((err) => {

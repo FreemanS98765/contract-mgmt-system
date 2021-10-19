@@ -3,11 +3,9 @@ import LoadingSpinner from "./LoadingSpinner";
 
 const UploadThumb = (props) => {
   const [loading, setLoading] = useState(false);
-  const [thumb, setThumb] = useState('');
+  const [thumb, setThumb] = useState("");
 
   const file = props.file;
-  
-  console.log('FIle is: ', file);
 
   const loadThumb = async (nextProps) => {
     if (!nextProps) {
@@ -41,13 +39,7 @@ const UploadThumb = (props) => {
   }
 
   return (
-    <img
-      src={thumb}
-      alt={file.name}
-      className="img"
-      height={150}
-      width={150}
-    />
+    <img src={thumb} alt={file.name} className="img" height={150} width={150} />
   );
 };
 

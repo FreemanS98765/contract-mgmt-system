@@ -178,8 +178,6 @@ export const UploadInput = ({ ...props }) => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
 
-    console.log("File is ", file);
-
     setFieldValue("files", file);
     setSelected(file);
   };

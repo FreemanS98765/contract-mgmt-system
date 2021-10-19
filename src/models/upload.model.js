@@ -3,7 +3,7 @@ module.exports = (sequelize, Sequelize) => {
     "Uploads",
     {
       files: {
-        type: Sequelize.ARRAY,
+        type: Sequelize.BLOB,
       },
       filename: {
         type: Sequelize.STRING,

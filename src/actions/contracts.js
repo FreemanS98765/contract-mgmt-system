@@ -54,38 +54,21 @@ export const addContract =
       status: contractData.status,
     };
 
-    return axios.post("contracts/add", contract).then((result) => {
-      dispatch(_addContract(result.data));
-    });
+    return axios
+      .post("contracts/add", contract)
+      .then((result) => {
+        dispatch(_addContract(result.data));
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+      });
   };
-
-//export const addContract = (contractData)
-
-// export const addContract = (contractData) => {
-//   return (dispatch) => {
-//     const contract = {
-//       client: contractData.client,
-//       company: contractData.company,
-//       email: contractData.email,
-//       phone: contractData.phone,
-//       address: contractData.address,
-//       city: contractData.city,
-//       state: contractData.state,
-//       zipcode: contractData.zipcode,
-//       title: contractData.title,
-//       startDate: contractData.startDate,
-//       endDate: contractData.endDate,
-//       price: contractData.price,
-//       notes: contractData.notes,
-//       upload: contractData.upload,
-//       status: contractData.status,
-//     };
-
-//     return axios.post("contracts/add", contract).then((result) => {
-//       dispatch(_addContract(result.data));
-//     });
-//   };
-// };
 
 const _removeContract = ({ id = {} }) => ({
   type: REMOVE_CONTRACT,

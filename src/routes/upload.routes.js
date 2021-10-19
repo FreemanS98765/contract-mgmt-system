@@ -1,9 +1,27 @@
 module.exports = function (app) {
+  const db = require("../config/db.config.js");
+  const Uploads = db.uploads;
+
+  const upload = require("../config/upload.config.js");
   const uploads = require("../controllers/upload.controller.js");
 
   // Create a new upload
-  //app.post("/api/uploads/add", upload.single('file'), uploads.create);
-  app.post("/api/uploads/add", uploads.create);
+  //app.post("/api/uploads/add", upload.single('files'), uploads.create);
+  app.post("/api/uploads/add", upload.single("files"), (req, res) => {
+    const uploadObj = {
+      files: req.file,
+      filename: req.file.filename,
+    };
+
+    Uploads.create(uploadObj)
+      .then((data) => {
+        console.log("Data is: ", data);
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send("Error -> " + err);
+      });
+  });
 
   // Retrieve all uploads
   app.get("/api/uploads", uploads.findAll);

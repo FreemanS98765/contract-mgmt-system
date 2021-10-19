@@ -16,7 +16,6 @@ export default function uploadsReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_UPLOAD:
       return [...state, action.upload];
-
     case REMOVE_UPLOAD:
       return state.filter(({ id }) => id !== action.id);
     case EDIT_UPLOAD:
