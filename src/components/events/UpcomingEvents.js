@@ -27,7 +27,7 @@ const UpcomingEvents = (props) => {
         </span>
       </div>
       <div className="card-content">
-        {!events || events.length === 0 ? (
+        {!events.length ? (
           <NoEventsFound />
         ) : (
           <div className="upcoming-events">
@@ -39,9 +39,9 @@ const UpcomingEvents = (props) => {
               onSlideChange={() => console.log("slide change")}
               onSwiper={(swiper) => console.log(swiper)}
             >
-              {events.map((date) => {
+              {events.map((date, index) => {
                 return (
-                  <SwiperSlide>
+                  <SwiperSlide key={index}>
                     <EventItem
                       id={date.id}
                       event="An upcoming event"

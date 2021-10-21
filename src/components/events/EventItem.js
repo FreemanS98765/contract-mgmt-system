@@ -16,8 +16,6 @@ const EventItem = (props) => {
   const eventDay = newDate.getDay();
   const eventMonth = getMonthNames(newDate);
 
-  console.log("Date is: ", newDate);
-
   return (
     <Fragment>
       <div className="block">
