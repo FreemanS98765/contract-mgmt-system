@@ -20,7 +20,7 @@ export const BreadcrumbItem = (props) => {
         aria-current={props.active ? "page" : undefined}
       >
         <Link
-          activeClassName="is-active"
+          className="is-active"
           to={props.to}
           title={props.title}
           target={props.target}

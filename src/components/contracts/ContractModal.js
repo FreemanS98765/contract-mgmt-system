@@ -37,7 +37,6 @@ const ContractModal = (props) => {
       props
         .dispatchData(addContract(savedData))
         .then(() => {
-          console.log("Saved data is: ", savedData);
           props.dispatchData(addUpload(savedData));
         })
         .then(() => {
@@ -70,6 +69,9 @@ const ContractModal = (props) => {
       ...fields,
       status: "Draft",
       slug: fields.title,
+      upload: fields.files.name,
+      filename: fields.files.name,
+      path: fields.path,
     };
 
     if (isNewContract) {
@@ -103,9 +105,16 @@ const ContractModal = (props) => {
     // Update contract data
     props
       .dispatchData(editContract(id, fields))
-      .then(() => {
-        //history.push(".");
-      })
+      .then(
+        props.dispatchData(
+          addNotification({
+            title: "A contract was updated!",
+            itemTitle: fields.title,
+            message: `The contract for ${fields.company} was updated.`,
+            url: `/contracts/${fields.slug}`,
+          })
+        )
+      )
       .catch((error) => {
         console.log(error);
       });

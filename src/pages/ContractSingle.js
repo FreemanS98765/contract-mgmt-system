@@ -69,14 +69,6 @@ const ContractSingle = (props) => {
     return <p>Contract not found!</p>;
   }
 
-  // const checkIfEmpty = (data) => {
-  //   if (data === email) {
-  //     return email ? <a href={`mailto:${email}`}>{email}</a> : `Nothing found`;
-  //   }
-
-  //   return data ? data : "Nothing found";
-  // };
-
   return (
     <Fragment>
       <ContractHeader

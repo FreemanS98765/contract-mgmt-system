@@ -1,6 +1,5 @@
 import ContractButton from "./contracts/ContractButton";
 import EventButton from "./events/EventButton";
-//import { Breadcrumbs, BreadcrumbItem } from "./UI/Breadcrumbs";
 
 const Header = (props) => {
   const getTemplate = (title) => {
