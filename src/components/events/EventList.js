@@ -41,7 +41,7 @@ const EventList = (props) => {
     setOrderBy(property);
   };
 
-  if (!filteredEvents.length) {
+  if (!events.length) {
     return (
       <h2>No Events found!</h2>
     )
