@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { Fragment } from "react";
 import { useParams, NavLink } from "react-router-dom";
-import { NavHashLink } from "react-router-hash-link";
+import { HashLink } from "react-router-hash-link";
 
 import ContractHeader from "../components/singleContract/ContractHeader";
 import ClientDetails from "../components/singleContract/ClientDetails";
@@ -17,14 +17,12 @@ const ContractSingle = (props) => {
   const dispatchData = props.dispatch;
 
   let { slug, id } = useParams();
+  let upload = [];
 
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
-
-  const setActiveLink = (e) => {
-    setIsSelected(true);
-  };
+  const [activeLink, setActiveLink] = useState(false);
 
   const contracts = props.contracts;
 
@@ -34,15 +32,13 @@ const ContractSingle = (props) => {
 
   const uploads = props.uploads;
 
-  if (!uploads) {
+  if (!uploads.length) {
     return null;
+  } else {
+    upload = uploads.map((c) => {
+      return c.filename === contract.upload ? c : "";
+    });
   }
-  let upload = uploads.map((c) => {
-    console.log('c is: ', c );
-    return c.filename === contract.upload ? c : '';
-  });
-
-  console.log("Upload is: ", uploads);
 
   const openFormModal = () => {
     setIsOpen(true);
@@ -50,6 +46,10 @@ const ContractSingle = (props) => {
 
   const closeFormModal = () => {
     setIsOpen(false);
+  };
+
+  const handleHashClick = (e) => {
+    setActiveLink(true);
   };
 
   if (!contract) {
@@ -80,31 +80,34 @@ const ContractSingle = (props) => {
                 <div className="menu">
                   <ul className="menu-list">
                     <li>
-                      <NavHashLink
-                        activeClassName="is-active"
+                      <HashLink
+                        className={activeLink ? "is-active" : ""}
                         smooth
                         to="#contractDetails"
+                        onClick={() => handleHashClick}
                       >
                         Contract Details
-                      </NavHashLink>
+                      </HashLink>
                     </li>
                     <li>
-                      <NavHashLink
-                        activeClassName="is-active"
+                      <HashLink
+                        className={activeLink ? "is-active" : ""}
                         smooth
                         to="#clientDetails"
+                        onClick={() => handleHashClick}
                       >
                         Client Details
-                      </NavHashLink>
+                      </HashLink>
                     </li>
                     <li>
-                      <NavHashLink
-                        activeClassName="is-active"
+                      <HashLink
+                        className={activeLink ? "is-active" : ""}
                         smooth
                         to="#attachments"
+                        onClick={() => handleHashClick}
                       >
                         Attachments
-                      </NavHashLink>
+                      </HashLink>
                     </li>
                   </ul>
                 </div>
