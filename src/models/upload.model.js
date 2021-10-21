@@ -8,6 +8,9 @@ module.exports = (sequelize, Sequelize) => {
       filename: {
         type: Sequelize.STRING,
       },
+      path: {
+        type: Sequelize.STRING,
+      },
     },
     {
       // options

@@ -7,7 +7,7 @@ module.exports = {
   //context: path.resolve(__dirname, "assets"),
   output: {
     filename: "[name].min.js",
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, "./public"),
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -27,6 +27,17 @@ module.exports = {
           },
           "postcss-loader",
           "sass-loader",
+        ],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              limit: 100000,
+            },
+          },
         ],
       },
     ],

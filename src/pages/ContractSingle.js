@@ -27,7 +27,6 @@ const ContractSingle = (props) => {
   };
 
   const contracts = props.contracts;
-  console.log(typeof contracts);
 
   let contract = contracts.find((c) => {
     return c.slug === slug;
@@ -35,12 +34,15 @@ const ContractSingle = (props) => {
 
   const uploads = props.uploads;
 
-  let upload = uploads.filter((c) => {
-    return c.id === contract.id;
+  if (!uploads) {
+    return null;
+  }
+  let upload = uploads.map((c) => {
+    console.log('c is: ', c );
+    return c.filename === contract.upload ? c : '';
   });
 
-  console.log("Id is: ", id);
-  console.log("Upload is: ", upload);
+  console.log("Upload is: ", uploads);
 
   const openFormModal = () => {
     setIsOpen(true);

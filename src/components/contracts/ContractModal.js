@@ -9,6 +9,8 @@ import { addContract, editContract } from "../../actions/contracts";
 import { addUpload } from "../../actions/uploads";
 import { addNotification } from "../../actions/notifications";
 
+const { v4: uuidv4 } = require("uuid");
+
 const ContractModal = (props) => {
   const { sendRequest, loadingStatus } = useHttp(addContract);
   const history = useHistory();
@@ -28,6 +30,7 @@ const ContractModal = (props) => {
       slug: fields.title,
       upload: fields.files.name,
       filename: fields.files.name,
+      path: fields.path,
     };
 
     if (isNewContract) {

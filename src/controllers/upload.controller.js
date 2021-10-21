@@ -8,6 +8,7 @@ exports.create = (req, res) => {
   const upload = {
     filename: req.file.filename,
     files: req.file,
+    path: req.file.path,
   };
 
   Uploads.create(upload)

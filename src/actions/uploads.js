@@ -10,6 +10,7 @@ import {
 const initialState = {
   filename: "",
   files: null,
+  path: "",
 };
 
 let formData = new FormData();
@@ -31,12 +32,12 @@ export const addUpload =
   async (dispatch) => {
     formData.append("filename", uploadData.filename);
     formData.append("files", uploadData.files);
+    formData.append("path", uploadData.path);
 
     console.log("Upload is: ", uploadData);
 
     try {
-      const result = await axios
-        .post("uploads/add", formData, config);
+      const result = await axios.post("uploads/add", formData, config);
       console.log("result is: ", result);
       dispatch(_addUpload(result.data));
     } catch (error) {

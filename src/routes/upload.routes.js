@@ -11,6 +11,7 @@ module.exports = function (app) {
     const uploadObj = {
       files: req.file,
       filename: req.file.filename,
+      path: req.file.path,
     };
 
     Uploads.create(uploadObj)
