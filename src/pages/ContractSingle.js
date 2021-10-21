@@ -13,16 +13,29 @@ import ContractAttachments from "../components/singleContract/ContractAttachment
 import ContractModal from "../components/contracts/ContractModal.js";
 
 const ContractSingle = (props) => {
-  //const params = useParams();
   const dispatchData = props.dispatch;
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
+  const [activeLink, setActiveLink] = useState(null);
 
   let { slug, id } = useParams();
   let upload = [];
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
-  const [activeLink, setActiveLink] = useState(false);
+  let hashLinks = [
+    {
+      to: "#contractDetails",
+      text: "Contract Details",
+    },
+    {
+      to: "#clientDetails",
+      text: "Client Details",
+    },
+    {
+      to: "#attachments",
+      text: "Attachments",
+    },
+  ];
 
   const contracts = props.contracts;
 
@@ -48,8 +61,8 @@ const ContractSingle = (props) => {
     setIsOpen(false);
   };
 
-  const handleHashClick = (e) => {
-    setActiveLink(true);
+  const handleHashClick = (index) => {
+    setActiveLink(index);
   };
 
   if (!contract) {
@@ -79,36 +92,20 @@ const ContractSingle = (props) => {
               <div className="box">
                 <div className="menu">
                   <ul className="menu-list">
-                    <li>
-                      <HashLink
-                        className={activeLink ? "is-active" : ""}
-                        smooth
-                        to="#contractDetails"
-                        onClick={() => handleHashClick}
-                      >
-                        Contract Details
-                      </HashLink>
-                    </li>
-                    <li>
-                      <HashLink
-                        className={activeLink ? "is-active" : ""}
-                        smooth
-                        to="#clientDetails"
-                        onClick={() => handleHashClick}
-                      >
-                        Client Details
-                      </HashLink>
-                    </li>
-                    <li>
-                      <HashLink
-                        className={activeLink ? "is-active" : ""}
-                        smooth
-                        to="#attachments"
-                        onClick={() => handleHashClick}
-                      >
-                        Attachments
-                      </HashLink>
-                    </li>
+                    {hashLinks.map((link, index) => {
+                      return (
+                        <li key={index}>
+                          <HashLink
+                            className={index === activeLink ? "is-active" : ""}
+                            smooth
+                            to={link.to}
+                            onClick={() => handleHashClick(index)}
+                          >
+                            {link.text}
+                          </HashLink>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>

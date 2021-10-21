@@ -5,8 +5,6 @@ import "react-image-lightbox/style.css";
 const LightboxImage = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log("Attachment is: ", props.attachment);
-
   return (
     <div className="row">
       <a href="#" onClick={() => setIsOpen(true)}>
