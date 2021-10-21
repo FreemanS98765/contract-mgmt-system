@@ -46,7 +46,7 @@ const ContractSingle = (props) => {
   const uploads = props.uploads;
 
   if (!uploads.length) {
-    return null;
+    return 'No attachments found';
   } else {
     upload = uploads.map((c) => {
       return c.filename === contract.upload ? c : "";

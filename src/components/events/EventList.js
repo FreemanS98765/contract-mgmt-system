@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 
 import FiltersToolbar from "../tables/FiltersToolbar";
 import { EventsTable } from "../tables/Table";
+import NoEventsFound from "./NoEventsFound";
 
 import Spinner from "../UI/LoadingSpinner";
 
@@ -9,6 +10,7 @@ import "bulma/css/bulma.min.css";
 
 const EventList = (props) => {
   const events = props.events;
+  let filteredEvents = [];
 
   console.log("Events inside list ", events);
 
@@ -39,44 +41,50 @@ const EventList = (props) => {
     setOrderBy(property);
   };
 
-  const filteredEvents = events.filter((item) => {
-    if (
-      (filteredStatus === "All" ||
-        filteredStatus === "draft" ||
-        filteredStatus === "expired" ||
-        filteredStatus === "active") &&
-      filteredStatus !== null
-    ) {
-      return item.status.toLowerCase() === filteredStatus;
-    }
-
-    // If some searchParam's value matches the value of the contract
-    // Return true
-
-    if (
-      (filteredDate === "2022" ||
-        filteredDate === "2021" ||
-        filteredDate === "2020" ||
-        filteredDate === "2019" ||
-        filteredDate === "2018") &&
-      filteredDate !== null
-    ) {
-      return item.startDate.getFullYear().toString() === filteredDate;
-    }
-
-    return searchParam.some((param) => {
-      const searchItem = item[param];
-
-      if (searchItem === null) {
-        console.log("Search value is null");
-        return;
+  if (!filteredEvents.length) {
+    return (
+      <h2>No Events found!</h2>
+    )
+  } else {
+    filteredEvents = events.filter((item) => {
+      if (
+        (filteredStatus === "All" ||
+          filteredStatus === "draft" ||
+          filteredStatus === "expired" ||
+          filteredStatus === "active") &&
+        filteredStatus !== null
+      ) {
+        return item.status.toLowerCase() === filteredStatus;
       }
 
-      return (
-        searchItem.toString().toLowerCase().indexOf(query.toLowerCase()) > -1
-      );
+      // If some searchParam's value matches the value of the contract
+      // Return true
+
+      if (
+        (filteredDate === "2022" ||
+          filteredDate === "2021" ||
+          filteredDate === "2020" ||
+          filteredDate === "2019" ||
+          filteredDate === "2018") &&
+        filteredDate !== null
+      ) {
+        return item.startDate.getFullYear().toString() === filteredDate;
+      }
+
+      return searchParam.some((param) => {
+        const searchItem = item[param];
+
+        if (searchItem === null) {
+          console.log("Search value is null");
+          return;
+        }
+
+        return (
+          searchItem.toString().toLowerCase().indexOf(query.toLowerCase()) > -1
+        );
+      });
     });
-  });
+  }
 
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
