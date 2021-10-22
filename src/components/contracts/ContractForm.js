@@ -1,6 +1,8 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { Prompt, Link } from "react-router-dom";
 
+import { fetchContract } from "../../actions/contracts";
+
 import { Formik, Form } from "formik";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,19 +24,15 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 
 import classes from "../../index.css";
 
-//const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
 const ContractForm = (props) => {
   const [isEntering, setIsEntering] = useState(false);
   const [isDraft, setIsDraft] = useState(false);
 
-  //const [selectedFile, setSelectedFile] = useState(null);
-
-  let { id } = useParams();
-
-  const isNewContract = !id;
+  const { id, slug } = useParams();
+  const isNewContract = !slug;
 
   const [initialValues, setInitialValues] = useState({
+    slug: "",
     company: "",
     client: "",
     email: "",
@@ -51,8 +49,14 @@ const ContractForm = (props) => {
     notes: "",
     status: "",
     files: null,
-    filename: ''
+    filename: "",
   });
+
+  useEffect(() => {
+    if (!isNewContract) {
+      setInitialValues(props.contract);
+    }
+  }, [isNewContract, props.contract]);
 
   const validationSchema = yup.object().shape({
     company: yup.string(),
@@ -82,13 +86,15 @@ const ContractForm = (props) => {
     setIsDraft(true);
   };
 
-  const onSubmit = (fields, { setStatus, setSubmitting, resetForm }) => {
+  const onSubmit = (fields, { setStatus, setSubmitting }) => {
     setStatus();
 
-    if (isDraft) {
-      props.onDraftContractData(fields, setSubmitting, isNewContract);
+    if (isNewContract) {
+      props.onSaveContractData(fields, setSubmitting);
+    } else if (isNewContract && isDraft) {
+      props.onDraftContractData(fields, setSubmitting);
     } else {
-      props.onSaveContractData(fields, setSubmitting, isNewContract, resetForm);
+      props.onUpdateContractData(slug, fields, setSubmitting);
     }
   };
 
@@ -108,27 +114,59 @@ const ContractForm = (props) => {
         onSubmit={onSubmit}
       >
         {function Render(formik) {
-          const [contractDetails, setContractDetails] = useState();
+          const [contract, setContract] = useState({});
 
-          useEffect(() => {
-            let mounted = true;
-            if (!isNewContract) {
-              setTimeout(() => {
-                if (mounted) {
-                  setInitialValues(props.contract);
-                }
-              }, 500);
-            }
+          console.log('Initial values are: ', initialValues);
 
-            return () => (mounted = false);
-          }, []);
+          // useEffect(() => {
+          //   let mounted = true;
+          //   if (!isNewContract) {
+          //     setTimeout(() => {
+          //       if (mounted) {
+          //         setInitialValues(props.contract);
+          //       }
+          //     }, 500);
+          //   }
+
+          //   return () => (mounted = false);
+          // }, []);
+
+          // useEffect(() => {
+          //   if (!isNewContract) {
+          //     // get contract and set form fields
+          //     props.dispatchData(fetchContract(id)).then((contract) => {
+          //       const fields = [
+          //         "company",
+          //         "client",
+          //         "email",
+          //         "phone",
+          //         "address",
+          //         "city",
+          //         "state",
+          //         "zipcode",
+          //         "title",
+          //         "startDate",
+          //         "endDate",
+          //         "price",
+          //         "upload",
+          //         "notes",
+          //         "status",
+          //         "files",
+          //         "filename",
+          //       ];
+          //       fields.forEach((field) =>
+          //         formik.setFieldValue(field, contract[field], false)
+          //       );
+          //       setContract(contract);
+          //     });
+          //   }
+          // }, [formik]);
 
           return (
             <Form
               onFocus={formFocusedHandler}
               onSubmit={formik.handleSubmit}
               encType="multipart/form-data"
-              // noValidate
             >
               <div className="columns">
                 <div className="column form-section">
@@ -266,7 +304,7 @@ const ContractForm = (props) => {
                   <div className="form-section">
                     <div className="field">
                       <div className="control">
-                        <UploadInput />
+                        <UploadInput upload={props.upload} />
                       </div>
                     </div>
                   </div>

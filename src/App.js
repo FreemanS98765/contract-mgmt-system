@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import {
   Redirect,
   Route,
@@ -28,9 +28,8 @@ import "./App.scss";
 
 toast.configure();
 function App() {
-
   return (
-    <>
+    <Fragment>
       <Router>
         <Layout>
           <Switch>
@@ -46,7 +45,7 @@ function App() {
               <Contracts />
             </Route>
 
-            <Route path={`/contracts/:slug`}>
+            <Route path={`/contracts/:slug`} component={ContractForm}>
               <ContractSingle />
             </Route>
 
@@ -58,7 +57,7 @@ function App() {
               <Events />
             </Route>
 
-            <Route path={`/events/:slug`}>
+            <Route path={`/events/:slug`} component={EventForm}>
               <EventSingle />
             </Route>
 
@@ -70,7 +69,7 @@ function App() {
           </Switch>
         </Layout>
       </Router>
-    </>
+    </Fragment>
   );
 }
 

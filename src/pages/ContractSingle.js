@@ -15,12 +15,10 @@ import ContractModal from "../components/contracts/ContractModal.js";
 const ContractSingle = (props) => {
   const dispatchData = props.dispatch;
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
   const [activeLink, setActiveLink] = useState(null);
 
-  let { slug, id } = useParams();
-  let upload = [];
+  let { slug } = useParams();
+  let attachment = "";
 
   let hashLinks = [
     {
@@ -37,21 +35,25 @@ const ContractSingle = (props) => {
     },
   ];
 
-  const contracts = props.contracts;
+  let contracts = props.contracts;
 
   let contract = contracts.find((c) => {
     return c.slug === slug;
   });
 
-  const uploads = props.uploads;
+  console.log("Contract is: ", contract);
 
-  if (!uploads.length) {
-    return 'No attachments found';
-  } else {
-    upload = uploads.map((c) => {
-      return c.filename === contract.upload ? c : "";
-    });
-  }
+  let uploads = props.uploads;
+
+  console.log("Uploads are: ", uploads);
+
+  // if (!uploads.length) {
+  //   return "No attachments found";
+  // } else {
+  //   attachment = uploads.find((u) => {
+  //     return u.filename === contract.upload ? u : "";
+  //   });
+  // }
 
   const openFormModal = () => {
     setIsOpen(true);
@@ -105,7 +107,11 @@ const ContractSingle = (props) => {
             <div className="column is-three-quarters">
               <ContractDetails contract={contract} />
               <ClientDetails contract={contract} />
-              <ContractAttachments upload={upload} slug={slug} />
+              <ContractAttachments
+                upload={props.uploads}
+                attachment={attachment}
+                slug={slug}
+              />
             </div>
           </div>
         </div>
@@ -115,6 +121,7 @@ const ContractSingle = (props) => {
         <ContractModal
           type="edit"
           contract={contract}
+          upload={props.uploads}
           onHideModal={closeFormModal}
           onShowModal={openFormModal}
           dispatchData={dispatchData}

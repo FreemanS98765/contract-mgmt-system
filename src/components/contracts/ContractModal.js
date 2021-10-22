@@ -5,7 +5,6 @@ import ContractForm from "./ContractForm";
 import useHttp from "../../hooks/use-http";
 
 import { addContract, editContract } from "../../actions/contracts";
-
 import { addUpload } from "../../actions/uploads";
 import { addNotification } from "../../actions/notifications";
 
@@ -18,12 +17,7 @@ const ContractModal = (props) => {
 
   const contracts = props.contracts;
 
-  const saveContractDataHandler = (
-    fields,
-    setSubmitting,
-    isNewContract,
-    resetForm
-  ) => {
+  const saveContractDataHandler = (fields, setSubmitting) => {
     const savedData = {
       ...fields,
       status: "Active",
@@ -33,38 +27,30 @@ const ContractModal = (props) => {
       path: fields.path,
     };
 
-    if (isNewContract) {
-      props
-        .dispatchData(addContract(savedData))
-        .then(() => {
-          props.dispatchData(addUpload(savedData));
-        })
-        .then(() => {
-          props.dispatchData(
-            addNotification({
-              title: "A new contract was created!",
-              itemTitle: savedData.title,
-              message: `A new contract was created for ${savedData.company}`,
-              url: `/contracts/${savedData.slug}`,
-            })
-          );
-        })
-        .catch((error) => {
-          setSubmitting(false);
-          console.log(error);
-        });
-
-      resetForm();
-    } else {
-      updateContractDataHandler(fields.id, savedData, setSubmitting);
-    }
+    props
+      .dispatchData(addContract(savedData))
+      .then(() => {
+        props.dispatchData(addUpload(savedData));
+      })
+      .then(() => {
+        props.dispatchData(
+          addNotification({
+            title: "A new contract was created!",
+            itemTitle: savedData.title,
+            message: `A new contract was created for ${savedData.company}`,
+            url: `/contracts/${savedData.slug}`,
+          })
+        );
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        console.log(error);
+      });
 
     props.onHideModal();
   };
 
   const draftContractDataHandler = (fields, setSubmitting, isNewContract) => {
-    //await new Promise((r) => setTimeout(r, 1000));
-
     const draftedData = {
       ...fields,
       status: "Draft",
@@ -74,29 +60,25 @@ const ContractModal = (props) => {
       path: fields.path,
     };
 
-    if (isNewContract) {
-      props
-        .dispatchData(addContract(draftedData))
-        .then(() => {
-          props.dispatchData(addUpload(draftedData));
-        })
-        .then(
-          props.dispatchData(
-            addNotification({
-              title: "A drafted contract was created!",
-              itemTitle: draftedData.title,
-              message: `A drafted contract was created for ${draftedData.company}`,
-              url: `/contracts/${draftedData.slug}`,
-            })
-          )
+    props
+      .dispatchData(addContract(draftedData))
+      .then(() => {
+        props.dispatchData(addUpload(draftedData));
+      })
+      .then(
+        props.dispatchData(
+          addNotification({
+            title: "A drafted contract was created!",
+            itemTitle: draftedData.title,
+            message: `A drafted contract was created for ${draftedData.company}`,
+            url: `/contracts/${draftedData.slug}`,
+          })
         )
-        .catch((error) => {
-          console.log(error);
-          setSubmitting(false);
-        });
-    } else {
-      updateContractDataHandler(fields.id, draftedData, setSubmitting);
-    }
+      )
+      .catch((error) => {
+        setSubmitting(false);
+        console.log(error);
+      });
 
     props.onHideModal();
   };
@@ -116,8 +98,10 @@ const ContractModal = (props) => {
         )
       )
       .catch((error) => {
+        setSubmitting(false);
         console.log(error);
       });
+
     props.onHideModal();
   };
 
