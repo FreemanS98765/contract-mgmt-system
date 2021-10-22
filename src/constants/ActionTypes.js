@@ -37,3 +37,10 @@ export const EDIT_UPLOAD = "EDIT_UPLOAD";
 export const GET_UPLOADS = "GET_UPLOADS";
 export const SHOW_UPLOAD = "SHOW_UPLOAD";
 export const LOAD_UPLOADS_TABLE = "LOAD_UPLOADS_TABLE";
+
+export const ADD_PLUGIN = "ADD_PLUGIN";
+export const REMOVE_PLUGIN = "REMOVE_PLUGIN";
+export const EDIT_PLUGIN = "EDIT_PLUGIN";
+export const GET_PLUGINS = "GET_PLUGINS";
+export const SHOW_PLUGIN = "SHOW_PLUGIN";
+export const LOAD_PLUGINS_TABLE = "LOAD_PLUGINS_TABLE";

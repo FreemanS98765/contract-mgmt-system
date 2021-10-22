@@ -1,5 +1,3 @@
-const { DATEONLY } = require("sequelize/types");
-
 module.exports = (sequelize, Sequelize) => {
   const Plugin = sequelize.define(
     "Plugin",
