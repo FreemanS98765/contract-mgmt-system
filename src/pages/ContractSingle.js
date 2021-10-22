@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { Fragment } from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 import ContractHeader from "../components/singleContract/ContractHeader";
@@ -40,8 +40,6 @@ const ContractSingle = (props) => {
   let contract = contracts.find((c) => {
     return c.slug === slug;
   });
-
-  console.log("Contract is: ", contract);
 
   let uploads = props.uploads;
 

@@ -116,8 +116,6 @@ const ContractForm = (props) => {
         {function Render(formik) {
           const [contract, setContract] = useState({});
 
-          console.log('Initial values are: ', initialValues);
-
           // useEffect(() => {
           //   let mounted = true;
           //   if (!isNewContract) {
@@ -295,7 +293,6 @@ const ContractForm = (props) => {
                       <TextareaInput
                         name="notes"
                         type="textarea"
-                        className="textarea"
                         placeholder="Notes"
                       ></TextareaInput>
                     </div>
