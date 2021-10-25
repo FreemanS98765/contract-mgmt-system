@@ -1,5 +1,5 @@
 import axios from "../axios/axios";
-import { ADD_PLUGIN } from "../constants/ActionTypes";
+import { ADD_PLUGIN, GET_PLUGINS } from "../constants/ActionTypes";
 
 const _addPlugin = (plugin) => ({
   type: ADD_PLUGIN,
@@ -29,3 +29,31 @@ export const addPlugin =
       dispatch(_addPlugin(result.data));
     });
   };
+
+const _getPlugins = (plugins, loading) => ({
+  type: GET_PLUGINS,
+  plugins,
+});
+
+export const getPlugins = (callback) => (dispatch, getState) => {
+  return axios
+    .get("plugins")
+    .then((response) => {
+      const plugins = [];
+
+      response.data.forEach((item) => {
+        plugins.push(item);
+      });
+
+      dispatch(_getPlugins(plugins));
+    })
+    .catch((error) => {
+      if (error.response) {
+        console.log(error.response.data);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log("Error", error.message);
+      }
+    });
+};

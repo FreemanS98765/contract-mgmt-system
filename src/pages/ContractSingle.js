@@ -9,6 +9,7 @@ import ContractHeader from "../components/singleContract/ContractHeader";
 import ClientDetails from "../components/singleContract/ClientDetails";
 import ContractDetails from "../components/singleContract/ContractDetails";
 import ContractAttachments from "../components/singleContract/ContractAttachments";
+import Plugins from "../components/plugins/Plugins";
 
 import ContractModal from "../components/contracts/ContractModal.js";
 
@@ -105,6 +106,7 @@ const ContractSingle = (props) => {
             <div className="column is-three-quarters">
               <ContractDetails contract={contract} />
               <ClientDetails contract={contract} />
+              <Plugins />
               <ContractAttachments
                 upload={props.uploads}
                 attachment={attachment}

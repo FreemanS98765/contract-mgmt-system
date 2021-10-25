@@ -30,6 +30,7 @@ require("./src/routes/contract.routes.js")(app);
 require("./src/routes/event.routes.js")(app);
 require("./src/routes/notification.routes.js")(app);
 require("./src/routes/upload.routes.js")(app);
+require("./src/routes/plugin.routes.js")(app);
 
 var server = app.listen(3306, function (err) {
   var host = server.address().address;
