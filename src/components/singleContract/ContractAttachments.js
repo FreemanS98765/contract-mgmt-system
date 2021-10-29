@@ -3,7 +3,9 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
 import LightboxImage from "../UI/LightboxImage";
 
 const ContractAttachments = (props) => {
-  const attachment = `../../uploads/${props.upload[0].filename}`;
+  //const attachment = `../../uploads/${props.upload[0].filename}`;
+
+  const attachment = props.upload.length ? `../../uploads/${props.upload[0].filename}` : ''
 
   return (
     <div id="attachments" className="box">

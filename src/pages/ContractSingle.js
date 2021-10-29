@@ -44,7 +44,7 @@ const ContractSingle = (props) => {
 
   let uploads = props.uploads;
 
-  console.log("Uploads are: ", uploads);
+  //console.log("Uploads are: ", uploads);
 
   // if (!uploads.length) {
   //   return "No attachments found";
