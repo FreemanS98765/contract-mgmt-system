@@ -18,14 +18,6 @@ const Root = (
   </Provider>
 );
 
-console.log("Initial state: ", store.getState());
-
-// store.dispatch(
-//   getContracts().then(() => {
-//     ReactDOM.render(Root, document.getElementById("root"));
-//   })
-// );
-
 store.dispatch(getContracts()).then(() => {
   ReactDOM.render(Root, document.getElementById("root"));
 });
