@@ -2,6 +2,12 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 const cors = require("cors");
 
 const db = require("./src/config/db.config.js");
@@ -9,7 +15,7 @@ const db = require("./src/config/db.config.js");
 const PORT = process.env.PORT || 3306;
 
 var corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://cms.danfreedesign.com/",
   optionsSuccessStatus: 200,
   credentials: true,
 };
